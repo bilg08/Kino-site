@@ -1,22 +1,16 @@
-.MoviesContainer{
-    margin:5px auto;
-    display: flex;
-    flex-wrap: wrap;
-    width: 100%;
-    gap:10px;
-    margin: auto;
-}
 .Movie{
     margin-top: 10px;
-    width: 400px;
+    width: 300px;
     height: auto;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
     border: 1px solid black;
+    border-radius: 10px;
 }
 .Movie img{
-    width: 80%;
+    width: 100%;
     height: 80%;
+    border-radius: 10px;
 }

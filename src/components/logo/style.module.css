@@ -2,6 +2,8 @@
     width: 60px;
     height: 100%;
     box-sizing: border-box;
+    padding: 10px;
+    box-sizing: border-box;
 }
 .Logo img{
     width: 100%;
