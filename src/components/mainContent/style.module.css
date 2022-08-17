@@ -1,0 +1,11 @@
+.MainContent{
+    width: 80%;
+    height: auto;
+    margin: auto;
+    margin-top: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-flow: column;
+    flex-wrap: wrap;
+}

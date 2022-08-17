@@ -1,0 +1,22 @@
+.MoviesContainer{
+    margin:5px auto;
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    gap:10px;
+    margin: auto;
+}
+.Movie{
+    margin-top: 10px;
+    width: 400px;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    border: 1px solid black;
+}
+.Movie img{
+    width: 80%;
+    height: 80%;
+}
