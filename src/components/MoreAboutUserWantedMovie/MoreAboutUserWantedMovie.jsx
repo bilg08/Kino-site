@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useContext, useState } from "react";
 import css from "./MoreAboutUserWantedMovie.module.css";
 import { MovieImageCart } from "../movieImageCart/movieImageCart";
-import {OrderMovieTime} from "../orderMovieTime/orderMovieTime";
-
-export const MoreAboutUserWantedMovie = (props) => {
-    const {zahialgiinMedeelel,movieUserWanted,isAnyMovieGoingToBeWatched,setIsAnyMovieGoingToBeWatched,takeUserInput ,takeOrder,tsagaaSongoh,setTsagaaSongoson,tsagaaSongoson,TicketPrices} = props;
+import { MoviesContext } from "../mainContent/mainContent";
+import { Link } from "react-router-dom";
+import { OrderMovie } from "../orderMovie/orderMovie";
+export const MoreAboutUserWantedMovie = () => {
+    const {movieUserWanted,movies,setUserWantToWatch} = useContext(MoviesContext);
     
     return(
         <div className={css.MoreMovieAbout}>
@@ -15,14 +16,23 @@ export const MoreAboutUserWantedMovie = (props) => {
                 <h1>{movieUserWanted.MovieName}</h1>
                 <p>{movieUserWanted.genre}</p>
                 <p>{movieUserWanted.about}</p>
-                <button onClick={() =>{
-                setIsAnyMovieGoingToBeWatched(prevValue=>!prevValue)
-                }}>Үзэх</button>
-                <button onClick={() =>{
-                setIsAnyMovieGoingToBeWatched(false)
-                }}>Буцах</button>
+                <button onClick={() => setUserWantToWatch(true)}>Үзмээр Байна</button>
+                <Link to="/">
+                <button onClick={() => setUserWantToWatch(false)}>Буцах</button>
+                </Link>
+                
            </div>
-           <OrderMovieTime isAnyMovieGoingToBeWatched={isAnyMovieGoingToBeWatched} takeUserInput={takeUserInput} tsagaaSongoh={tsagaaSongoh} TicketPrices={TicketPrices} takeOrder={takeOrder} setTsagaaSongoson={setTsagaaSongoson} zahialgiinMedeelel={zahialgiinMedeelel} tsagaaSongoson={tsagaaSongoson}/>
+           <OrderMovie/>
         </div>
     )
 }
+{/* 
+<h1>{movieUserWanted.MovieName}</h1>
+<p>{movieUserWanted.genre}</p>
+<p>{movieUserWanted.about}</p>
+<button onClick={() =>{
+setIsAnyMovieGoingToBeWatched(prevValue=>!prevValue)
+}}>Үзэх</button>
+<button onClick={() =>{
+setIsAnyMovieGoingToBeWatched(false)
+}}>Буцах</button> */}

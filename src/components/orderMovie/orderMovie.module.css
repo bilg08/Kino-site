@@ -1,0 +1,10 @@
+.OrderMovie{
+  width: 1000px;
+  height: 600px;
+  position:absolute;
+  background-color: red;
+  transition: 0.5s;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}

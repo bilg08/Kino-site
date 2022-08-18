@@ -1,0 +1,60 @@
+.FormMovieContainer{
+    width: 40%;
+    height: 90%;
+    border: 1px solid black;
+    display: flex;
+    flex-direction: column;
+}
+
+.FormMovie{
+    width: 90%;
+    height: 90%;
+    border: 1px solid black;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    flex-direction: column;
+    box-sizing: border-box;
+    margin: auto;
+    overflow: scroll;
+    gap:10px;
+    outline: none;
+}
+
+.FormMovie div{
+    width: 80%;
+    height: auto;
+    border: 1px solid black;
+    margin: auto;
+}
+.formName{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.nerInput{
+    width: auto;
+    height: auto;
+    margin: auto;
+}
+.tomhun{
+    width: 80%;
+    height: auto;
+    border: 1px solid black;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+.huuhed{
+    width: 80%;
+    height: auto;
+    border: 1px solid black;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+.Zahialah{
+    width: 50%;
+    height: 40px;
+    margin: auto;
+}
