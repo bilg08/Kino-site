@@ -2,11 +2,11 @@ import React,{useContext, useState}from "react";
 import css from "./movie.module.css";
 import { MovieImageCart } from "../movieImageCart/movieImageCart";
 import {Link} from "react-router-dom";
-import { MoviesContext } from "../mainContent/mainContent";
+import { MoviesContext } from "../mainContent/MainContent";
 export const Movie = (props) => {
     const {movieData} = props;
-    const {movies, movieUserWanted,setMovieUserWanted} = useContext(MoviesContext)
-    // const [isThisAboutToBeWatched,setThisAboutToBeWatched] = useState(false);
+    const { movies, movieUserWanted, setMovies,setMovieUserWanted} = useContext(MoviesContext)
+    
     
     
     return(

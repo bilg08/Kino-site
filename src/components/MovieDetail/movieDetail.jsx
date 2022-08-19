@@ -1,12 +1,14 @@
 import React, { useContext, useState } from "react";
-import css from "./MoreAboutUserWantedMovie.module.css";
+import css from "./movieDetail.module.css";
 import { MovieImageCart } from "../movieImageCart/movieImageCart";
-import { MoviesContext } from "../mainContent/mainContent";
+import { MoviesContext } from "../mainContent/MainContent";
 import { Link } from "react-router-dom";
 import { OrderMovie } from "../orderMovie/orderMovie";
 
 export const MoreAboutUserWantedMovie = () => {
     const {movieUserWanted,movies,setUserWantToWatch} = useContext(MoviesContext);
+    const movieseat=movieUserWanted.seat;
+   
 
     return(
         <div className={css.MoreMovieAbout}>
@@ -22,7 +24,7 @@ export const MoreAboutUserWantedMovie = () => {
                 <button className={css.backToMovies} onClick={() => setUserWantToWatch(false)}>Буцах</button>
                 </Link>
            </div>
-           <OrderMovie/>
+           <OrderMovie movieseat={movieseat}/>
         </div>
     )
 }

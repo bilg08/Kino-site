@@ -1,24 +1,6 @@
-.OrderMoviebefore{
-  width: 1000px;
-  height: 600px;
-  position:absolute;
-  background-color:#293462;
-  transition: 2s;
-  display: flex;
-  justify-content:center;
-  align-items: center;
-  transform: translateY(-100vh);
-  transition: 5s;
-}
-.OrderMovieafter{
-  width: 1000px;
-  height: 600px;
-  position:absolute;
-  background-color:#293462;
-  transition: 2s;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  transform: translateY(0vh);
-  transition: 5s;
+.OrderMovie{
+    width: 1200px;
+    height: 1000px;
+    background-color: red;
+    position: absolute;
 }
