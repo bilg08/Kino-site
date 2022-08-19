@@ -13,17 +13,18 @@ export const MainContent = () => {
     let [movieUserWanted, setMovieUserWanted] = useState("");
     let [userWantToWatch, setUserWantToWatch] = useState(false);
     let [Orders, setOrders] = useState("");
-    console.log(userWantToWatch,movieUserWanted)
+    let [hereglegcOrder,setHereglegcOrder] = useState("");
+    let [suudalOrder,setSuudalOrder] = useState("");
 
-const takeUserOrder = (e) => {
+    const takeUserOrder = (e) => {
     
-}
+    }
 
     const MoviesContextProvider = ({ children }) => {
 
         return (
             <MoviesContext.Provider
-                value={{ movies, movieUserWanted, setMovies, setMovieUserWanted, setUserWantToWatch, userWantToWatch }}
+                value={{ movies, movieUserWanted, setMovies, setMovieUserWanted, setUserWantToWatch, userWantToWatch,Orders, setOrders,suudalOrder,setSuudalOrder ,hereglegcOrder,setHereglegcOrder}}
             >
                 {children}
             </MoviesContext.Provider>

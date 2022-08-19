@@ -7,7 +7,7 @@ import { OrderMovie } from "../orderMovie/orderMovie";
 
 export const MoreAboutUserWantedMovie = () => {
     const {movieUserWanted,movies,setUserWantToWatch} = useContext(MoviesContext);
-    console.log("movie",movieUserWanted);
+
     return(
         <div className={css.MoreMovieAbout}>
            <div className={css.MovieImage}>
