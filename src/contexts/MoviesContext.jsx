@@ -1,12 +1,13 @@
-import { createContext, useContext } from "react";
-import { data } from "../asset/movies";
+import { createContext, useState } from "react";
+import { moviesDatas } from "../asset/movies";
 export const MoviesContext = createContext();
 
 export const MoviesContextProvider = ({children}) => {
+    const [userWantedMovie,setUserWantedMovie]=useState(""); 
+    console.log("MoviesContextProvider",userWantedMovie);
     return(
-        <MoviesContext.Provider value={data}>
+        <MoviesContext.Provider value={{moviesDatas,userWantedMovie,setUserWantedMovie}}>
             {children}
         </MoviesContext.Provider>
     )
 }
-export const useMoviesContext = () => useContext(MoviesContext);

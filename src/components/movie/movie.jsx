@@ -1,26 +1,22 @@
-import React,{useContext, useState}from "react";
+import React, { useContext } from "react";
 import css from "./movie.module.css";
 import { MovieImageCart } from "../movieImageCart/movieImageCart";
-import {Link} from "react-router-dom";
-import { MoviesContext } from "../mainContent/MainContent";
+// import {Link} from "react-router-dom";
+import { MoviesContext } from "../../contexts/MoviesContext";
+
 export const Movie = (props) => {
-    const {movieData} = props;
-    const { movies, movieUserWanted, setMovies,setMovieUserWanted} = useContext(MoviesContext)
-    
-    
-    
+    const {oneMovieData} = props;
+    const {setUserWantedMovie} =useContext(MoviesContext);
+
+
     return(
         <div className={css.Movie}>
-            <MovieImageCart imageSrc={movieData.image}/>
-                <p>{movieData.MovieName}</p>
-                <p>Төрөл: {movieData.genre}</p>
-            <Link to="/MovieAbout">
-            <button onClick={()=>{setMovieUserWanted(movieData)}}>Дэлгэрэнгүй</button>    
-            </Link>
-            
-           
-                    
-            
+            <MovieImageCart imageSrc={oneMovieData.image}/>
+                <p>{oneMovieData.MovieName}</p>
+                <p>Төрөл: {oneMovieData.genre}</p>
+            <button onClick={()=>{
+                setUserWantedMovie(oneMovieData)}
+            }>Дэлгэрэнгүй</button>
         </div>
     )
-}
+}              

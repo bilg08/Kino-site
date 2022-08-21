@@ -1,16 +1,18 @@
 import React, { useContext } from "react";
 import css from "./movies.module.css";
 import { Movie } from "../movie/movie";
-import { MoviesContext } from "../mainContent/MainContent";
+import {MoviesContext} from "../../contexts/MoviesContext"
 
 export const Movies = () => {
-   const {movies,movieUserWanted} = useContext(MoviesContext);
-     console.log(movies)
+
+    const {moviesDatas} = useContext(MoviesContext);
+    
+
     return (
         <div className={css.MoviesContainer}>
-            {movies.map((movie,index) => {
+            {moviesDatas.map((oneMovie,index) => {
                 return(
-                    <Movie key={index} movieData={movie} />
+                    <Movie key={index} oneMovieData={oneMovie} />
                 )
             })}
         </div>

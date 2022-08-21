@@ -1,30 +1,37 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import css from "./movieDetail.module.css";
 import { MovieImageCart } from "../movieImageCart/movieImageCart";
-import { MoviesContext } from "../mainContent/MainContent";
+import { MoviesContext } from "../../contexts/MoviesContext";
+import {OrderMovie} from "../orderMovie/orderMovie"
+import { MovieOrderingContext } from "../../contexts/MovieOrderingContext";
 import { Link } from "react-router-dom";
-import { OrderMovie } from "../orderMovie/orderMovie";
-
-export const MoreAboutUserWantedMovie = () => {
-    const {movieUserWanted,movies,setUserWantToWatch} = useContext(MoviesContext);
-    const movieseat=movieUserWanted.seat;
-   
-
+export const MovieDetail = () => {
+    const {userWantedMovie} = useContext(MoviesContext);
+    const {userWantedToOrder,setUserWantedToOrder} = useContext(MovieOrderingContext);
+     
     return(
-        <div className={css.MoreMovieAbout}>
-           <div className={css.MovieImage}>
-            <MovieImageCart imageSrc={movieUserWanted.image}/>
-           </div>
-           <div className={css.movieMoreAbout}>
-                <h1>{movieUserWanted.MovieName}</h1>
-                <p className={css.genre}>{movieUserWanted.genre}</p>
-                <p>{movieUserWanted.about}</p>
-                <button className={css.continue} onClick={() => setUserWantToWatch(true)}>Үзмээр Байна</button>
-                <Link to="/">
-                <button className={css.backToMovies} onClick={() => setUserWantToWatch(false)}>Буцах</button>
-                </Link>
-           </div>
-           <OrderMovie movieseat={movieseat}/>
-        </div>
+
+            <div style={{
+                display:!userWantedMovie?"none":"flex"
+            }} className={css.MoreMovieAbout}>
+                <div className={css.MovieImage}>
+                    <MovieImageCart imageSrc={userWantedMovie.image}/>
+                </div>
+                <div className={css.movieMoreAbout}>
+                    <h1>{userWantedMovie.MovieName}</h1>
+                    <p className={css.genre}>{userWantedMovie.genre}</p>
+                    <p>{userWantedMovie.about}</p>
+                    
+                    <button className={css.continue} onClick={()=>{
+                        setUserWantedToOrder(true);
+                        }} >
+                    Захиалах
+                    </button>
+                    
+
+                </div>
+                 <OrderMovie userWantedMovie={userWantedMovie}/>
+            </div>
+
     )
 }

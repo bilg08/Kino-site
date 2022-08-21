@@ -1,29 +1,21 @@
-import React, { useState, useContext, createContext } from "react";
-import { Movies } from "../movies/movies";
+import React,{useContext}from "react";
 import css from "./mainContent.module.css";
-import { data } from "../../asset/movies";
-import { Routes, Route } from "react-router-dom";
-import { MoreAboutUserWantedMovie } from "../MovieDetail/movieDetail";
-import {MoviesContextProvider, useMoviesContext} from "../../contexts/MoviesContext"
+import { Movies } from "../movies/movies";
+import { MovieDetail } from "../MovieDetail/movieDetail";
+import { MovieOrderingContext } from "../../contexts/MovieOrderingContext";
+import { MovieOrderingContextProvider } from "../../contexts/MovieOrderingContext";
+import { OrderMovie } from "../orderMovie/orderMovie";
+import { Link } from "react-router-dom";
 
-
-export const MoviesContext = createContext()
 export const MainContent = () => {
-    // let [movies, setMovies] = useState(data);
-    let [movieUserWanted, setMovieUserWanted] = useState("");
-
-    let {data} = useMoviesContext();
-    console.log(data)
-   
+    console.log("mainContentAjilla");
     
-
-
-
     return (
         <main className={css.MainContent}>
-            <MoviesContextProvider>
-                <Movies />
-            </MoviesContextProvider>
+            <Movies />
+            <MovieOrderingContextProvider>
+             <MovieDetail/>
+            </MovieOrderingContextProvider>
         </main>
     )
 }
