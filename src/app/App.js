@@ -4,9 +4,10 @@ import {MainContent} from "../components/mainContent/mainContent";
 import {Route,Routes} from "react-router-dom";
 import {MoviesContextProvider} from "../contexts/MoviesContext";
 import { OrderMovie } from "../components/orderMovie/orderMovie";
+import { Test } from "../components/test/test";
 // import {MovieOrderingContextProvider} from "../contexts/MovieOrderingContext"
 function App() {
-
+   
 
 
   return (
@@ -18,8 +19,9 @@ function App() {
             </MoviesContextProvider>
             }
           />
-            {/* // <OrderMovie/>  */}
+            
         </Routes>
+        {/* <Test/> */}
     </div>
   );
 }

@@ -95,7 +95,7 @@ export const OrderMovie = (props) => {
 
                 {userWantedMovieSeats === undefined ? console.log("bolohgui") : userWantedMovieSeats.map((seat, index) => {
                     return (
-                        <button name="Seat" key={index} style={{
+                        <button  name="Seat" key={index} style={{
                             background: seat.isOrdered === true ? "red" : "blue"
                         }}
                             disabled={seat.isOrdered === true ? true : false}
@@ -108,13 +108,6 @@ export const OrderMovie = (props) => {
             </div>
             <button
                 onClick={() => {
-                    // const userOrderedMovie = userWantedMovie.MovieName;
-                    // const userName = document.getElementById("userNameInput").value;
-                    // const email = document.getElementById("emailInput").value;
-                    // const phoneNumber = document.getElementById("phoneNumberInput").value;
-                    // const Adult = parseInt(document.getElementById("Adult").value);
-                    // const Kids = parseInt(document.getElementById("Kids").value);
-                    // userOrderedMovie, userName, email, phoneNumber, Adult, Kids, 
                     takeOrder(userOrderedSeat);
                     setUserWantedMovie(false);
                     setUserWantedToOrder(false);

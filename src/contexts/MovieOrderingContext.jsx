@@ -7,7 +7,9 @@ export const MovieOrderingContextProvider = ({children}) => {
     const [orders,setOrders] = useState([]);
     const [userWantedToOrderSeat,setUserWantedToOrderSeat]=useState(false);
     const [checkInputWhetherFullOrNot,setCheckInputWhetherFullOrNot]=useState(false)
-    const [form,setForm]=useState({});
+    let [form,setForm]=useState({
+        seats:[]
+    });
 
     useEffect(() => {
 
@@ -67,15 +69,22 @@ export const MovieOrderingContextProvider = ({children}) => {
        
    
     const takeOrder = (userOrderedSeat) => {
-        console.log(form)
-        console.log(userOrderedSeat);
-        // let copyForm={...form,seat:userOrderedSeat};
-        // console.log("copyForm",copyForm);
-        setForm({...form,seat:userOrderedSeat})
-        console.log("form1",form)
+        
+        setForm(prevVal=> {
+            let copyPrevVal={...prevVal};
+            copyPrevVal.seats=userOrderedSeat;
+            console.log(copyPrevVal);
+            return(
+                form=copyPrevVal
+            )
+        })
+        setTimeout(async()=>{
+           await setOrders([...orders,form]);
+           console.log(orders);
+        },1000)        
     }
-    console.log("form2",form)
-    // useEffect(takeOrder,[])
+    
+   
     
     return(
         <MovieOrderingContext.Provider value={
@@ -83,8 +92,6 @@ export const MovieOrderingContextProvider = ({children}) => {
             userWantedToOrder,
             setUserWantedToOrder,userWantedToOrderSeat,
             setUserWantedToOrderSeat,checkInputWhetherFullOrNot,
-            
-            
         }
         }>  {children}
         </MovieOrderingContext.Provider>
