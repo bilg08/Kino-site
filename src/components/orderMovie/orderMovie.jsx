@@ -1,7 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import css from "./orderMovie.module.css";
 import { MovieOrderingContext } from "../../contexts/MovieOrderingContext";
-import { Link } from "react-router-dom";
 import { MoviesContext } from "../../contexts/MoviesContext";
 
 export const OrderMovie = (props) => {
@@ -9,32 +8,27 @@ export const OrderMovie = (props) => {
     const { setUserWantedMovie } = useContext(MoviesContext);
     const userWantedMovieSeats = userWantedMovie.seat;
     const { takeUserInput, userWantedToOrder, setUserWantedToOrder,
-            takeOrder, setUserWantedToOrderSeat, userWantedToOrderSeat,
-            checkInputWhetherFullOrNot
-            
+        takeOrder, setUserWantedToOrderSeat, userWantedToOrderSeat,
+        canUserContinueOrderSeat
     } = useContext(MovieOrderingContext);
-    const userOrderedSeat = [];
 
     const checkSeat = (e) => {
-        const TotalPerson = parseInt(document.getElementById("Adult").value) + parseInt(document.getElementById("Kids").value);
-
 
         const thisClickedSeatId = parseInt(e.target.innerText);
         if (userWantedMovieSeats[thisClickedSeatId].isOrdered === false) {
-            userWantedMovieSeats[thisClickedSeatId].isOrdered = true;
-            userOrderedSeat.push(parseInt(e.target.innerText));
-            e.target.style.background = "green";
-            if (TotalPerson < userOrderedSeat.length) {
-                userWantedMovieSeats[userOrderedSeat.length - 1].isOrdered = false;
+            if (userWantedMovieSeats[thisClickedSeatId].isOrdering === false) {
+                e.target.style.background = "green";
+                userWantedMovieSeats[thisClickedSeatId].isOrdering = true;
+            } else {
                 e.target.style.background = "blue";
-                userOrderedSeat.splice(userOrderedSeat.indexOf(userOrderedSeat[userOrderedSeat.length - 1]), 1);
+                userWantedMovieSeats[thisClickedSeatId].isOrdering = false;
             }
+
 
 
         } else if (userWantedMovieSeats[thisClickedSeatId].isOrdered === true) {
             userWantedMovieSeats[thisClickedSeatId].isOrdered = false;
             e.target.style.background = "blue";
-            userOrderedSeat.splice(userOrderedSeat.indexOf(parseInt(e.target.innerText)), 1);
         }
     }
 
@@ -73,11 +67,11 @@ export const OrderMovie = (props) => {
                     <p>Хүүхэд</p>
                     <input id="Kids" onChange={(e) => takeUserInput(e)} name="Kid" />
                 </div>
-                <button 
-                disabled={checkInputWhetherFullOrNot===true?true:false}
-                onClick={() => {
-                    setUserWantedToOrderSeat(true);
-                }}>Суудал Захиалах</button>
+                <button
+                disabled={canUserContinueOrderSeat===true?true:false}
+                    onClick={() => {
+                        setUserWantedToOrderSeat(true);
+                    }}>Суудал Захиалах</button>
             </div>
 
             <div
@@ -95,11 +89,14 @@ export const OrderMovie = (props) => {
 
                 {userWantedMovieSeats === undefined ? console.log("bolohgui") : userWantedMovieSeats.map((seat, index) => {
                     return (
-                        <button  name="Seat" key={index} style={{
+                        <button name="Seat" key={index} style={{
                             background: seat.isOrdered === true ? "red" : "blue"
                         }}
                             disabled={seat.isOrdered === true ? true : false}
-                            onClick={checkSeat} className={css.seat}>
+                            onClick={(e) => {
+                                checkSeat(e)
+                                takeUserInput(e, seat, userWantedMovieSeats)
+                            }} className={css.seat}>
                             {index}
                         </button>
                     )
@@ -108,7 +105,7 @@ export const OrderMovie = (props) => {
             </div>
             <button
                 onClick={() => {
-                    takeOrder(userOrderedSeat);
+                    takeOrder(userWantedMovieSeats);
                     setUserWantedMovie(false);
                     setUserWantedToOrder(false);
                     setUserWantedToOrderSeat(false)

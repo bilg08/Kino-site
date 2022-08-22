@@ -9,83 +9,103 @@ export const moviesDatas = [
 
             {
                 "id":0,
-                "isOrdered":false
+                "isOrdered":false,
+                "isOrdering":false,
             },
             {
                 "id":1,
-                "isOrdered":false
+                "isOrdered":false,
+                "isOrdering":false,
             },
             {
                 "id":2,
-                "isOrdered":false
+                "isOrdered":false,
+                "isOrdering":false,
             },
             {
                 "id":3,
-                "isOrdered":false
+                "isOrdered":false,
+                "isOrdering":false,
             },
             {
                 "id":4,
-                "isOrdered":false
+                "isOrdered":false,
+                "isOrdering":false,
             },
             {
                 "id":5,
-                "isOrdered":false
+                "isOrdered":false,
+                "isOrdering":false,
             },
             {
                 "id":6,
-                "isOrdered":false
+                "isOrdered":false,
+                "isOrdering":false,
             },
             {
                 "id":7,
-                "isOrdered":false
+                "isOrdered":false,
+                "isOrdering":false,
             },
             {
                 "id":8,
-                "isOrdered":false
+                "isOrdered":false,
+                "isOrdering":false,
             },
             {
                 "id":9,
-                "isOrdered":false
+                "isOrdered":false,
+                "isOrdering":false,
             },
             {
                 "id":10,
-                "isOrdered":false
+                "isOrdered":false,
+                "isOrdering":false,
             },
             {
                 "id":11,
-                "isOrdered":false
+                "isOrdered":false,
+                "isOrdering":false,
             },
             {
                 "id":12,
-                "isOrdered":false
+                "isOrdered":false,
+                "isOrdering":false,
             },
             {
                 "id":13,
-                "isOrdered":false
+                "isOrdered":false,
+                "isOrdering":false,
             },
             {
                 "id":14,
-                "isOrdered":false
+                "isOrdered":false,
+                "isOrdering":false,
             },
             {
                 "id":15,
-                "isOrdered":false
+                "isOrdered":false,
+                "isOrdering":false,
             },
             {
                 "id":16,
-                "isOrdered":false
+                "isOrdered":false,
+                "isOrdering":false,
             },
             {
                 "id":17,
-                "isOrdered":false
+                "isOrdered":false,
+                "isOrdering":false,
             },
             {
                 "id":18,
-                "isOrdered":false
+                "isOrdered":false,
+                "isOrdering":false,
             },
             {
                 "id":19,
-                "isOrdered":false
+                "isOrdered":false,
+                "isOrdering":false,
             },
         ]
     },
@@ -100,83 +120,103 @@ export const moviesDatas = [
 
             {
                 "id":0,
-                "isOrdered":false
+                "isOrdered":false,
+                "isOrdering":false,
             },
             {
                 "id":1,
-                "isOrdered":false
+                "isOrdered":false,
+                "isOrdering":false,
             },
             {
                 "id":2,
-                "isOrdered":false
+                "isOrdered":false,
+                "isOrdering":false,
             },
             {
                 "id":3,
-                "isOrdered":false
+                "isOrdered":false,
+                "isOrdering":false,
             },
             {
                 "id":4,
-                "isOrdered":false
+                "isOrdered":false,
+                "isOrdering":false,
             },
             {
                 "id":5,
-                "isOrdered":false
+                "isOrdered":false,
+                "isOrdering":false,
             },
             {
                 "id":6,
-                "isOrdered":false
+                "isOrdered":false,
+                "isOrdering":false,
             },
             {
                 "id":7,
-                "isOrdered":false
+                "isOrdered":false,
+                "isOrdering":false,
             },
             {
                 "id":8,
-                "isOrdered":false
+                "isOrdered":false,
+                "isOrdering":false,
             },
             {
                 "id":9,
-                "isOrdered":false
+                "isOrdered":false,
+                "isOrdering":false,
             },
             {
                 "id":10,
-                "isOrdered":false
+                "isOrdered":false,
+                "isOrdering":false,
             },
             {
                 "id":11,
-                "isOrdered":false
+                "isOrdered":false,
+                "isOrdering":false,
             },
             {
                 "id":12,
-                "isOrdered":false
+                "isOrdered":false,
+                "isOrdering":false,
             },
             {
                 "id":13,
-                "isOrdered":false
+                "isOrdered":false,
+                "isOrdering":false,
             },
             {
                 "id":14,
-                "isOrdered":false
+                "isOrdered":false,
+                "isOrdering":false,
             },
             {
                 "id":15,
-                "isOrdered":false
+                "isOrdered":false,
+                "isOrdering":false,
             },
             {
                 "id":16,
-                "isOrdered":false
+                "isOrdered":false,
+                "isOrdering":false,
             },
             {
                 "id":17,
-                "isOrdered":false
+                "isOrdered":false,
+                "isOrdering":false,
             },
             {
                 "id":18,
-                "isOrdered":false
+                "isOrdered":false,
+                "isOrdering":false,
             },
             {
                 "id":19,
-                "isOrdered":false
+                "isOrdered":false,
+                "isOrdering":false,
             },
         ]
     },
@@ -185,180 +225,109 @@ export const moviesDatas = [
         "MovieName":"Forrest Gump",
         "genre":"Drama and Romance",
         "image":"https://upload.wikimedia.org/wikipedia/en/thumb/6/67/Forrest_Gump_poster.jpg/220px-Forrest_Gump_poster.jpg",
-        "about":"The presidencies of Kennedy and Johnson, the Vietnam War, the Watergate scandal and other historical events unfold from the perspective of an Alabama man with an IQ of 75, whose only desire is to be reunited with his childhood sweetheart."
+        "about":"The presidencies ,of Kennedy and Johnson, the Vietnam War, the Watergate scandal and other historical events unfold from the perspective of an Alabama man with an IQ of 75, whose only desire is to be reunited with his childhood sweetheart."
         ,
          "seat":[
 
             {
                 "id":0,
-                "isOrdered":false
+                "isOrdered":false,
+                "isOrdering":false,
             },
             {
                 "id":1,
-                "isOrdered":false
+                "isOrdered":false,
+                "isOrdering":false,
             },
             {
                 "id":2,
-                "isOrdered":false
+                "isOrdered":false,
+                "isOrdering":false,
             },
             {
                 "id":3,
-                "isOrdered":false
+                "isOrdered":false,
+                "isOrdering":false,
             },
             {
                 "id":4,
-                "isOrdered":false
+                "isOrdered":false,
+                "isOrdering":false,
             },
             {
                 "id":5,
-                "isOrdered":false
+                "isOrdered":false,
+                "isOrdering":false,
             },
             {
                 "id":6,
-                "isOrdered":false
+                "isOrdered":false,
+                "isOrdering":false,
             },
             {
                 "id":7,
-                "isOrdered":false
+                "isOrdered":false,
+                "isOrdering":false,
             },
             {
                 "id":8,
-                "isOrdered":false
+                "isOrdered":false,
+                "isOrdering":false,
             },
             {
                 "id":9,
-                "isOrdered":false
+                "isOrdered":false,
+                "isOrdering":false,
             },
             {
                 "id":10,
-                "isOrdered":false
+                "isOrdered":false,
+                "isOrdering":false,
             },
             {
                 "id":11,
-                "isOrdered":false
+                "isOrdered":false,
+                "isOrdering":false,
             },
             {
                 "id":12,
-                "isOrdered":false
+                "isOrdered":false,
+                "isOrdering":false,
             },
             {
                 "id":13,
-                "isOrdered":false
+                "isOrdered":false,
+                "isOrdering":false,
             },
             {
                 "id":14,
-                "isOrdered":false
+                "isOrdered":false,
+                "isOrdering":false,
             },
             {
                 "id":15,
-                "isOrdered":false
+                "isOrdered":false,
+                "isOrdering":false,
             },
             {
                 "id":16,
-                "isOrdered":false
+                "isOrdered":false,
+                "isOrdering":false,
             },
             {
                 "id":17,
-                "isOrdered":false
+                "isOrdered":false,
+                "isOrdering":false,
             },
             {
                 "id":18,
-                "isOrdered":false
+                "isOrdered":false,
+                "isOrdering":false,
             },
             {
                 "id":19,
-                "isOrdered":false
-            },
-        ]
-    },
-    {
-        "id":3,
-        "MovieName":"Top Gun",
-        "genre":"Action",
-        "image":"https://m.media-amazon.com/images/M/MV5BOWQwOTA1ZDQtNzk3Yi00ZmVmLWFiZGYtNjdjNThiYjJhNzRjXkEyXkFqcGdeQXVyODE5NzE3OTE@._V1_FMjpg_UX1000_.jpg",
-        "about":"After more than thirty years of service as one of the Navy's top aviators, Pete Mitchell is where he belongs, pushing the envelope as a courageous test pilot and dodging the advancement in rank that would ground him"
-        ,
-         "seat":[
-
-            {
-                "id":0,
-                "isOrdered":false
-            },
-            {
-                "id":1,
-                "isOrdered":false
-            },
-            {
-                "id":2,
-                "isOrdered":false
-            },
-            {
-                "id":3,
-                "isOrdered":false
-            },
-            {
-                "id":4,
-                "isOrdered":false
-            },
-            {
-                "id":5,
-                "isOrdered":false
-            },
-            {
-                "id":6,
-                "isOrdered":false
-            },
-            {
-                "id":7,
-                "isOrdered":false
-            },
-            {
-                "id":8,
-                "isOrdered":false
-            },
-            {
-                "id":9,
-                "isOrdered":false
-            },
-            {
-                "id":10,
-                "isOrdered":false
-            },
-            {
-                "id":11,
-                "isOrdered":false
-            },
-            {
-                "id":12,
-                "isOrdered":false
-            },
-            {
-                "id":13,
-                "isOrdered":false
-            },
-            {
-                "id":14,
-                "isOrdered":false
-            },
-            {
-                "id":15,
-                "isOrdered":false
-            },
-            {
-                "id":16,
-                "isOrdered":false
-            },
-            {
-                "id":17,
-                "isOrdered":false
-            },
-            {
-                "id":18,
-                "isOrdered":false
-            },
-            {
-                "id":19,
-                "isOrdered":false
+                "isOrdered":false,
+                "isOrdering":false,
             },
         ]
     }
