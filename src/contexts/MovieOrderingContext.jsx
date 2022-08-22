@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import { MoviesContext } from "./MoviesContext";
 export const MovieOrderingContext = createContext();
 
@@ -6,17 +6,48 @@ export const MovieOrderingContextProvider = ({children}) => {
     const [userWantedToOrder,setUserWantedToOrder]=useState(false);
     const [orders,setOrders] = useState([]);
     const [userWantedToOrderSeat,setUserWantedToOrderSeat]=useState(false);
-    // const [usersOrders,setUsersOrders]=useState([])
+    const [checkInputWhetherFullOrNot,setCheckInputWhetherFullOrNot]=useState(false)
+    const [form,setForm]=useState({});
 
+    useEffect(() => {
+
+        if(form.Name===""||form.Email==="") {
+            setCheckInputWhetherFullOrNot(true)
+           }else{
+            setCheckInputWhetherFullOrNot(false)
+           } 
+       
+    }, [form])
 
     const takeUserInput = (e) => {
-
-
+      setForm({...form,[e.target.name]:e.target.value});
+      
+     
         if(e.target.name==="Email") {
             if(!e.target.value.includes("@yahoo.com")) {
                 e.target.style.background="red";
             }else{
                 e.target.style.background="transparent"
+            }
+        }
+        if(e.target.name==="Adult") {
+            let AdultInput=e.target.value;
+            for(let i=0;i<AdultInput.length;i++) {
+                if(AdultInput[i].charCodeAt()>=48&&AdultInput[i].charCodeAt()<=57) {
+                    e.target.style.background="transparent"
+                }else{
+                    e.target.style.background="red"
+                } 
+            }
+        }
+        if(e.target.name==="Kid") {
+            let KidInput=e.target.value;
+            for(let i=0;i<KidInput.length;i++) {
+                if(KidInput[i].charCodeAt()>=48&&KidInput[i].charCodeAt()<=57) {
+                    e.target.style.background="transparent"
+                }else{
+                    e.target.style.background="red"
+                } 
             }
         }
 
@@ -31,44 +62,29 @@ export const MovieOrderingContextProvider = ({children}) => {
                 } 
             }
         }
-        
-    // setUserOrder(prevVal=> {
-    //     let prevValACopy={...prevVal};
-    //     prevValACopy={...prevValACopy,[e.target.name]:e.target.value};
-    //     return(
-    //         prevVal=prevValACopy
-    //     )
-    //    });
     }
-    const takeOrder = (userOrderedMovie,userName,email,phoneNumber,Adult,Kids,userOrderedSeat) => {
-        console.log(userName,email,phoneNumber,Adult,Kids,userOrderedSeat)
-        const order = {
-            userOrderedMovie:userOrderedMovie,
-            userName:userName,
-            email:email,
-            phoneNumber:phoneNumber,
-            Adult:Adult,
-            Kids:Kids,
-            userOrderedSeat:userOrderedSeat
-        }
-        setOrders(PrevOrders=>{
-            
-            console.log(PrevOrders);
-            let prevOrderACopy=PrevOrders;
-            prevOrderACopy.push(order);
-            return(
-                PrevOrders=prevOrderACopy
-            )
-        })
-        console.log(orders)
+   
+       
+   
+    const takeOrder = (userOrderedSeat) => {
+        console.log(form)
+        console.log(userOrderedSeat);
+        // let copyForm={...form,seat:userOrderedSeat};
+        // console.log("copyForm",copyForm);
+        setForm({...form,seat:userOrderedSeat})
+        console.log("form1",form)
     }
+    console.log("form2",form)
+    // useEffect(takeOrder,[])
     
     return(
         <MovieOrderingContext.Provider value={
             {takeOrder,takeUserInput,
             userWantedToOrder,
             setUserWantedToOrder,userWantedToOrderSeat,
-            setUserWantedToOrderSeat,
+            setUserWantedToOrderSeat,checkInputWhetherFullOrNot,
+            
+            
         }
         }>  {children}
         </MovieOrderingContext.Provider>
