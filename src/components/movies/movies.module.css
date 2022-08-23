@@ -1,9 +1,8 @@
 .MoviesContainer{
     margin:5px auto;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    width: auto;
+    width: 80%;
+    justify-content: space-around;
+    align-items: center;
     gap:10px;
-    margin: auto;
-    grid-gap: 5%;   
+    display: flex;
 }

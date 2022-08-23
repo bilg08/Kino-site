@@ -1,18 +1,14 @@
 .MoreMovieAbout{
-    width: 100%;
+    width:1350px;
     height: 100%;
-    position: fixed;
-    top: 0;
-    left: 0;
+    position: absolute;
     background: white;
     display: flex;
-    /* display: none; */
     justify-content: center;
     align-items: center;
-    /* flex-direction: column; */
     gap:10px;
     transition: 0.5s;
-    border: 1px solid black;
+   box-shadow: rgb(0 0 0 / 20%) 0px 2px 1px -1px, rgb(0 0 0 / 14%) 0px 1px 1px 0px, rgb(0 0 0 / 12%) 0px 1px 3px 0px;;
 }
 .MovieImage{
     width:400px;

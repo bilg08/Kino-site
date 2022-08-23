@@ -1,19 +1,34 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext } from "react";
 import css from "./orderMovie.module.css";
 import { MovieOrderingContext } from "../../contexts/MovieOrderingContext";
 import { MoviesContext } from "../../contexts/MoviesContext";
-
+import { BsFillArrowLeftCircleFill, BsCart3 } from "react-icons/bs";
+///////////////////////////////////////////////firebase/////////////////////////////////////////////////
+import { initializeApp } from "firebase/app";
+import {getDocs,getDoc,setDoc,doc,collection,getFirestore,addDoc} from "firebase/firestore";
+const firebaseConfig = {
+    apiKey: "AIzaSyB3d_wMRiKnFQJeuqQP-3wvPeEegp84MwE",
+    authDomain: "zbilguun-moviesite.firebaseapp.com",
+    projectId: "zbilguun-moviesite",
+    storageBucket: "zbilguun-moviesite.appspot.com",
+    messagingSenderId: "805291568664",
+    appId: "1:805291568664:web:4e3ae223c699f49783dd6d",
+    measurementId: "G-47DY21SGX5"
+};
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 export const OrderMovie = (props) => {
     const { userWantedMovie } = props;
     const { setUserWantedMovie } = useContext(MoviesContext);
     const userWantedMovieSeats = userWantedMovie.seat;
     const { takeUserInput, userWantedToOrder, setUserWantedToOrder,
         takeOrder, setUserWantedToOrderSeat, userWantedToOrderSeat,
-        canUserContinueOrderSeat
+        canUserContinueOrderSeat,form
     } = useContext(MovieOrderingContext);
-
+    
+   
+    
     const checkSeat = (e) => {
-
+    
         const thisClickedSeatId = parseInt(e.target.innerText);
         if (userWantedMovieSeats[thisClickedSeatId].isOrdered === false) {
             if (userWantedMovieSeats[thisClickedSeatId].isOrdering === false) {
@@ -30,6 +45,10 @@ export const OrderMovie = (props) => {
             userWantedMovieSeats[thisClickedSeatId].isOrdered = false;
             e.target.style.background = "blue";
         }
+        else if(''){
+
+        }
+       
     }
 
 
@@ -42,10 +61,10 @@ export const OrderMovie = (props) => {
         }} className={css.OrderMovie}>
 
             <div className={css.form}>
-                <button onClick={() => {
+                <button className={css.backToMovieBtn} onClick={() => {
                     setUserWantedMovie(false)
                     setUserWantedToOrderSeat(false)
-                }}>Болих</button>
+                }}><BsFillArrowLeftCircleFill /></button>
                 <h1>Захиалга</h1>
                 <div className={css.userName}>
                     <p>Нэр</p>
@@ -68,7 +87,7 @@ export const OrderMovie = (props) => {
                     <input id="Kids" onChange={(e) => takeUserInput(e)} name="Kid" />
                 </div>
                 <button
-                disabled={canUserContinueOrderSeat===true?true:false}
+                    
                     onClick={() => {
                         setUserWantedToOrderSeat(true);
                     }}>Суудал Захиалах</button>
@@ -87,7 +106,7 @@ export const OrderMovie = (props) => {
                     <div className={css.aboutGreenSeat}>Таны сонгосон</div>
                 </div>
 
-                {userWantedMovieSeats === undefined ? console.log("bolohgui") : userWantedMovieSeats.map((seat, index) => {
+                {userWantedMovieSeats === undefined ? "" : userWantedMovieSeats.map((seat, index) => {
                     return (
                         <button name="Seat" key={index} style={{
                             background: seat.isOrdered === true ? "red" : "blue"
@@ -101,17 +120,17 @@ export const OrderMovie = (props) => {
                         </button>
                     )
                 })}
-
+                <button
+                    onClick={() => {
+                        takeOrder(userWantedMovieSeats);
+                        setUserWantedMovie(false);
+                        setUserWantedToOrder(false);
+                        setUserWantedToOrderSeat(false)
+                    }}>
+                    <BsCart3 />
+                </button>
             </div>
-            <button
-                onClick={() => {
-                    takeOrder(userWantedMovieSeats);
-                    setUserWantedMovie(false);
-                    setUserWantedToOrder(false);
-                    setUserWantedToOrderSeat(false)
-                }}>
-                Захиалах
-            </button>
+
         </div>
     )
 }

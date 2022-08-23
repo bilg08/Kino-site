@@ -1,7 +1,6 @@
 import React, { useContext } from "react";
 import css from "./movie.module.css";
 import { MovieImageCart } from "../movieImageCart/movieImageCart";
-// import {Link} from "react-router-dom";
 import { MoviesContext } from "../../contexts/MoviesContext";
 
 export const Movie = (props) => {

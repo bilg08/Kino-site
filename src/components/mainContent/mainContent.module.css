@@ -1,7 +1,6 @@
 .MainContent{
-    width:1350px;
+    width:100%;
     height: auto;
-    margin: auto;
     margin-top: 80px;
     display: flex;
     justify-content: center;
