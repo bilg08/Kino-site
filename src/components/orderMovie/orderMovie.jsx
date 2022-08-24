@@ -4,17 +4,17 @@ import { MovieOrderingContext } from "../../contexts/MovieOrderingContext";
 import { MoviesContext } from "../../contexts/MoviesContext";
 import { BsFillArrowLeftCircleFill, BsCart3 } from "react-icons/bs";
 ///////////////////////////////////////////////firebase/////////////////////////////////////////////////
-import { initializeApp } from "firebase/app";
-import {getDocs,getDoc,setDoc,doc,collection,getFirestore,addDoc} from "firebase/firestore";
-const firebaseConfig = {
-    apiKey: "AIzaSyB3d_wMRiKnFQJeuqQP-3wvPeEegp84MwE",
-    authDomain: "zbilguun-moviesite.firebaseapp.com",
-    projectId: "zbilguun-moviesite",
-    storageBucket: "zbilguun-moviesite.appspot.com",
-    messagingSenderId: "805291568664",
-    appId: "1:805291568664:web:4e3ae223c699f49783dd6d",
-    measurementId: "G-47DY21SGX5"
-};
+// import { initializeApp } from "firebase/app";
+// import {getDocs,getDoc,setDoc,doc,collection,getFirestore,addDoc} from "firebase/firestore";
+// const firebaseConfig = {
+//     apiKey: "AIzaSyB3d_wMRiKnFQJeuqQP-3wvPeEegp84MwE",
+//     authDomain: "zbilguun-moviesite.firebaseapp.com",
+//     projectId: "zbilguun-moviesite",
+//     storageBucket: "zbilguun-moviesite.appspot.com",
+//     messagingSenderId: "805291568664",
+//     appId: "1:805291568664:web:4e3ae223c699f49783dd6d",
+//     measurementId: "G-47DY21SGX5"
+// };
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 export const OrderMovie = (props) => {
     const { userWantedMovie } = props;
@@ -22,13 +22,16 @@ export const OrderMovie = (props) => {
     const userWantedMovieSeats = userWantedMovie.seat;
     const { takeUserInput, userWantedToOrder, setUserWantedToOrder,
         takeOrder, setUserWantedToOrderSeat, userWantedToOrderSeat,
-        canUserContinueOrderSeat,form
+        canUserContinueOrderSeat,form,checkUserInputFullOrNot
     } = useContext(MovieOrderingContext);
     
    
     
     const checkSeat = (e) => {
-    
+    const kidQuantity=parseInt(form.Kid);
+    const AdultQuantity=parseInt(form.Adult);
+    const seatsQuantity=parseInt(form.seats.length);
+   
         const thisClickedSeatId = parseInt(e.target.innerText);
         if (userWantedMovieSeats[thisClickedSeatId].isOrdered === false) {
             if (userWantedMovieSeats[thisClickedSeatId].isOrdering === false) {
@@ -48,6 +51,7 @@ export const OrderMovie = (props) => {
         else if(''){
 
         }
+       console.log({kid:kidQuantity},{adult:AdultQuantity},{seat:seatsQuantity})
        
     }
 
@@ -89,7 +93,8 @@ export const OrderMovie = (props) => {
                 <button
                     
                     onClick={() => {
-                        setUserWantedToOrderSeat(true);
+                        // setUserWantedToOrderSeat(true);
+                        checkUserInputFullOrNot()
                     }}>Суудал Захиалах</button>
             </div>
 

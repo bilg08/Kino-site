@@ -1,40 +1,24 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { MoviesContext } from "./MoviesContext";
-///////firebase
-import { initializeApp } from "firebase/app";
-import {getDocs,getDoc,setDoc,doc,collection,getFirestore,addDoc} from "firebase/firestore";
-const firebaseConfig = {
-    apiKey: "AIzaSyB3d_wMRiKnFQJeuqQP-3wvPeEegp84MwE",
-    authDomain: "zbilguun-moviesite.firebaseapp.com",
-    projectId: "zbilguun-moviesite",
-    storageBucket: "zbilguun-moviesite.appspot.com",
-    messagingSenderId: "805291568664",
-    appId: "1:805291568664:web:4e3ae223c699f49783dd6d",
-    measurementId: "G-47DY21SGX5"
-};
-////////////
+
 export const MovieOrderingContext = createContext();
 
 export const MovieOrderingContextProvider = ({ children }) => {
-//firebase
 
-
-  const appFirebase = initializeApp(firebaseConfig);
-  const db=getFirestore(appFirebase);
-
-
-//////
     const [userWantedToOrder, setUserWantedToOrder] = useState(false);
     const {userWantedMovie} = useContext(MoviesContext)
     const [userWantedToOrderSeat, setUserWantedToOrderSeat] = useState(false);
     const [checkInputWhetherFullOrNot, setCheckInputWhetherFullOrNot] = useState(false);
     const [canUserContinueOrderSeat,setCanUserContinueOrderSeat] = useState(false);
-    const [canUserContinue,setUserCanContinue]=useState(false)
+    // const [checkUserInputFullOrNot,setCheckUserInputFullOrNot]=useState(false)
 
 
     let [orders,setOrders]=useState([]);
     let [form, setForm] = useState({
         MovieName:"",
+        Adult:"",
+        Kid:"",
+        Email:"",
         seats: []
     });
 
@@ -49,10 +33,14 @@ export const MovieOrderingContextProvider = ({ children }) => {
     }, [form])
 
     const takeUserInput = (e, seat,userWantedMovieSeats) => {
+    const kidQuantity=parseInt(form.Kid);
+    const AdultQuantity=parseInt(form.Adult);
+    const seatsQuantity=parseInt(form.seats.length);
         setForm({ ...form, [e.target.name]: e.target.value });
 
-        if((form.Email==="")&&(form.PhoneNumber==="")) {
+        if((form.Email==="")||(form.PhoneNumber==="")) {
             setCanUserContinueOrderSeat(true)
+            
         }else{
             setCanUserContinueOrderSeat(false)           
         }
@@ -89,7 +77,7 @@ export const MovieOrderingContextProvider = ({ children }) => {
         if (e.target.name === "PhoneNumber") {
             let phoneNumber = e.target.value;
 
-            for (let i = 0; i < phoneNumber.length; i++) {
+            for (let i = 0; i < e.target.value.length; i++) {
                 if (phoneNumber[i].charCodeAt() >= 48 && phoneNumber[i].charCodeAt() <= 57) {
                     e.target.style.background = "transparent"
                 } else {
@@ -114,6 +102,7 @@ export const MovieOrderingContextProvider = ({ children }) => {
                     return (
                         copyPrevVal
                     )
+                    
                 })
             }else{
                 const id = e.target.innerText;              
@@ -128,10 +117,19 @@ export const MovieOrderingContextProvider = ({ children }) => {
                 })
             }
             
+            
         }
         
     }
-
+    
+    const checkUserInputFullOrNot=()=>{
+        console.log('ko');
+        
+            if (!form.Email.includes("@yahoo.com")||form.PhoneNumber==="") {
+              console.log('KKKa',form.PhoneNumber)
+            }  
+          
+    }
 
 
     const takeOrder = async(userWantedMovieSeats) => {
@@ -141,6 +139,7 @@ export const MovieOrderingContextProvider = ({ children }) => {
             userWantedMovieSeats[i].isOrdered=true
         }
        }
+       
         setOrders((prevVal)=>{
            let prevValAcopy=[...prevVal];
            prevValAcopy.push(form);
@@ -149,7 +148,6 @@ export const MovieOrderingContextProvider = ({ children }) => {
                orders=prevValAcopy
            )
        });
-       addDoc(collection(db,userWantedMovie.MovieName,),form);
      setForm((prevVal)=> {
          let prevValAcopy={...prevVal}
          prevValAcopy={MovieName:"",seats:[]};
@@ -168,7 +166,7 @@ export const MovieOrderingContextProvider = ({ children }) => {
                 userWantedToOrder,
                 setUserWantedToOrder, userWantedToOrderSeat,
                 setUserWantedToOrderSeat, checkInputWhetherFullOrNot,
-                canUserContinueOrderSeat,form
+                canUserContinueOrderSeat,form,checkUserInputFullOrNot
             }
         }>  {children}
         </MovieOrderingContext.Provider>
