@@ -1,8 +1,0 @@
-.MoviesContainer{
-    margin:5px auto;
-    width: 80%;
-    justify-content: space-around;
-    align-items: center;
-    gap:10px;
-    display: flex;
-}
