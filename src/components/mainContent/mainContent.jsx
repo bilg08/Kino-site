@@ -6,6 +6,7 @@ import { MovieOrderingContext } from "../../contexts/MovieOrderingContext";
 import { MovieOrderingContextProvider } from "../../contexts/MovieOrderingContext";
 import { OrderMovie } from "../orderMovie/orderMovie";
 import { Link } from "react-router-dom";
+// import { MobileAuth } from "../mobileAuth/mobileAuth";
 
 export const MainContent = () => {
     console.log("mainContentAjilla");
@@ -16,6 +17,7 @@ export const MainContent = () => {
             <MovieOrderingContextProvider>
              <MovieDetail/>
             </MovieOrderingContextProvider>
+            {/* <MobileAuth/> */}
         </main>
     )
 }

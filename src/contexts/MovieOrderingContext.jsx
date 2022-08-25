@@ -1,35 +1,19 @@
+
 import { createContext, useContext, useEffect, useState } from "react";
 import { MoviesContext } from "./MoviesContext";
-///////firebase
-import { initializeApp } from "firebase/app";
-import {getDocs,getDoc,setDoc,doc,collection,getFirestore,addDoc} from "firebase/firestore";
-const firebaseConfig = {
-    apiKey: "AIzaSyB3d_wMRiKnFQJeuqQP-3wvPeEegp84MwE",
-    authDomain: "zbilguun-moviesite.firebaseapp.com",
-    projectId: "zbilguun-moviesite",
-    storageBucket: "zbilguun-moviesite.appspot.com",
-    messagingSenderId: "805291568664",
-    appId: "1:805291568664:web:4e3ae223c699f49783dd6d",
-    measurementId: "G-47DY21SGX5"
-};
-////////////
+import {setDoc,doc,getDoc}from"firebase/firestore"
+import { database } from "../firebase/firebase";
 export const MovieOrderingContext = createContext();
 
 export const MovieOrderingContextProvider = ({ children }) => {
-//firebase
 
 
-  const appFirebase = initializeApp(firebaseConfig);
-  const db=getFirestore(appFirebase);
-
-
-//////
     const [userWantedToOrder, setUserWantedToOrder] = useState(false);
-    const {userWantedMovie} = useContext(MoviesContext)
+    const {userWantedMovie,moviesDatas} = useContext(MoviesContext)
     const [userWantedToOrderSeat, setUserWantedToOrderSeat] = useState(false);
     const [checkInputWhetherFullOrNot, setCheckInputWhetherFullOrNot] = useState(false);
     const [canUserContinueOrderSeat,setCanUserContinueOrderSeat] = useState(false);
-    const [canUserContinue,setUserCanContinue]=useState(false)
+    const db =database;
 
 
     let [orders,setOrders]=useState([]);
@@ -40,8 +24,8 @@ export const MovieOrderingContextProvider = ({ children }) => {
 
     useEffect(() => {
 
-        if (form.Name === "" || form.Email === "") {
-            setCheckInputWhetherFullOrNot(true)
+        if (form.Name === ""|| form.Email === ""||form.PhoneNumber==="") {
+            setCheckInputWhetherFullOrNot(true);
         } else {
             setCheckInputWhetherFullOrNot(false)
         }
@@ -50,7 +34,7 @@ export const MovieOrderingContextProvider = ({ children }) => {
 
     const takeUserInput = (e, seat,userWantedMovieSeats) => {
         setForm({ ...form, [e.target.name]: e.target.value });
-
+console.log(form)
         if((form.Email==="")&&(form.PhoneNumber==="")) {
             setCanUserContinueOrderSeat(true)
         }else{
@@ -138,25 +122,31 @@ export const MovieOrderingContextProvider = ({ children }) => {
       
        for(let i=0;i<userWantedMovieSeats.length;i++) {
         if(userWantedMovieSeats[i].isOrdering===true){
-            userWantedMovieSeats[i].isOrdered=true
+            userWantedMovieSeats[i].isOrdered=true;
+            userWantedMovieSeats[i].isOrdering=false;
         }
        }
         setOrders((prevVal)=>{
            let prevValAcopy=[...prevVal];
            prevValAcopy.push(form);
-           console.log(prevValAcopy)
            return(
                orders=prevValAcopy
            )
        });
-       addDoc(collection(db,userWantedMovie.MovieName,),form);
+    for(let i=0;i<moviesDatas.length;i++) {
+        
+    }
      setForm((prevVal)=> {
          let prevValAcopy={...prevVal}
          prevValAcopy={MovieName:"",seats:[]};
          return prevValAcopy
      })
        
-       
+       for(let i=0;i<moviesDatas.length;i++){
+           console.log(moviesDatas[i].MovieName);
+           await setDoc(doc(db,"movies",moviesDatas[i].MovieName),moviesDatas[i])
+           getDoc(doc(db,"movies",moviesDatas[i].MovieName)).then((res)=>console.log(res.data()))
+       }
     }
 
 

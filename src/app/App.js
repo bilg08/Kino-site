@@ -6,7 +6,6 @@ import {MoviesContextProvider} from "../contexts/MoviesContext";
 function App() {
    
 
-
   return (
     <div className={css.App}>
         <Routes>
@@ -16,7 +15,6 @@ function App() {
             </MoviesContextProvider>
             }
           />
-            
         </Routes>
     </div>
   );

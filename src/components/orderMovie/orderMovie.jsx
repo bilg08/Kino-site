@@ -1,54 +1,53 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import css from "./orderMovie.module.css";
 import { MovieOrderingContext } from "../../contexts/MovieOrderingContext";
 import { MoviesContext } from "../../contexts/MoviesContext";
 import { BsFillArrowLeftCircleFill, BsCart3 } from "react-icons/bs";
-///////////////////////////////////////////////firebase/////////////////////////////////////////////////
-import { initializeApp } from "firebase/app";
-import {getDocs,getDoc,setDoc,doc,collection,getFirestore,addDoc} from "firebase/firestore";
-const firebaseConfig = {
-    apiKey: "AIzaSyB3d_wMRiKnFQJeuqQP-3wvPeEegp84MwE",
-    authDomain: "zbilguun-moviesite.firebaseapp.com",
-    projectId: "zbilguun-moviesite",
-    storageBucket: "zbilguun-moviesite.appspot.com",
-    messagingSenderId: "805291568664",
-    appId: "1:805291568664:web:4e3ae223c699f49783dd6d",
-    measurementId: "G-47DY21SGX5"
-};
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 export const OrderMovie = (props) => {
     const { userWantedMovie } = props;
     const { setUserWantedMovie } = useContext(MoviesContext);
     const userWantedMovieSeats = userWantedMovie.seat;
     const { takeUserInput, userWantedToOrder, setUserWantedToOrder,
         takeOrder, setUserWantedToOrderSeat, userWantedToOrderSeat,
-        canUserContinueOrderSeat,form
+        form
     } = useContext(MovieOrderingContext);
     
    
-    
+
     const checkSeat = (e) => {
-    
+        
+  
         const thisClickedSeatId = parseInt(e.target.innerText);
         if (userWantedMovieSeats[thisClickedSeatId].isOrdered === false) {
             if (userWantedMovieSeats[thisClickedSeatId].isOrdering === false) {
+                
                 e.target.style.background = "green";
                 userWantedMovieSeats[thisClickedSeatId].isOrdering = true;
             } else {
                 e.target.style.background = "blue";
                 userWantedMovieSeats[thisClickedSeatId].isOrdering = false;
             }
-
+        
 
 
         } else if (userWantedMovieSeats[thisClickedSeatId].isOrdered === true) {
             userWantedMovieSeats[thisClickedSeatId].isOrdered = false;
             e.target.style.background = "blue";
         }
-        else if(''){
-
-        }
-       
+        let a=0;
+       for(let i=0;i<userWantedMovieSeats.length;i++){
+           
+           if(userWantedMovieSeats[i].isOrdering===true){
+               a++;
+               if(parseInt(form.Adult)+parseInt(form.Kid)<a){
+                //   userWantedMovieSeats[i].isOrdering=false;
+                  
+                    userWantedMovieSeats[i].isOrdering=false;
+                  
+                  e.target.style.background="blue"
+               }
+           }
+       }
     }
 
 
@@ -87,7 +86,7 @@ export const OrderMovie = (props) => {
                     <input id="Kids" onChange={(e) => takeUserInput(e)} name="Kid" />
                 </div>
                 <button
-                    
+                    // disabled={true}
                     onClick={() => {
                         setUserWantedToOrderSeat(true);
                     }}>Суудал Захиалах</button>
@@ -105,8 +104,10 @@ export const OrderMovie = (props) => {
                     <div className={css.aboutBlueSeat}>Захиалгагүй</div>
                     <div className={css.aboutGreenSeat}>Таны сонгосон</div>
                 </div>
-
+                
+                
                 {userWantedMovieSeats === undefined ? "" : userWantedMovieSeats.map((seat, index) => {
+                    
                     return (
                         <button name="Seat" key={index} style={{
                             background: seat.isOrdered === true ? "red" : "blue"
