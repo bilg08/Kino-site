@@ -1,0 +1,50 @@
+*{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+.siteHeader{
+    width:100%;
+    height: 120px;
+    border: 1px solid black;
+    background: #87805E;
+}
+.siteHeaderMain{
+    width: 1350px;
+    height: 100%;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.headerLogo{
+    width: 6%;
+    height: 100%;
+    display: flex;
+    box-sizing: border-box;
+}
+.headerLogo img{
+    width: 100%;
+    height: 80%;
+    margin: auto;
+}
+.headerMenuItem{
+    width: auto;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap:1.5%;
+}
+
+.headerMenuItem li{
+    padding: 5px 15px;
+    background-color: #000000;
+    color:white;
+    border-radius: 10px;
+    transition: 0.3s;
+}
+.headerMenuItem li:hover{
+    background-color: #87805E;
+    color:black;
+}

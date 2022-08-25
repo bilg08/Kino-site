@@ -1,6 +1,7 @@
 .MoviesContainer{
-    margin:5px auto;
-    width: 80%;
+    width: 1350px;
+    height:auto;
+    margin: auto;
     justify-content: space-around;
     align-items: center;
     gap:10px;
