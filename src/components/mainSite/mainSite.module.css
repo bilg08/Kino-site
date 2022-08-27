@@ -7,10 +7,10 @@
     align-items: center;
     flex-direction: column;
     position: relative;
-    background:radial-gradient(#423F3E 20%,#2B2B2B);
+    background:black;
 }
 .MainContentMain{
-    width:1350px;
+    max-width:1350px;
     height: 100%;
     position: relative;
     margin: auto;

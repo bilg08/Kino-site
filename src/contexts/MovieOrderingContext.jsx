@@ -1,14 +1,19 @@
-import { createContext,useEffect,useState } from "react";
+import { createContext,useContext,useEffect,useState } from "react";
 import { checkInputMongolianAlphabetOrNot } from "../functions/checkInputMongolianOrNot";
+import { MoviesContext } from "./MoviesContext";
 export const MovieOrderingContext = createContext();
 export const MovieOrderingContextProvider = ({ children }) => {
 
 
-
+    const {userWantedMovie}=useContext(MoviesContext)
     const [userWantedToOrder, setUserWantedToOrder] = useState(false);
     const [canUserResumeToPhoneNumber,setCanUserResumeToPhoneNumber]=useState(false);
     const [canUserResumeToAdultAndKidsForm,setCanUserResumeToAdultAndKidsForm]=useState(false);
     const [canUserResumeToOrderChair,setCanUserResumeToOrderChair]=useState(false);
+    const userWantedMovieSeats=userWantedMovie.seat;
+    const [possibleSeattoOrder,setPossibleSeatToOrder]=useState(0);
+    let [exceededPossibleOrderSeat,setExceededPossibleOrderSeat]=useState(false)
+    console.log(exceededPossibleOrderSeat)
     let [form,setForm]=useState({
         Name:"",
         Email:"",
@@ -33,8 +38,6 @@ export const MovieOrderingContextProvider = ({ children }) => {
     const checkEmail=()=>{
         console.log('ss',form.Email)
         if(form.Email.includes("@yahoo.com")){
-            console.log(form.Email)
-            console.log("unen")
             setCanUserResumeToAdultAndKidsForm(true)
         }else{
             setCanUserResumeToAdultAndKidsForm(false)
@@ -44,19 +47,52 @@ export const MovieOrderingContextProvider = ({ children }) => {
         console.log(typeof form.Adult,typeof form.Kids)
         if(parseInt(form.Adult)===0&&parseInt(form.Kids)===0){
             setCanUserResumeToOrderChair(false)
-            console.log('buruu')
         }else{
             setCanUserResumeToOrderChair(true);
-            console.log('zov')
         }
 
     }
 
+    const checkSeat=(e)=>{
+        const seatId=parseInt(e.target.innerText);
+           if(exceededPossibleOrderSeat===false){
+            console.log('ihdeegui')
+            if(userWantedMovieSeats[seatId].isOrdering===false){
+                userWantedMovieSeats[seatId].isOrdering=true;
+                e.target.style.background="green";
+                setPossibleSeatToOrder(prevVal=>prevVal+1);
+               
+            }else{
+                userWantedMovieSeats[seatId].isOrdering=false;
+                e.target.style.background="blue";
+                setPossibleSeatToOrder(prevVal=>prevVal-1);
+            }
+            
+           }else{
+            return null
+           }
+        }
+useEffect(()=>{
+    console.log("parseInt(form.Adult)+parseInt(form.Kids)",parseInt(form.Adult)+parseInt(form.Kids),"seat",possibleSeattoOrder)
+    if(parseInt(form.Adult)+parseInt(form.Kids)<possibleSeattoOrder){
+        console.log('ih')
+        setExceededPossibleOrderSeat(exceededPossibleOrderSeat=true)
+    }
+},[possibleSeattoOrder])
+
+const takeOrder=()=>{
+    for(let i=0;i<userWantedMovieSeats.length;i++){
+        if(userWantedMovieSeats[i].isOrdering===true){
+            userWantedMovieSeats[i].isOrdered=true
+        }
+    }
+}
     return (
         <MovieOrderingContext.Provider value={
             {
                 userWantedToOrder,canUserResumeToPhoneNumber,checkEmail,checkUserCount,
-                setUserWantedToOrder,takeUserInput,checkUserName,canUserResumeToAdultAndKidsForm
+                setUserWantedToOrder,takeUserInput,checkUserName,canUserResumeToAdultAndKidsForm,
+                canUserResumeToOrderChair,form,checkSeat,takeOrder
                 
             }
         }>  {children}

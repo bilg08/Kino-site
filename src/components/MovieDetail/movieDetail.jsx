@@ -10,13 +10,16 @@ export const MovieDetail = (props) => {
     const {userWantedToOrder,setUserWantedToOrder} = useContext(MovieOrderingContext);
      
     return(
-            <div style={{background:`url(${userWantedMovie.backgroundImage})`,
+            <div className={css.MovieDetail}>
+                <div style={{background:`url(${userWantedMovie.backgroundImage})`,
                             backgroundPosition: "center",
                             backgroundSize: "cover",
+                            margin:"auto",
+                            width:1350+"px",
                             overflow:"hidden",
                             backgroundRepeat:"no-repeat"}
                             } 
-            className={css.MoreMovieAbout}>
+            className={css.MovieDetailMain}>
                 
                 <div className={css.movieMoreAbout}>
                     <div className={css.movieLogo}>
@@ -32,9 +35,10 @@ export const MovieDetail = (props) => {
                         }} >
                     Захиалах
                     </button></Link>
-                    <button>Буцах</button>
+                    <button className={css.backToMovies}>Буцах</button>
                    </div>
                 </div>
+            </div>
             </div>
 
     )

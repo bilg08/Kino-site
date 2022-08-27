@@ -4,6 +4,7 @@
         "MovieName":"The Shawshank Redemption",
         "genre":"Drama Advanture",
         "director":"Stephen King",
+        "rating":9.5,
         "MovieLogo":"https://occ-0-325-395.1.nflxso.net/dnm/api/v6/LmEnxtiAuzezXBjYXPuDgfZ4zZQ/AAAABahQQ5XvYZjmahuo7hQVPDD4LfknCR3wuGf3NZ3qHzVJgyn6rfKUw8UkvOXj-jfUzmu9SsO7ZRQh3FXJl84eDOaChIcGsstdyQFHmX-Jg9V_.png?r=c2c",
         "backgroundImage":"https://occ-0-325-395.1.nflxso.net/dnm/api/v6/6AYY37jfdO6hpXcMjf9Yu5cnmO0/AAAABRi8-w2QM3rGYadQzElfxBCLb4CjNcEoO7g3YXpIZu8_wfbvVSJ7Fd-icgaQgT78r_zyymXNl1fQxImWSJFzq83zHV3zLMjVPT_z.jpg?r=cbb",
         "image":"https://upload.wikimedia.org/wikipedia/en/8/81/ShawshankRedemptionMoviePoster.jpg",
@@ -117,9 +118,10 @@
         "MovieName":"The God Father",
         "genre":"Crime and Drama",
         "director":"Francis Ford Coppola",
+        "rating":9.6,
         "MovieLogo":"https://occ-0-325-395.1.nflxso.net/dnm/api/v6/LmEnxtiAuzezXBjYXPuDgfZ4zZQ/AAAABeFW9M5_e7IVV39sqVwVcYQvdCAj4BoOwXuKcrYbYQDswQlOmGD-ir9-FxI4202JrsSXbko0OLc79S36-ncUJ5nE-nPVNYVIoCV1N8errjqm.png?r=4a5",
         "image":"https://m.media-amazon.com/images/M/MV5BM2MyNjYxNmUtYTAwNi00MTYxLWJmNWYtYzZlODY3ZTk3OTFlXkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_.jpg",
-        "backgroundImage":"https://occ-0-325-395.1.nflxso.net/dnm/api/v6/6AYY37jfdO6hpXcMjf9Yu5cnmO0/AAAABY-Dm0UtpXCOhR4o7RWphMkI9HugGQS87k5H3H8Q1yD0YKPnthO9UEr6NyfY73mvfXjCDYIjAJWcBWWQoGsaqQA7BVleItY0EkCF.jpg?r=3c8",
+        "backgroundImage":"https://wallpapercave.com/wp/7C4y3Up.jpg",
         "about":"1945-1955 он. Энэ бол Корлеоногийн гэр бүлийн гэмт хэргийн түүх. Өөрийг нь алах гэсэн оролдлогоос амьд үлдэж чадсан Вито цусан өшөө авах ажил эхлүүлнэ. Түүний гэр бүлийн гэмт хэргийн түүхийг та  ЗАГАЛМАЙЛСАН ЭЦЭГ киноноос хүлээн авч үзээрэй."
          ,
          "seat":[
@@ -231,6 +233,7 @@
         "MovieName":"The Dark Knight",
         "genre":"Action Crime Adventure",
         "director":"Christopher Nolan",
+        "rating":9.2,
         "MovieLogo":"https://occ-0-325-395.1.nflxso.net/dnm/api/v6/LmEnxtiAuzezXBjYXPuDgfZ4zZQ/AAAABTXF3pHDNydm9RJBFvbWZil50IZTp-DjX0-zKXYTa8hrw2AI6ManQCtCzUcHgQEkQz1OMsijZGHw0ebf71BoOEYOCeEb4hV-Hk2HvSRiaEk6.png?r=40b",
         "backgroundImage":"https://occ-0-325-395.1.nflxso.net/dnm/api/v6/6AYY37jfdO6hpXcMjf9Yu5cnmO0/AAAABdyLqW5WyQKb8ROtBb3yIhYmM2H-HPsdqsEFhwmuMEpoJIJOA5EyukadIKNst3QiiX-PbzZyOlEDnTqnFnycKOhuiI8Ri0TOcaFx.jpg?r=77f",
         "image":"https://mobwallpapershd.com/wp-content/uploads/2021/08/4k-Batman-Phone-Wallpaper-576x1024.jpg",

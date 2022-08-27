@@ -11,7 +11,7 @@ function App() {
     <div className={css.App}>
       <Header/>
       <Routes>
-        <Route path="/home" element={<MainSite/>}/>
+        <Route path="/" element={<MainSite/>}/>
         <Route path="/movies/:MovieName" element={<MovieDetail/>}/>
         <Route path="/OrderMovie" element={<OrderMovie/>}/>
       </Routes>
