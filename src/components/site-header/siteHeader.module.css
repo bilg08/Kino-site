@@ -10,7 +10,7 @@
     background: #87805E;
 }
 .siteHeaderMain{
-    width: 1350px;
+    width: 80%;
     height: 100%;
     margin: auto;
     display: flex;
@@ -47,4 +47,14 @@
 .headerMenuItem li:hover{
     background-color: #87805E;
     color:black;
+}
+@media (min-width:1350px) {
+    .siteHeaderMain{
+        width: 1350px;
+        height: 100%;
+        margin: auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
 }

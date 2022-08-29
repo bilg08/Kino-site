@@ -8,8 +8,6 @@ export const Movie = (props) => {
     
     const {setUserWantedMovie} =useContext(MoviesContext);
     const {oneMovieData} = props;
-    console.log(oneMovieData)
-
 
     return(
      

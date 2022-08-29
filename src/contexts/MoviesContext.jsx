@@ -3,7 +3,6 @@ import  moviesDatas  from "../asset/movies";
 export const MoviesContext=createContext();
 export const MoviesContextProvider = ({children}) => {
     const [userWantedMovie,setUserWantedMovie]=useState("");
-    console.log(userWantedMovie) 
     return(
         <MoviesContext.Provider value={{moviesDatas,userWantedMovie,setUserWantedMovie}}>
             {children}

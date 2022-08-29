@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import css from "./orderMovie.module.css";
 import { BsFillArrowLeftCircleFill, BsCart3 } from "react-icons/bs";
 import { MovieOrderingContext } from "../../contexts/MovieOrderingContext";
@@ -10,12 +10,11 @@ export const OrderMovie = (props) => {
 
     const {takeUserInput,checkEmail,
         checkUserName,
-        canUserResumeToPhoneNumber,canUserResumeToOrderChair,checkSeat,takeOrder,
+        canUserResumeToPhoneNumber,canUserResumeToOrderChair,takeOrder,checkSeat,
         canUserResumeToAdultAndKidsForm,checkUserCount} =useContext(MovieOrderingContext)
         const {userWantedMovie}=useContext(MoviesContext)
         const userWantedMovieSeats=userWantedMovie.seat;
-
-    
+        
     return (
         <div className={css.OrderMovie}>
             <div className={css.form}
@@ -25,6 +24,7 @@ export const OrderMovie = (props) => {
                 <div  style={{display:canUserResumeToPhoneNumber===true?"none":'flex'}} className={css.userInputForm}>
                     <h1>Захиалга</h1>
                     <p>Нэр</p>
+                    <button className={css.backButton}><BsFillArrowLeftCircleFill/></button>
                     <input id="userNameInput" onChange={(e)=>takeUserInput(e)} name="Name" />
                     <button className={css.continueForm} onClick={()=>checkUserName()}>Үргэлжлүүлэх</button>
                 </div>
@@ -35,6 +35,7 @@ export const OrderMovie = (props) => {
                  }} className={css.userInputForm}>
                     <h1>Захиалга</h1>
                     <p>Имайл</p>
+                    <button className={css.backButton} ><BsFillArrowLeftCircleFill/></button>
                     <input id="emailInput" onChange={(e)=>takeUserInput(e)} name="Email" />
                     <button className={css.continueForm} onClick={checkEmail}>Үргэлжлүүлэх</button>
                 </div>
@@ -43,6 +44,7 @@ export const OrderMovie = (props) => {
                           transform:canUserResumeToOrderChair===true?'translateY(-100vh)':
                           'translateY(0vh)'}} className={css.userInputForm}>
                     <h1>Захиалга</h1>
+                    <button className={css.backButton}><BsFillArrowLeftCircleFill/></button>
                     <p>Том Хүн</p>
                     <input id="Adult" onChange={(e)=>takeUserInput(e)} name="Adult" />
                     <p>Хүүхэд</p>

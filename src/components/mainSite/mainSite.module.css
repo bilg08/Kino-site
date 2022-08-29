@@ -10,11 +10,21 @@
     background:black;
 }
 .MainContentMain{
-    max-width:1350px;
+    width:80%;
     height: 100%;
     position: relative;
     margin: auto;
     display: flex;
     justify-content: center;
     align-items: center;
+}
+@media (min-width:1350px) {
+    .MainContentMain{
+        width: 1350px;
+        height: 100%;
+        margin: auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
 }
