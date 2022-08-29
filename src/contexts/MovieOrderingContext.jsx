@@ -10,9 +10,8 @@ export const MovieOrderingContextProvider = ({ children }) => {
     let [canUserResumeToPhoneNumber,setCanUserResumeToPhoneNumber]=useState(false);
     let [canUserResumeToAdultAndKidsForm,setCanUserResumeToAdultAndKidsForm]=useState(false);
     let [canUserResumeToOrderChair,setCanUserResumeToOrderChair]=useState(false);
-    let [userChosenSeats,setUserChosenseats]=useState([]);
+    let [orders,setOrders]=useState([])
     let userWantedMovieSeats=userWantedMovie.seat;
-    let [exceededPossibleOrderSeat,setExceededPossibleOrderSeat]=useState(false);
     
     let [form,setForm]=useState({
         Name:"",
@@ -48,100 +47,36 @@ export const MovieOrderingContextProvider = ({ children }) => {
         }else{
             setCanUserResumeToOrderChair(true);
         }
-        console.log(form,"form")
-
     }
 
-    const checkSeat=(e)=>{
-        const seatId=parseInt(e.target.innerText);
-        
-        
-        
-//hervee songoh ystoi sandalliin toonoosoo ihdeegui bol
-            if(exceededPossibleOrderSeat===false){
-               
-                    if(userWantedMovieSeats[seatId].isOrdering===false){
-                        userWantedMovieSeats[seatId].isOrdering=true;
-                        e.target.style.background="green"
-                        setUserChosenseats(prevVal=>{
-                            let prevValACopy=prevVal;
-                            prevValACopy.push(seatId);
-                            console.log(prevValACopy,'after1Push')
-                            return(
-                                prevVal=prevValACopy
-                            )
-                        })
-                        setForm(prevVal=>{
-                            let prevValACopy=prevVal;
-                            prevValACopy.Seat=userChosenSeats
-                            console.log(prevValACopy,'after2Form')
-                            return(
-                                prevVal=prevValACopy
-                            )
-                        })
-                        
-                    }else{
-                        userWantedMovieSeats[seatId].isOrdering=false;
-                        e.target.style.background="blue"                       
-                        setUserChosenseats(prevVal=>{
-                            let prevValACopy=prevVal;
-                            prevValACopy.splice(prevValACopy.indexOf(seatId,1));
-                            return(
-                                prevVal=prevValACopy
-                            )
-                            
-                        })
-                        setForm(prevVal=>{
-                            let prevValACopy=prevVal;
-                            prevValACopy.Seat=userChosenSeats
-                            return(
-                                prevVal=prevValACopy
-                            )
-                        })
-                    }
-            //hervee songoh ystoi sandalliin toonoosoo ihedsen bol
-            }else {
-            for(let i=0;i<userChosenSeats.length;i++){
-                if(seatId===userChosenSeats[i]){
-                    e.target.style.background="blue"                       
-                    setUserChosenseats(prevVal=>{
-                        let prevValACopy=prevVal;
-                        prevValACopy.splice(prevValACopy.indexOf(seatId,1));
-                        return(
-                            prevVal=prevValACopy
-                        )
-                    })
-                    setForm(prevVal=>{
-                        let prevValACopy=prevVal;
-                        prevValACopy.Seat=userChosenSeats
-                        return(
-                            prevVal=prevValACopy
-                        )
-                    })
-                }
-             }
-            }
-            
-           
-    }
-    useEffect(()=>{
-        if(userChosenSeats.length>parseInt(form.Adult)+parseInt(form.Kids)){
-          setExceededPossibleOrderSeat(exceededPossibleOrderSeat=true);
-        }else{
-            setExceededPossibleOrderSeat(exceededPossibleOrderSeat=false);
-        }
-    },[userChosenSeats.length]);
 
-
-const takeOrder=()=>{
+const takeOrder=(userChosenSeats)=>{
+    console.log(userChosenSeats)
     for(let i=0;i<userWantedMovieSeats.length;i++){
         if(userWantedMovieSeats[i].isOrdering===true){
             userWantedMovieSeats[i].isOrdered=true;
         }
     }
+    setForm(prevVal=>{
+        let prevValACopy=prevVal;
+        prevValACopy.Seat=userChosenSeats
+        
+        return(
+            prevVal=prevValACopy
+        )
+    })
+    setOrders(prevVal=>{
+        let prevValACopy=prevVal;
+        prevValACopy.push(form)
+        console.log(orders,'orders')
+        return(
+            prevVal=prevValACopy
+        )
+    })
+    
     setCanUserResumeToOrderChair(false);
     setCanUserResumeToAdultAndKidsForm(false);
-    setUserChosenseats(userChosenSeats=[]);
+    //zahialga hiigdsenii daraa omnoh zahialgatai zahialgiin huseltiig hoosolno
     setForm(prevVal=>{
         let prevValACopy=prevVal;
         prevValACopy={
@@ -160,7 +95,7 @@ const takeOrder=()=>{
             {
                 userWantedToOrder,canUserResumeToPhoneNumber,checkEmail,checkUserCount,
                 setUserWantedToOrder,takeUserInput,checkUserName,canUserResumeToAdultAndKidsForm,
-                canUserResumeToOrderChair,form,takeOrder,checkSeat
+                canUserResumeToOrderChair,form,takeOrder
             }
         }>  {children}
         </MovieOrderingContext.Provider>
