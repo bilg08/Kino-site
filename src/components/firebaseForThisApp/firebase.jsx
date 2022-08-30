@@ -1,14 +1,15 @@
 import { initializeApp } from "firebase/app";
 import {getAuth} from "firebase/auth";
+import { getFirestore } from "firebase/firestore";
 const firebaseConfig = {
-  apiKey: "AIzaSyCbCrCB1oY8M01S-xzpPLmK3l6N163Y-9A",
-  authDomain: "learningfirebaseauthwithphonum.firebaseapp.com",
-  projectId: "learningfirebaseauthwithphonum",
-  storageBucket: "learningfirebaseauthwithphonum.appspot.com",
-  messagingSenderId: "120576265071",
-  appId: "1:120576265071:web:572379f4e049268e2f369a",
-  measurementId: "G-905S2VL4E7"
+  apiKey: "AIzaSyDPHIV6qpFJbMgEcIyS4asAEzKldPeG3DA",
+  authDomain: "moviesite-432bd.firebaseapp.com",
+  projectId: "moviesite-432bd",
+  storageBucket: "moviesite-432bd.appspot.com",
+  messagingSenderId: "1049607448588",
+  appId: "1:1049607448588:web:2133414a499c41f682e629",
+  measurementId: "G-VDS2HTRZXH"
 };
-
 const app = initializeApp(firebaseConfig);
+export const db=getFirestore(app)
 export const auth = getAuth(app);

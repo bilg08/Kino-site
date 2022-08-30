@@ -1,6 +1,8 @@
 import { createContext,useContext,useEffect,useState } from "react";
 import { checkInputMongolianAlphabetOrNot } from "../functions/checkInputMongolianOrNot";
 import { MoviesContext } from "./MoviesContext";
+import { db } from "../components/firebaseForThisApp/firebase";
+import {setDoc,doc, addDoc, collection} from 'firebase/firestore'
 export const MovieOrderingContext = createContext();
 export const MovieOrderingContextProvider = ({ children }) => {
 
@@ -10,7 +12,6 @@ export const MovieOrderingContextProvider = ({ children }) => {
     let [canUserResumeToPhoneNumber,setCanUserResumeToPhoneNumber]=useState(false);
     let [canUserResumeToAdultAndKidsForm,setCanUserResumeToAdultAndKidsForm]=useState(false);
     let [canUserResumeToOrderChair,setCanUserResumeToOrderChair]=useState(false);
-    let [orders,setOrders]=useState([])
     let userWantedMovieSeats=userWantedMovie.seat;
     
     let [form,setForm]=useState({
@@ -50,29 +51,22 @@ export const MovieOrderingContextProvider = ({ children }) => {
     }
 
 
-const takeOrder=(userChosenSeats)=>{
-    console.log(userChosenSeats)
+const takeOrder=async(userChosenSeats)=>{
     for(let i=0;i<userWantedMovieSeats.length;i++){
         if(userWantedMovieSeats[i].isOrdering===true){
             userWantedMovieSeats[i].isOrdered=true;
         }
     }
-    setForm(prevVal=>{
+    setForm(async(prevVal)=>{
         let prevValACopy=prevVal;
         prevValACopy.Seat=userChosenSeats
-        
+        await addDoc(collection(db,`${userWantedMovie.MovieName}orders`),form,{merge:true});
+        await setDoc(doc(db,'movies',userWantedMovie.MovieName),userWantedMovie);
         return(
             prevVal=prevValACopy
         )
     })
-    setOrders(prevVal=>{
-        let prevValACopy=prevVal;
-        prevValACopy.push(form)
-        console.log(orders,'orders')
-        return(
-            prevVal=prevValACopy
-        )
-    })
+    
     
     setCanUserResumeToOrderChair(false);
     setCanUserResumeToAdultAndKidsForm(false);

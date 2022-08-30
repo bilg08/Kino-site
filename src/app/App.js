@@ -5,18 +5,20 @@ import {MainSite} from "../components/mainSite/mainSite";
 import {Route,Routes}from 'react-router-dom'
 import { MovieDetail } from "../components/MovieDetail/movieDetail";
 import { OrderMovie } from "../components/orderMovie/orderMovie";
-// import { UserRegisteration } from "../components/userRegisteration/userRegisteration";
+import {  } from "../components/testForFirebaseCustomHook/useUseDoc";
+import { Test } from "../components/testForFirebaseCustomHook/testForSetDoc";
 function App() {
    
   return (
     <div className={css.App}>
+      <Test/>
       {/* <UserRegisteration/> */}
-      <Header/>
+       {/* <Header/>
       <Routes>
         <Route path="/" element={<MainSite/>}/>
         <Route path="/movies/:MovieName" element={<MovieDetail/>}/>
         <Route path="/OrderMovie" element={<OrderMovie/>}/>
-      </Routes>
+      </Routes> */}
     </div>
   );
 }

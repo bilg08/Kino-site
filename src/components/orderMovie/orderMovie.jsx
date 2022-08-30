@@ -24,7 +24,10 @@ export const OrderMovie=()=>{
 
     //suudal zahialah
     const checkSeat = (e) => {
+
         const seatId=parseInt(e.target.innerText)
+        console.log(seatId,'seatid',userWantedMovieSeats[seatId].isOrdering )
+
         const possibleSeatToOrder=parseInt(form.Adult)+parseInt(form.Kids)
         //hervee niit hunii toonoos songoson suudliin too ihedeegui bol ene ajilna
         if(possibleSeatToOrder>userChosenSeats.length){
@@ -57,6 +60,9 @@ export const OrderMovie=()=>{
         //tuhain hasahiig husej bui sandal songogdson sandalni arrayt baibal hasana
             for(let i=0;i<userChosenSeats.length;i++){
                 if(parseInt(userChosenSeats[i])===seatId){
+                    userWantedMovieSeats[seatId].isOrdering=false
+                    console.log('monBain',userWantedMovieSeats[seatId].isOrdering)
+
                     setUserChosenseats((prevVal)=>{
                         let prevValACopy=prevVal;
                         prevValACopy.splice(prevValACopy.indexOf(seatId),1)
