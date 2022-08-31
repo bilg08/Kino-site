@@ -1,10 +1,11 @@
-import { createContext,useContext,useState } from "react";
+import { createContext,useContext,useEffect,useState } from "react";
 import { checkInputMongolianAlphabetOrNot } from "../functions/checkInputMongolianOrNot";
+import { checkInputNumberOrNot } from "../functions/checkInputNumberOrNot";
 import { MoviesContext } from "./MoviesContext";
 import { addDocToFirebase } from "../components/firebaseForThisApp/addDoc";
 import { setDocToFirebase } from "../components/firebaseForThisApp/setDoc";
 import { WhetherUserLoggedOrNotContext } from "./whetherUserLoggedOrNot";
-import { addDoc, collection } from "firebase/firestore";
+import { addDoc,collection } from "firebase/firestore";
 import { db } from "../components/firebaseForThisApp/firebase";
 export const MovieOrderingContext = createContext();
 export const MovieOrderingContextProvider = ({ children }) => {
@@ -13,46 +14,33 @@ export const MovieOrderingContextProvider = ({ children }) => {
     let {userWantedMovie}=useContext(MoviesContext);
     let {userUid}=useContext(WhetherUserLoggedOrNotContext)
     let [userWantedToOrder, setUserWantedToOrder] = useState(false);
-    let [canUserResumeToPhoneNumber,setCanUserResumeToPhoneNumber]=useState(false);
-    let [canUserResumeToAdultAndKidsForm,setCanUserResumeToAdultAndKidsForm]=useState(false);
-    let [canUserResumeToOrderChair,setCanUserResumeToOrderChair]=useState(false);
+    let [userWantedToOrderChair, setUserWantedToOrderChair] = useState(false);
+    let [userWantedtoSeeCart,setUserWantedtoSeeCart]=useState(false)
     let userWantedMovieSeats=userWantedMovie.seat;
     
     let [form,setForm]=useState({
         Name:"",
         Email:"",
+        userOrderedMovie:"",
         Adult:0,
         Kids:0,
         Seat:[]
     });
 
     const takeUserInput=(e)=>{
-
-    if(e.target.name==="Adult"||e.target.name==="Kids"){
-            setForm({...form,[e.target.name]:parseInt(e.target.value)});
+        if(e.target.name==='Name'){
+        let targetValue=e.target.value;
+        checkInputMongolianAlphabetOrNot(targetValue)
+        }else if(e.target.name==='Adult'||e.target.name==='Kids'){
+            let targetValue=e.target.value;
+            checkInputNumberOrNot(targetValue)
         }
+        setForm({...form,userOrderedMovie:userWantedMovie.MovieName})
         setForm({...form,[e.target.name]:e.target.value});
     }
-    const checkUserName=()=>{
-     const result=checkInputMongolianAlphabetOrNot(form.Name);
-     if(result===true){
-       setCanUserResumeToPhoneNumber(true)
-     }
-    }
-    const checkEmail=()=>{
-        if(form.Email.includes("@yahoo.com")){
-            setCanUserResumeToAdultAndKidsForm(true)
-        }else{
-            setCanUserResumeToAdultAndKidsForm(false)
-        }
-    }
-    const checkUserCount=()=>{  
-        if(parseInt(form.Adult)===0&&parseInt(form.Kids)===0){
-            setCanUserResumeToOrderChair(false)
-        }else{
-            setCanUserResumeToOrderChair(true);
-        }
-    }
+   
+     
+   
 
 
 const takeOrder=async(userChosenSeats)=>{
@@ -64,6 +52,7 @@ const takeOrder=async(userChosenSeats)=>{
     setForm(async(prevVal)=>{
         let prevValACopy=prevVal;
         prevValACopy.Seat=userChosenSeats;
+        prevValACopy.userOrderedMovie=userWantedMovie.MovieName
         addDocToFirebase(`${userWantedMovie.MovieName}orders`,form)
         setDocToFirebase('movies',userWantedMovie.MovieName,userWantedMovie)
         await addDoc(collection(db,'users',userUid,'myOrders'),form)
@@ -72,9 +61,6 @@ const takeOrder=async(userChosenSeats)=>{
         )
     })
     
-    
-    setCanUserResumeToOrderChair(false);
-    setCanUserResumeToAdultAndKidsForm(false);
     //zahialga hiigdsenii daraa omnoh zahialgatai zahialgiin huseltiig hoosolno
     setForm(prevVal=>{
         let prevValACopy=prevVal;
@@ -92,9 +78,8 @@ const takeOrder=async(userChosenSeats)=>{
     return (
         <MovieOrderingContext.Provider value={
             {
-                userWantedToOrder,canUserResumeToPhoneNumber,checkEmail,checkUserCount,
-                setUserWantedToOrder,takeUserInput,checkUserName,canUserResumeToAdultAndKidsForm,
-                canUserResumeToOrderChair,form,takeOrder
+                userWantedToOrder,setUserWantedToOrder,takeUserInput,setUserWantedtoSeeCart,
+                form,takeOrder,userWantedToOrderChair, setUserWantedToOrderChair,userWantedtoSeeCart
             }
         }>  {children}
         </MovieOrderingContext.Provider>

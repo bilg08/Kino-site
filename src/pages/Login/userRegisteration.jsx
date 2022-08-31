@@ -1,12 +1,12 @@
 import React, { useContext, useState } from "react";
 import {RecaptchaVerifier,signInWithPhoneNumber}from "firebase/auth"
-import { auth } from "../firebaseForThisApp/firebase";
+import { auth } from "../../components/firebaseForThisApp/firebase";
 import css from "./userRegisteration.module.css"
-import { AiFillCloseCircle } from "react-icons/ai";
-import { Shadow } from "../shadow/shadow";
+import { Shadow } from "../../components/shadow/shadow";
 import { useNavigate } from "react-router-dom";
 import { WhetherUserLoggedOrNotContext } from "../../contexts/whetherUserLoggedOrNot";
-import { setDocToFirebase } from "../firebaseForThisApp/setDoc";
+import { setDocToFirebase } from "../../components/firebaseForThisApp/setDoc";
+import { Header } from "../../components/site-header/siteHeader";
 export const UserRegisteration=()=>{
     const {setWhetherUserLoggedOrNot,setUserUid}=useContext(WhetherUserLoggedOrNotContext)
     const countryCode="+976";
@@ -51,7 +51,7 @@ export const UserRegisteration=()=>{
 
     return(
        <>
-       <Shadow/>
+       <Header/>
        <div style={{display:isOTPRight===true?'none':'flex'}}  className={css.UserRegisteration}>
             <div className={css.loginHeader}>
               <p>Нэвтрэх</p>

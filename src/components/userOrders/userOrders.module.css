@@ -1,21 +1,7 @@
-.UserOrders{
-    width: 70vw;
-    height: 80vh;
-    margin: auto;
-    border: 1px solid black;
-    transition: 0.3s;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
 .userOrder{
-    width: 30%;
+    width: 50%;
     height: 60%;
     border: 1px solid black;
-}
-@media (min-width:1350px) {
-    .UserOrders{
-        width: 1350px;
-        height: 80vh;
-    }
+    position: absolute;
+    background-color: red;
 }

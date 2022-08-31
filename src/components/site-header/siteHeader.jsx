@@ -1,10 +1,11 @@
 import React, { useContext } from "react";
 import css from "./siteHeader.module.css";
 import { WhetherUserLoggedOrNotContext } from "../../contexts/whetherUserLoggedOrNot";
+import { MovieOrderingContext } from "../../contexts/MovieOrderingContext";
 import { Link } from "react-router-dom";
 export const Header =()=>{
   const {isUserLogged}=useContext(WhetherUserLoggedOrNotContext)
-  console.log(isUserLogged)
+  const {setUserWantedtoSeeCart}=useContext(MovieOrderingContext)
     return(
         <header className={css.siteHeader}>
           <div className={css.siteHeaderMain}>
@@ -13,11 +14,10 @@ export const Header =()=>{
             </div>
             <ul className={css.headerMenuItem}>
                 <li>Үндсэн</li>
-                <Link to='userOrders'>
-                  <li style={{display:isUserLogged===false?'none':'block'}}>Сагс</li>
-                </Link>
-                <li style={{display:isUserLogged===false?'block':'none'}}>Бүртгүүлэх</li>
-                <li style={{display:isUserLogged===false?'block':'none'}}>Нэвтрэх</li>
+                <li onClick={()=>setUserWantedtoSeeCart(true)} style={{display:isUserLogged===false?'none':'block'}}>Сагс</li>
+                 <Link to='/login'>
+                 <li style={{display:isUserLogged===false?'block':'none'}}>Нэвтрэх</li>
+                 </Link>
             </ul>
           </div>
         </header>

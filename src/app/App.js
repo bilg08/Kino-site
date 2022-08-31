@@ -1,19 +1,17 @@
 import css from "./style.module.css";
 import React from "react";
-import {Header} from "../components/site-header/siteHeader";
-import {MainSite} from "../components/mainSite/mainSite";
 import {Route,Routes}from 'react-router-dom'
-import { MovieDetail } from "../components/MovieDetail/movieDetail";
+import { MovieDetail } from "../pages/MovieDetail/movieDetail"
 import { OrderMovie } from "../components/orderMovie/orderMovie";
-import { UserRegisteration } from "../components/userRegisteration/userRegisteration";
+import { UserRegisteration } from "../pages/Login/userRegisteration";
 import { UserOrders } from "../components/userOrders/userOrders";
+import { HomePage } from "../pages/home/HomePage";
 function App() {
    
   return (
     <div className={css.App}>
-      <Header/>
       <Routes>
-        <Route path="/" element={<MainSite/>}/>
+        <Route path="/" element={<HomePage/>}/>
         <Route path="/login" element={<UserRegisteration/>}/>
         <Route path="/movies/:MovieName" element={<MovieDetail/>}/>
         <Route path="/OrderMovie" element={<OrderMovie/>}/>

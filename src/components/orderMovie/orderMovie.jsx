@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import css from "./orderMovie.module.css";
 import { BsFillArrowLeftCircleFill, BsCart3 } from "react-icons/bs";
 import { MovieOrderingContext } from "../../contexts/MovieOrderingContext";
@@ -7,14 +7,9 @@ import { Link } from "react-router-dom";
 
 export const OrderMovie=()=>{
     const { takeUserInput, 
-            checkEmail,
-            checkUserName,
-            canUserResumeToPhoneNumber,
-            canUserResumeToOrderChair,
             takeOrder,
-            form,
-            canUserResumeToAdultAndKidsForm,
-            checkUserCount 
+            form,setUserWantedToOrder,
+            userWantedToOrder,userWantedToOrderChair, setUserWantedToOrderChair
            } = useContext(MovieOrderingContext)
     const { userWantedMovie } = useContext(MoviesContext);
     const userWantedMovieSeats = userWantedMovie.seat;
@@ -22,11 +17,9 @@ export const OrderMovie=()=>{
 
 
 
-    //suudal zahialah
     const checkSeat = (e) => {
 
         const seatId=parseInt(e.target.innerText)
-
         const possibleSeatToOrder=parseInt(form.Adult)+parseInt(form.Kids)
         if(possibleSeatToOrder>userChosenSeats.length){
             if (userWantedMovieSeats[seatId].isOrdering === false) {
@@ -70,62 +63,39 @@ export const OrderMovie=()=>{
     }
 
     return (
-        <div className={css.OrderMovie}>
-            <div className={css.form}
-                style={{
-                    transform: canUserResumeToOrderChair === true ? 'translateY(-100vh)' :
-                        'translateY(0vh)'
-                }}
-            >
-                <div style={{ display: canUserResumeToPhoneNumber === true ? "none" : 'flex' }} className={css.userInputForm}>
-                    <h1>Захиалга</h1>
+        <div className={css.OrderMovie} style={{transform:userWantedToOrder===true?"translateY(0vh)":"translateY(-100vh)",}}>
+            <div style={{display:userWantedToOrderChair===true?"none":'flex'}} className={css.form}>
+                <div className={css.formHeader}>
+                    <h2>Захиалга</h2>
+                    <button className={css.exitFromForm}>X</button>
+                </div>
+                <div className={css.formMain}>
+                 <div className={css.formName}>
                     <p>Нэр</p>
-                    <button className={css.backButton}><BsFillArrowLeftCircleFill /></button>
                     <input id="userNameInput" onChange={(e) => takeUserInput(e)} name="Name" />
-                    <button className={css.continueForm} onClick={() => checkUserName()}>Үргэлжлүүлэх</button>
-                </div>
-
-                <div
-                    style={{
-                        display: canUserResumeToPhoneNumber === true ? "flex" : 'none',
-                        transform: canUserResumeToAdultAndKidsForm === false ? "translateY(0)" : "translateY(-100vh)"
-                    }} className={css.userInputForm}>
-                    <h1>Захиалга</h1>
+                 </div>
+                 <div className={css.formEmail}>
                     <p>Имайл</p>
-                    <button className={css.backButton} ><BsFillArrowLeftCircleFill /></button>
                     <input id="emailInput" onChange={(e) => takeUserInput(e)} name="Email" />
-                    <button className={css.continueForm} onClick={checkEmail}>Үргэлжлүүлэх</button>
-                </div>
-
-                <div style={{
-                    display: canUserResumeToAdultAndKidsForm === true ? "flex" : "none",
-                    transform: canUserResumeToOrderChair === true ? 'translateY(-100vh)' :
-                        'translateY(0vh)'
-                }} className={css.userInputForm}>
-                    <h1>Захиалга</h1>
-                    <button className={css.backButton}><BsFillArrowLeftCircleFill /></button>
+                 </div>
+                 <div className={css.personQuantity}>
                     <p>Том Хүн</p>
                     <input id="Adult" onChange={(e) => takeUserInput(e)} name="Adult" />
                     <p>Хүүхэд</p>
                     <input id="Kids" onChange={(e) => takeUserInput(e)} name="Kids" />
-                    <button className={css.continueForm} onClick={checkUserCount}>Үргэлжлүүлэх</button>
+                 </div>
+                 <button onClick={()=>setUserWantedToOrderChair(true)}>Үргэлжлүүлэх</button>
                 </div>
+           </div>
 
-            </div>
-
-            <div
-                className={css.seatsSection}
-                style={{
-                    transform: canUserResumeToOrderChair === true ? 'translateY(-100vh)' :
-                        'translateY(0vh)'
-                }}>
+            <div className={css.seatsSection} style={{display:userWantedToOrderChair===true?"flex":'none'}}>
                 <div className={css.aboutSeats}>
                     <div className={css.aboutRedSeat}>Захиалгатай</div>
                     <div className={css.aboutBlueSeat}>Захиалгагүй</div>
                     <div className={css.aboutGreenSeat}>Таны сонгосон</div>
                 </div>
                 <div className={css.theaterTelevision}></div>
-                <div className={css.seats}>
+                <div className={css.seats} >
                     {userWantedMovieSeats === undefined ? "" : userWantedMovieSeats.map((seat, index) => {
                         return (
                             <button name="Seat" key={index} style={{
@@ -142,7 +112,11 @@ export const OrderMovie=()=>{
                     })}
                 </div>
                 <Link to="/">
-                    <button onClick={()=>takeOrder(userChosenSeats)}><BsCart3 /></button>
+                    <button onClick={()=>{
+                        takeOrder(userChosenSeats)
+                        setUserWantedToOrderChair(false);
+                        setUserWantedToOrder(false)
+                    }}><BsCart3 /></button>
                 </Link>
             </div>
 

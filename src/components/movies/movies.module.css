@@ -1,5 +1,5 @@
 .MoviesContainer{
-    width: 1350px;
+    width: 90%;
     height:auto;
     margin: auto;
     justify-content: space-around;
@@ -7,4 +7,16 @@
     gap:10px;
     display: flex;
     background: #121212;
+}
+@media (min-width:1350px) {
+    .MoviesContainer{
+        width: 1350px;
+        height:auto;
+        margin: auto;
+        justify-content: space-around;
+        align-items: center;
+        gap:10px;
+        display: flex;
+        background: #121212;
+    }
 }
