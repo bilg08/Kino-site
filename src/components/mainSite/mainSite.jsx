@@ -7,7 +7,7 @@ export const MainSite = () => {
     return (
         <main className={css.MainContent}>
             <div className={css.MainContentMain}>
-                <UserRegisteration/>
+                {/* <UserRegisteration/> */}
                <Movies/>
             </div>
         </main>
