@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import css from "./movieDetail.module.css";
 import { MoviesContext } from "../../contexts/MoviesContext";
 import { MovieOrderingContext } from "../../contexts/MovieOrderingContext";
@@ -7,7 +7,7 @@ import {Link} from "react-router-dom";
 export const MovieDetail = (props) => {
     
     const {userWantedMovie} = useContext(MoviesContext);
-    const {userWantedToOrder,setUserWantedToOrder} = useContext(MovieOrderingContext);
+    const {setUserWantedToOrder} = useContext(MovieOrderingContext);
      
     return(
             <div className={css.MovieDetail}>

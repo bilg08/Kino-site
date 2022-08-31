@@ -1,16 +1,21 @@
-import { createContext,useContext,useEffect,useState } from "react";
+import { createContext,useContext,useState } from "react";
 import { checkInputMongolianAlphabetOrNot } from "../functions/checkInputMongolianOrNot";
 import { MoviesContext } from "./MoviesContext";
+import { addDocToFirebase } from "../components/firebaseForThisApp/addDoc";
+import { setDocToFirebase } from "../components/firebaseForThisApp/setDoc";
+import { WhetherUserLoggedOrNotContext } from "./whetherUserLoggedOrNot";
+import { addDoc, collection } from "firebase/firestore";
+import { db } from "../components/firebaseForThisApp/firebase";
 export const MovieOrderingContext = createContext();
 export const MovieOrderingContextProvider = ({ children }) => {
 
 
     let {userWantedMovie}=useContext(MoviesContext);
+    let {userUid}=useContext(WhetherUserLoggedOrNotContext)
     let [userWantedToOrder, setUserWantedToOrder] = useState(false);
     let [canUserResumeToPhoneNumber,setCanUserResumeToPhoneNumber]=useState(false);
     let [canUserResumeToAdultAndKidsForm,setCanUserResumeToAdultAndKidsForm]=useState(false);
     let [canUserResumeToOrderChair,setCanUserResumeToOrderChair]=useState(false);
-    let [orders,setOrders]=useState([])
     let userWantedMovieSeats=userWantedMovie.seat;
     
     let [form,setForm]=useState({
@@ -50,29 +55,23 @@ export const MovieOrderingContextProvider = ({ children }) => {
     }
 
 
-const takeOrder=(userChosenSeats)=>{
-    console.log(userChosenSeats)
+const takeOrder=async(userChosenSeats)=>{
     for(let i=0;i<userWantedMovieSeats.length;i++){
         if(userWantedMovieSeats[i].isOrdering===true){
             userWantedMovieSeats[i].isOrdered=true;
         }
     }
-    setForm(prevVal=>{
+    setForm(async(prevVal)=>{
         let prevValACopy=prevVal;
-        prevValACopy.Seat=userChosenSeats
-        
+        prevValACopy.Seat=userChosenSeats;
+        addDocToFirebase(`${userWantedMovie.MovieName}orders`,form)
+        setDocToFirebase('movies',userWantedMovie.MovieName,userWantedMovie)
+        await addDoc(collection(db,'users',userUid,'myOrders'),form)
         return(
             prevVal=prevValACopy
         )
     })
-    setOrders(prevVal=>{
-        let prevValACopy=prevVal;
-        prevValACopy.push(form)
-        console.log(orders,'orders')
-        return(
-            prevVal=prevValACopy
-        )
-    })
+    
     
     setCanUserResumeToOrderChair(false);
     setCanUserResumeToAdultAndKidsForm(false);

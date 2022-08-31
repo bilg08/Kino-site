@@ -1,4 +1,4 @@
-import React,{useContext}from "react";
+import React from "react";
 import css from "./mainSite.module.css";
 import { Movies } from "../movies/movies";
 import { UserRegisteration } from "../userRegisteration/userRegisteration";

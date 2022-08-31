@@ -24,11 +24,11 @@ export const OrderMovie=()=>{
 
     //suudal zahialah
     const checkSeat = (e) => {
+
         const seatId=parseInt(e.target.innerText)
+
         const possibleSeatToOrder=parseInt(form.Adult)+parseInt(form.Kids)
-        //hervee niit hunii toonoos songoson suudliin too ihedeegui bol ene ajilna
         if(possibleSeatToOrder>userChosenSeats.length){
-            //hervee darsan suudal zahialagdaagui bol
             if (userWantedMovieSeats[seatId].isOrdering === false) {
                 userWantedMovieSeats[seatId].isOrdering = true;
                 setUserChosenseats(prevVal => {
@@ -39,7 +39,6 @@ export const OrderMovie=()=>{
                         prevVal = prevValACopy
                     )
                 })
-            //hervee darsan suudal zahialagdsan bol
             } else {
                 userWantedMovieSeats[seatId].isOrdering = false;
                 setUserChosenseats(prevVal => {
@@ -53,10 +52,10 @@ export const OrderMovie=()=>{
             })
             }
         }
-        //hervee suudaliin too ihedeed hasah uyd ene heseg ajilna
-        //tuhain hasahiig husej bui sandal songogdson sandalni arrayt baibal hasana
+
             for(let i=0;i<userChosenSeats.length;i++){
                 if(parseInt(userChosenSeats[i])===seatId){
+                    userWantedMovieSeats[seatId].isOrdering=false;
                     setUserChosenseats((prevVal)=>{
                         let prevValACopy=prevVal;
                         prevValACopy.splice(prevValACopy.indexOf(seatId),1)

@@ -1,10 +1,12 @@
 import { createContext, useState } from "react";
-import  moviesDatas  from "../asset/movies";
+import { useGetDocsFromFireBase } from "../components/firebaseForThisApp/getDocs";
 export const MoviesContext=createContext();
 export const MoviesContextProvider = ({children}) => {
+   
     const [userWantedMovie,setUserWantedMovie]=useState("");
+    const [MoviesDatas]=useGetDocsFromFireBase('movies'); 
     return(
-        <MoviesContext.Provider value={{moviesDatas,userWantedMovie,setUserWantedMovie}}>
+        <MoviesContext.Provider value={{MoviesDatas,userWantedMovie,setUserWantedMovie}}>
             {children}
         </MoviesContext.Provider>
     )

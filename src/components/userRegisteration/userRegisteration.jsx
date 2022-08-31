@@ -1,13 +1,18 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import {RecaptchaVerifier,signInWithPhoneNumber}from "firebase/auth"
 import { auth } from "../firebaseForThisApp/firebase";
 import css from "./userRegisteration.module.css"
 import { AiFillCloseCircle } from "react-icons/ai";
 import { Shadow } from "../shadow/shadow";
+import { useNavigate } from "react-router-dom";
+import { WhetherUserLoggedOrNotContext } from "../../contexts/whetherUserLoggedOrNot";
+import { setDocToFirebase } from "../firebaseForThisApp/setDoc";
 export const UserRegisteration=()=>{
+    const {setWhetherUserLoggedOrNot,setUserUid}=useContext(WhetherUserLoggedOrNotContext)
     const countryCode="+976";
     const [phoneNumber,setPhoneNumber]=useState(countryCode);
     const [otp,setOTP]=useState();
+    const navigate = useNavigate();
     let [sendRequest,setSentRequest]=useState(false);
     let [isOTPRight,setIsOTPRight]=useState(false)
     const generateRecaptcha = () => {
@@ -19,12 +24,12 @@ export const UserRegisteration=()=>{
     }
     const requestOtpMessage=()=>{
         if(phoneNumber.length>=12) {
-            setSentRequest(sendRequest=true)
             const appVerifier = window.recaptchaVerifier;
             generateRecaptcha()
             signInWithPhoneNumber(auth, phoneNumber, appVerifier)
                 .then((confirmationResult) => {
                 alert('messeage ilgeelee')
+                setSentRequest(sendRequest=true)
                 window.confirmationResult = confirmationResult;
                 }).catch((error) => {
                 });
@@ -34,7 +39,10 @@ export const UserRegisteration=()=>{
         const confirmationResult=window.confirmationResult;
         confirmationResult.confirm(otp).then((result) => {
             const user = result.user;
-            console.log(user)
+            setUserUid(user.uid);
+            setDocToFirebase('users',user.uid,{phoneNumber:phoneNumber})
+            setWhetherUserLoggedOrNot(true)
+            navigate("/")
             setIsOTPRight(isOTPRight=true)
           }).catch((error) => {
 

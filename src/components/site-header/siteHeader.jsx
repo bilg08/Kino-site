@@ -1,6 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import css from "./siteHeader.module.css";
+import { WhetherUserLoggedOrNotContext } from "../../contexts/whetherUserLoggedOrNot";
+import { Link } from "react-router-dom";
 export const Header =()=>{
+  const {isUserLogged}=useContext(WhetherUserLoggedOrNotContext)
+  console.log(isUserLogged)
     return(
         <header className={css.siteHeader}>
           <div className={css.siteHeaderMain}>
@@ -9,9 +13,11 @@ export const Header =()=>{
             </div>
             <ul className={css.headerMenuItem}>
                 <li>Үндсэн</li>
-                <li>Сагс</li>
-                <li>Бүртгүүлэх</li>
-                <li>Нэвтрэх</li>
+                <Link to='userOrders'>
+                  <li style={{display:isUserLogged===false?'none':'block'}}>Сагс</li>
+                </Link>
+                <li style={{display:isUserLogged===false?'block':'none'}}>Бүртгүүлэх</li>
+                <li style={{display:isUserLogged===false?'block':'none'}}>Нэвтрэх</li>
             </ul>
           </div>
         </header>
