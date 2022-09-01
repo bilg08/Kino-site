@@ -4,8 +4,9 @@ import { db } from "./firebase"
 
 export const useGetDocsFromFireBase=(collectionName)=>{
    const [colName,setColName]=useState(collectionName);
-   const [data,setDatas]=useState([]);
+   let [data,setDatas]=useState([]);
     const getData=async()=>{
+        setDatas(data=[])
     try {
         const datas=await getDocs(collection(db,colName));
         datas.forEach(e=>{

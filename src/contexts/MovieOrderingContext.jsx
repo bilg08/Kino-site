@@ -17,14 +17,14 @@ export const MovieOrderingContextProvider = ({ children }) => {
     let [userWantedToOrderChair, setUserWantedToOrderChair] = useState(false);
     let [userWantedtoSeeCart,setUserWantedtoSeeCart]=useState(false)
     let userWantedMovieSeats=userWantedMovie.seat;
-    
     let [form,setForm]=useState({
         Name:"",
         Email:"",
         userOrderedMovie:"",
         Adult:0,
         Kids:0,
-        Seat:[]
+        Seat:[],
+        userOrderedMovieImg:""
     });
 
     const takeUserInput=(e)=>{
@@ -39,8 +39,6 @@ export const MovieOrderingContextProvider = ({ children }) => {
         setForm({...form,[e.target.name]:e.target.value});
     }
    
-     
-   
 
 
 const takeOrder=async(userChosenSeats)=>{
@@ -53,6 +51,7 @@ const takeOrder=async(userChosenSeats)=>{
         let prevValACopy=prevVal;
         prevValACopy.Seat=userChosenSeats;
         prevValACopy.userOrderedMovie=userWantedMovie.MovieName
+        prevValACopy.userOrderedMovieImg=userWantedMovie.image;
         addDocToFirebase(`${userWantedMovie.MovieName}orders`,form)
         setDocToFirebase('movies',userWantedMovie.MovieName,userWantedMovie)
         await addDoc(collection(db,'users',userUid,'myOrders'),form)
