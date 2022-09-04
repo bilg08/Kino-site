@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/Kino-site/static/css/main.46efbc6f.css",
+    "main.js": "/Kino-site/static/js/main.d227609e.js",
+    "index.html": "/Kino-site/index.html",
+    "main.46efbc6f.css.map": "/Kino-site/static/css/main.46efbc6f.css.map",
+    "main.d227609e.js.map": "/Kino-site/static/js/main.d227609e.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.46efbc6f.css",
+    "static/js/main.d227609e.js"
+  ]
+}
