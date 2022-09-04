@@ -1,10 +1,10 @@
 {
   "files": {
-    "main.css": "/Kino-site/static/css/main.46efbc6f.css",
-    "main.js": "/Kino-site/static/js/main.d227609e.js",
-    "index.html": "/Kino-site/index.html",
-    "main.46efbc6f.css.map": "/Kino-site/static/css/main.46efbc6f.css.map",
-    "main.d227609e.js.map": "/Kino-site/static/js/main.d227609e.js.map"
+    "main.css": "/static/css/main.46efbc6f.css",
+    "main.js": "/static/js/main.d227609e.js",
+    "index.html": "/index.html",
+    "main.46efbc6f.css.map": "/static/css/main.46efbc6f.css.map",
+    "main.d227609e.js.map": "/static/js/main.d227609e.js.map"
   },
   "entrypoints": [
     "static/css/main.46efbc6f.css",
