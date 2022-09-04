@@ -1,11 +1,11 @@
 import React, { useContext, useState } from "react";
 import {RecaptchaVerifier,signInWithPhoneNumber}from "firebase/auth"
-import { auth } from "../../components/firebaseForThisApp/firebase";
+import { auth } from "../../firebaseForThisApp/firebase";
 import css from "./userRegisteration.module.css"
 import { Shadow } from "../../components/shadow/shadow";
-import { useNavigate } from "react-router-dom";
+import { Link,useNavigate } from "react-router-dom";
 import { WhetherUserLoggedOrNotContext } from "../../contexts/whetherUserLoggedOrNot";
-import { setDocToFirebase } from "../../components/firebaseForThisApp/setDoc";
+import { setDocToFirebase } from "../../firebaseForThisApp/setDoc";
 import { Header } from "../../components/site-header/siteHeader";
 export const UserRegisteration=()=>{
     const {setWhetherUserLoggedOrNot,setUserUid}=useContext(WhetherUserLoggedOrNotContext)
@@ -40,22 +40,23 @@ export const UserRegisteration=()=>{
         confirmationResult.confirm(otp).then((result) => {
             const user = result.user;
             setUserUid(user.uid);
-            setDocToFirebase('users',user.uid,{phoneNumber:phoneNumber})
+            setDocToFirebase(`users/${user.uid}`,{phoneNumber:phoneNumber})
             setWhetherUserLoggedOrNot(true)
             navigate("/")
             setIsOTPRight(isOTPRight=true)
-          }).catch((error) => {
-
-          });
+          }).catch((error) => {});
     }
 
     return(
+       
        <>
        <Header/>
        <div style={{display:isOTPRight===true?'none':'flex'}}  className={css.UserRegisteration}>
             <div className={css.loginHeader}>
               <p>Нэвтрэх</p>
-              <button>x</button>
+              <Link to="/" style={{textDecoration:'none'}}>
+                <button>x</button>
+              </Link>
             </div>
             <div style={{display:sendRequest===true?'none':'flex'}} className={css.loginWithPhoneNumber}>
                 <input value={phoneNumber} onChange={e=>setPhoneNumber(e.target.value)} placeholder="Утасны дугаараа оруулна уу"/>

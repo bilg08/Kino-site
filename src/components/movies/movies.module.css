@@ -1,23 +1,39 @@
-.MoviesContainer{
+.Movies{
     width: 90%;
-    height:auto;
-    position: absolute;
-    top: 15%;
+    height:80vh;
     justify-content: space-around;
     align-items: center;
     gap:10px;
     display: flex;
+    /* background: white; */
     background: #121212;
+    flex-direction: column;
+    position: relative;
 }
-@media (min-width:1350px) {
-    .MoviesContainer{
+.MoviesHeader{
+    width: 90%;
+    color: #f5c518;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+.MoviesContainer{
+   width: 100%;
+   height: auto;
+   display: flex;
+   justify-content: space-around;
+   /* position: relative; */
+   position: absolute;
+   flex-wrap: wrap;
+}  
+ @media (min-width:1350px) {
+    .Movies{
         width: 1350px;
-        height:auto;
-        margin: auto;
-        justify-content: space-around;
-        align-items: center;
-        gap:10px;
-        display: flex;
-        background: #121212;
     }
-}
+    .MoviesContainer{
+        width: 1000px;
+    }
+    
+}  
+
+ 

@@ -1,0 +1,79 @@
+.ShowMoviesInSlideContainer{
+    width: 100%;
+    height: 70vh;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+}
+.ShowMoviesInSlides{
+    width: 60%;
+    height: 70vh;
+    margin-top: 3%;
+    display: flex;
+    position: relative;
+    color: white;
+}
+.ShowMoviesInSlides p{
+    position: absolute;
+    top: 0;
+    left: 0;
+    font-size: 20px;
+    font-weight: bold;
+}
+.prevBtn{
+    width: 50px;
+    height: 60px;
+    font-size: 20px;
+    background: rgba(255,255,255,0.1);
+    color: black;
+    border: 2px solid white;
+    border-radius: 10px;
+}
+.nextBtn{
+    width: 50px;
+    height: 60px;
+    font-size: 20px;
+    background: rgba(255,255,255,0.5);
+    color: black;
+    border: 2px solid white;
+    border-radius: 10px;
+}
+.nextBtn:hover,.prevBtn:hover{
+    color:#f5c518;
+    transition:none;
+}
+.upNextMoviesContainer{
+    width: 35%;
+    height: 70vh;
+    margin: 2% auto;
+    position: absolute;
+    top: 0;
+    right: 0;
+    display: flex;
+    gap:10px;
+    flex-direction: column;
+}
+.upNextMoviesContainer h2:nth-child(1){
+    color: #f5c518;
+}
+.upNextMovies{
+    width: 100%;
+    height: 90%;
+    display: flex;
+    flex-direction: column;
+}
+.upNextMovie{
+    width: 100%;
+    height: 40%;
+    display: flex; 
+    gap: 10px;
+}
+
+ .upNextMovie img{
+   width:45%;
+   height: 90%;
+}
+.upNextMovie h3{
+    color: white;
+}

@@ -1,6 +1,6 @@
 .OrderMovie{
     width: 50%;
-    height:60%;
+    height:50%;
     margin: auto;
     position:relative;
     display: flex;
@@ -8,7 +8,6 @@
     flex-direction: column;
     align-items:center;   
 }
-
 .form{
     width: 70%;
     height: 100%;
@@ -17,9 +16,10 @@
     flex-direction: column;
     justify-content: center;
     align-items:center;
-    color: white;
+    color: #1F1D36;
+    border-radius: 10px;
     gap: 1%;
-    background-color: #1F1D36;
+    background-color: #fff;
 }
 .formHeader{
     width: 100%;
@@ -32,6 +32,9 @@
 .exitFromForm{
     width: 30px;
     height: 30px;
+    font-size: 23px;
+    color: silver;
+    background: transparent;
 }
 .formMain{
     width: 100%;
@@ -41,6 +44,19 @@
     justify-content:center;
     align-items: center;
     flex-direction: column;
+    gap: 10px;
+}
+.personQuantity{
+    width: 80%;
+    height: 60%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.Adult,.Kids{
+    width: 85%;
+    height: 15%;
 }
 .seatsSection{
     width: 600px;
@@ -80,15 +96,7 @@
     width: 50px;
     height: 50px;
 }
-.continueForm{
-    background-color: #423F3E;
-    border-radius: 5px;
-    width: 200px;
-    height: 50px;
-    border: none;
-    color: white;
-    transition: 0.3s; 
-}
+
 .theaterTelevision{
     width: 300px;
     height: 5px;
@@ -101,11 +109,26 @@
     flex-wrap: wrap;
     gap:1%;
 }
-.continueForm:hover{
-    background-color: #5e5b5a;
-}
+
 .backToMovieBtn{
     position: absolute;
     top: 0;
     left: 0;
+}
+.continueToOrderSeat{
+    background-color: #423F3E;
+    border-radius: 5px;
+    width: 100px;
+    padding: 10px;
+    border: none;
+    color: white;
+    transition: 0.3s; 
+    /* margin: auto; */
+}
+.orderMovieBtn{
+    width: 50px;
+    height: 50px;
+    background-color: #423F3E;
+    color: white;
+    border-radius: 10px;
 }

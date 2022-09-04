@@ -1,7 +1,7 @@
 .HomePage{
     width: 100%;
-    height: 100vh;
     background:black;
+    /* height: auto; */
 }
 .HomePageMain{
     width: 80%;
@@ -10,10 +10,13 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
+    position: relative;
+    gap:100px
 }
 @media (min-width:1350px) {
    .HomePageMain{
     width: 1350px;
-    height: 100%;
+    height: 80%;
    }
 }

@@ -14,7 +14,9 @@ export const Movie = (props) => {
         <div className={css.Movie}>
             <MovieImageCart imageSrc={oneMovieData.image}/>
                 <div className={css.movieCartBottom} >
-                    <div style={{width:100+"%",display:"flex",gap:5+"%"}}><MdStarRate color="yellow"/>{oneMovieData.rating}</div>
+                    <div style={{width:100+"%",display:"flex",gap:5+"%"}}>
+                        <MdStarRate color="yellow"/>{oneMovieData.rating}
+                        </div>
                     <p>{oneMovieData.MovieName}</p>
                     <p>Төрөл: {oneMovieData.genre}</p>
                     <Link to={"/movies/"+oneMovieData.MovieName} style={{ textDecoration: 'none' }}>

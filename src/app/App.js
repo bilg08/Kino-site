@@ -1,6 +1,6 @@
 import css from "./style.module.css";
 import React from "react";
-import {Route,Routes}from 'react-router-dom'
+import {Route,Routes}from 'react-router-dom';
 import { MovieDetail } from "../pages/MovieDetail/movieDetail"
 import { OrderMovie } from "../components/orderMovie/orderMovie";
 import { UserRegisteration } from "../pages/Login/userRegisteration";

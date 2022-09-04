@@ -4,7 +4,6 @@ import { BsFillArrowLeftCircleFill, BsCart3 } from "react-icons/bs";
 import { MovieOrderingContext } from "../../contexts/MovieOrderingContext";
 import { MoviesContext } from "../../contexts/MoviesContext";
 import { Link } from "react-router-dom";
-
 export const OrderMovie=()=>{
     const { takeUserInput, 
             takeOrder,
@@ -67,24 +66,17 @@ export const OrderMovie=()=>{
             <div style={{display:userWantedToOrderChair===true?"none":'flex'}} className={css.form}>
                 <div className={css.formHeader}>
                     <h2>Захиалга</h2>
-                    <button className={css.exitFromForm}>X</button>
+                    <button onClick={()=>setUserWantedToOrder(false)} className={css.exitFromForm}>X</button>
                 </div>
                 <div className={css.formMain}>
-                 <div className={css.formName}>
-                    <p>Нэр</p>
-                    <input id="userNameInput" onChange={(e) => takeUserInput(e)} name="Name" />
-                 </div>
-                 <div className={css.formEmail}>
-                    <p>Имайл</p>
-                    <input id="emailInput" onChange={(e) => takeUserInput(e)} name="Email" />
-                 </div>
+                    <p>Таны боломжит захиалганы тоо:{userWantedMovie.possibleSeatsAllNumber}</p>
                  <div className={css.personQuantity}>
                     <p>Том Хүн</p>
-                    <input id="Adult" onChange={(e) => takeUserInput(e)} name="Adult" />
+                    <input className={css.Adult} onChange={(e) => takeUserInput(e)} name="Adult" />
                     <p>Хүүхэд</p>
-                    <input id="Kids" onChange={(e) => takeUserInput(e)} name="Kids" />
+                    <input className={css.Kids} onChange={(e) => takeUserInput(e)} name="Kids" />
                  </div>
-                 <button onClick={()=>setUserWantedToOrderChair(true)}>Үргэлжлүүлэх</button>
+                 <button className={css.continueToOrderSeat} onClick={()=>setUserWantedToOrderChair(true)}>Үргэлжлүүлэх</button>
                 </div>
            </div>
 
@@ -112,14 +104,16 @@ export const OrderMovie=()=>{
                     })}
                 </div>
                 <Link to="/">
-                    <button onClick={()=>{
+                    <button
+                        className={css.orderMovieBtn}
+                        onClick={()=>{
                         takeOrder(userChosenSeats)
                         setUserWantedToOrderChair(false);
                         setUserWantedToOrder(false)
                     }}><BsCart3 /></button>
                 </Link>
-            </div>
 
+            </div>
         </div>
     )
 }
