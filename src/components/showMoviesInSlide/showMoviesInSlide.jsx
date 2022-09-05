@@ -44,7 +44,7 @@ export const ShowMoviesInSlide = () => {
   useEffect(() => {
     setUpNextMovies(prevVal => {
       let prevValACopy = prevVal;
-      prevValACopy = MoviesDatas.filter((el, i) => i != index);
+      prevValACopy = MoviesDatas.filter((el, i) => i !== index);
       return (
         prevVal = prevValACopy
       )

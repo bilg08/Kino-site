@@ -59,6 +59,16 @@
     display: flex;
     gap:10px;
 }
+.deleteOrderBtn{
+    background-color: #423F3E;
+    border-radius: 5px;
+    width: 100px;
+    padding: 5px;
+    border: none;
+    color: white;
+    transition: 0.3s; 
+}
+
 @media (min-width:1350px) {
     .userOrdersContainer{
         width: 1000px;

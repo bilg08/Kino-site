@@ -1,4 +1,4 @@
-import { addDoc,collection,getDocs } from "firebase/firestore";
+import { addDoc,collection } from "firebase/firestore";
 import { db } from "./firebase";
 
 export const addDocToFirebase=async(collectionName,data)=>{

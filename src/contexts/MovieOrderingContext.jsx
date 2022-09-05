@@ -4,21 +4,18 @@ import { checkInputNumberOrNot } from "../functions/checkInputNumberOrNot";
 import { MoviesContext } from "./MoviesContext";
 import { addDocToFirebase } from "../firebaseForThisApp/addDoc";
 import { setDocToFirebase } from "../firebaseForThisApp/setDoc";
-import { addDoc, collection, doc, setDoc } from "firebase/firestore";
-import { db } from "../firebaseForThisApp/firebase";
 import { WhetherUserLoggedOrNotContext } from "./whetherUserLoggedOrNot";
 import { uuidv4 } from "@firebase/util";
 import { deleteDocOfFirebase } from "../firebaseForThisApp/deleteDoc";
-import { useNavigate } from "react-router-dom";
 export const MovieOrderingContext = createContext();
 export const MovieOrderingContextProvider = ({ children }) => {
 
-  const navigate=useNavigate()
     let { userWantedMovie } = useContext(MoviesContext);
     let { userUid } = useContext(WhetherUserLoggedOrNotContext);
     let [userWantedToOrder, setUserWantedToOrder] = useState(false);
     let [userWantedToOrderChair, setUserWantedToOrderChair] = useState(false);
-    let [userWantedtoSeeCart, setUserWantedtoSeeCart] = useState(false)
+    let [userWantedtoSeeCart, setUserWantedtoSeeCart] = useState(false);
+    let [userOrders,setUserOrders]=useState([]);
     let userWantedMovieSeats = userWantedMovie.seat;
     let [form, setForm] = useState({
         Name: "",
@@ -44,10 +41,8 @@ export const MovieOrderingContextProvider = ({ children }) => {
     }
 
     const deleteOrder=(DocUid)=>{
-      deleteDocOfFirebase(`users/${userUid}/myOrders/${DocUid}`).then(setUserWantedtoSeeCart(false))
+      deleteDocOfFirebase(`users/${userUid}/myOrders/${DocUid}`).then(setUserWantedtoSeeCart(false));
     }
-     
-
     const takeOrder = async (userChosenSeats) => {
         const uuidForOrderDoc=uuidv4()
         for (let i = 0; i < userWantedMovieSeats.length; i++) {
@@ -88,7 +83,7 @@ export const MovieOrderingContextProvider = ({ children }) => {
         <MovieOrderingContext.Provider value={
             {
                 userWantedToOrder, setUserWantedToOrder, takeUserInput, setUserWantedtoSeeCart,deleteOrder,
-                form, takeOrder, userWantedToOrderChair, setUserWantedToOrderChair, userWantedtoSeeCart
+                form, takeOrder, userWantedToOrderChair, setUserWantedToOrderChair, userWantedtoSeeCart,setUserOrders,userOrders
             }
         }>  {children}
         </MovieOrderingContext.Provider>

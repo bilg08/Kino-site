@@ -2,7 +2,6 @@ import React, { useContext, useState } from "react";
 import {RecaptchaVerifier,signInWithPhoneNumber}from "firebase/auth"
 import { auth } from "../../firebaseForThisApp/firebase";
 import css from "./userRegisteration.module.css"
-import { Shadow } from "../../components/shadow/shadow";
 import { Link,useNavigate } from "react-router-dom";
 import { WhetherUserLoggedOrNotContext } from "../../contexts/whetherUserLoggedOrNot";
 import { setDocToFirebase } from "../../firebaseForThisApp/setDoc";

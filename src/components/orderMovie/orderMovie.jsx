@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 import css from "./orderMovie.module.css";
-import { BsFillArrowLeftCircleFill, BsCart3 } from "react-icons/bs";
+import { BsCart3 } from "react-icons/bs";
 import { MovieOrderingContext } from "../../contexts/MovieOrderingContext";
 import { MoviesContext } from "../../contexts/MoviesContext";
 import { Link } from "react-router-dom";

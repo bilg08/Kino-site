@@ -19,7 +19,7 @@ export const MovieDetail = (props) => {
                         backgroundSize: "contain",backgroundRepeat:"no-repeat",width:100+'%',height:100+"%"}}>
                 <div className={css.movieMoreAbout}>
                     <div className={css.movieLogo}>
-                            <img src={userWantedMovie.MovieLogo}/>
+                            <img alt="" src={userWantedMovie.MovieLogo}/>
                     </div>
                     <h1>{userWantedMovie.MovieName}</h1>
                     <p className={css.genre}>{userWantedMovie.genre}</p>

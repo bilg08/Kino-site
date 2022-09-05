@@ -1,7 +1,6 @@
 import { initializeApp } from "firebase/app";
 import {getAuth} from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
-import { useState } from "react";
 const firebaseConfig = {
   apiKey: "AIzaSyDPHIV6qpFJbMgEcIyS4asAEzKldPeG3DA",
   authDomain: "moviesite-432bd.firebaseapp.com",
