@@ -6,7 +6,7 @@
     flex-direction: column;
     justify-content:space-between;
     align-items:center; 
-    gap: auto;
+    /* gap: auto; */
     background: #121212;
     color:white;
     border-radius: 10px;
@@ -39,3 +39,11 @@
     align-items: center;
     flex-direction: column;
 }
+@media (max-width:1030px) {
+    .Movie{
+        min-width: 40%;
+    
+    }
+    
+    
+} 

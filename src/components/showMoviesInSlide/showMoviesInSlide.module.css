@@ -77,3 +77,11 @@
 .upNextMovie h3{
     color: white;
 }
+@media(max-width:1030px){
+    .ShowMoviesInSlides{
+        width: 100%;
+    }
+    .upNextMoviesContainer{
+        display: none;
+    }
+}
