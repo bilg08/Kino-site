@@ -38,6 +38,7 @@ export const UserOrders = () => {
                                        if(data.seat[sth].isOrdered===true&&data.seat[sth].isOrdering===true){
                                         data.seat[sth].isOrdered=false;
                                         data.seat[sth].isOrdering=false;
+                                        data.possibleSeatsAllNumber=data.possibleSeatsAllNumber+1
                                         await setDocToFirebase(`movies/${data.MovieName}`,data);
                                         deleteOrder(order.uid)
                                         }
