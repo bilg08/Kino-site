@@ -1,6 +1,7 @@
 .Movies{
     width: 100%;
-    height:60vh;
+    height:70vh;
+    margin-top: 50px;
     position: relative;
     box-shadow: rgb(0 0 0 / 20%) 0px 2px 1px -1px, rgb(0 0 0 / 14%) 0px 1px 1px 0px, rgb(0 0 0 / 12%) 0px 1px 3px 0px;
 }
@@ -16,19 +17,12 @@
    display: flex;
    margin: auto;
    display: flex;
+   justify-content: center;
+   align-items: center;
    gap: 10px;
-   flex-wrap: wrap;
+   /* flex-wrap: wrap; */
 }  
- @media (min-width:1350px) {
-    .Movies{
-        width: 1350px;
-    }
-    .MoviesContainer{
-        width: 90%;
-    }
-    
-} 
- @media (max-width:1030px) {
+@media (max-width:1030px) {
     .Movies{
         width: 100%;
         height: auto;
@@ -38,13 +32,6 @@
         height: 100%;
         overflow: scroll;
         flex-direction: column;
-        position: relative;
-        justify-content: center;
-        align-items: center;
     }
     
 }  
-
-
- 
-  

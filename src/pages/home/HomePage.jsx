@@ -5,16 +5,18 @@ import { Movies } from "../../components/movies/movies";
 import { UserOrders } from "../../components/userOrders/userOrders";
 import { ShowMoviesInSlide } from "../../components/showMoviesInSlide/showMoviesInSlide";
 import { UserRegisteration } from "../../components/Login/userRegisteration";
+import { Box, Container } from "@mui/material";
 export const HomePage=()=>{
+    
     return(
-        <div className={css.HomePage}>
-            <Header/> 
-            <div className={css.HomePageMain}>
+        <Container maxWidth="xl" className="hello">
+            <Box className="helloWorld" sx={{ height: 'auto' }} >
+                <Header/>
                 <ShowMoviesInSlide/>
+                <UserRegisteration/>
                 <Movies/>
                 <UserOrders/>
-                <UserRegisteration/>
-            </div>
-        </div>
+            </Box>
+        </Container>
     )
 }

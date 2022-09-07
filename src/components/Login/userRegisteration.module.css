@@ -11,7 +11,8 @@
     color: white;
     border-radius: 10px;
     position: absolute;
-    top:0%;
+    top: 5%;
+    left: 30%;
     box-shadow: rgb(0 0 0 / 50%) 0px 2px 1px -1px, rgb(0 0 0 / 50%) 0px 1px 1px 0px, rgb(0 0 0 / 50%) 0px 1px 3px 0px;;
 }
 .loginHeader{

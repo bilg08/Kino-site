@@ -3,10 +3,16 @@ import css from "./showMoviesInSlide.module.css";
 import { MoviesContext } from "../../contexts/MoviesContext"
 import { Spinning } from "../spinner/spinner";
 import { AiFillCaretLeft, AiFillCaretRight } from "react-icons/ai";
+import { Box } from "@mui/system";
+import { Button } from "@mui/material";
+import { useNavigate } from "react-router-dom";
+import { MovieOrderingContext } from "../../contexts/MovieOrderingContext";
 export const ShowMoviesInSlide = () => {
   const { MoviesDatas } = useContext(MoviesContext);
+  const {setUserWantedMovie}=useContext(MoviesContext)
   let [upNextMovies, setUpNextMovies] = useState([])
-  let [index, setIndex] = useState(0)
+  let [index, setIndex] = useState(0);
+  let navigate=useNavigate()
   const nextImg = () => {
     setIndex(prevVal => {
       let prevValACopy = prevVal;
@@ -51,9 +57,9 @@ export const ShowMoviesInSlide = () => {
     })
   }, [index,MoviesDatas])
   return (
-    <div className={css.ShowMoviesInSlideContainer}>
-      <div className={css.ShowMoviesInSlides}>
-        {MoviesDatas.length <= 0 ? <Spinning /> : MoviesDatas.map((movie, MovieIndex) => {
+    <Box className={css.ShowMoviesInSlideContainer} style={{width:100+'%',height:70+'vh'}}>
+     <Box className={css.ShowMoviesInSlides}>
+         {MoviesDatas.length <= 0 ? <Spinning /> : MoviesDatas.map((movie, MovieIndex) => {
           return (
             <div
               key={MovieIndex}
@@ -67,27 +73,19 @@ export const ShowMoviesInSlide = () => {
                   ,backgroundPosition: 'center', backgroundSize: 'cover'
                 }}>
               <button className={css.prevBtn} onClick={() => prevImg()}><AiFillCaretLeft /></button>
-              <div><h1>{movie.MovieName}</h1></div>
+              <Box className={css.MoviesInSlideAbout}>
+                <h1>{movie.MovieName}</h1>
+                     <Button
+                        onClick={async()=>{
+                        await setUserWantedMovie(movie)
+                        navigate(`movies/${movie.MovieName}`)
+                        }} variant="contained">Дэлгэрэнгүй</Button>
+              </Box>
               <button className={css.nextBtn} onClick={() => nextImg()}><AiFillCaretRight /></button>
             </div>
           )
         })}
-      </div>
-    </div>
+      </Box>
+    </Box>
   )
 }
-{/* <div className={css.upNextMoviesContainer}>
-
-  <h2>Дараа нь</h2>
-  <div className={css.upNextMovies}>
-  {upNextMovies.map((movie, index) =>{
-    return (
-      <div
-      className={css.upNextMovie} key={index}>
-            <img src={movie.image}/>
-            <h3>`{movie.MovieName}`</h3>
-      </div>
-    )
-  })}
-  </div>
-</div> */}

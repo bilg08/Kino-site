@@ -41,7 +41,8 @@ export const UserRegisteration=()=>{
             const user = result.user;
             setUserUid(user.uid);
             setDocToFirebase(`users/${user.uid}`,{phoneNumber:phoneNumber})
-            setWhetherUserLoggedOrNot(true)
+            setWhetherUserLoggedOrNot(true);
+            setUserWantedToLogin(false);
             navigate("/")
             setIsOTPRight(isOTPRight=true)
           }).catch((error) => {});

@@ -11,6 +11,7 @@ export const MovieDetail = (props) => {
     const {userWantedMovie} = useContext(MoviesContext);
     const {setUserWantedToOrder} = useContext(MovieOrderingContext);
     const {isUserLogged}=useContext(WhetherUserLoggedOrNotContext);
+    console.log(userWantedMovie)
     return(
         <div className={css.MovieDetailPage}>
             <Header/>

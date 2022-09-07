@@ -20,8 +20,8 @@ export const Movie = (props) => {
                         </div>
                     <p>{oneMovieData.MovieName}</p>
                     <p>Төрөл: {oneMovieData.genre}</p>
-                    <Link to={"/movies/"+oneMovieData.MovieName} style={{ textDecoration: 'none' }}>
-                    <Button
+                    <Link to={"/movies/"+oneMovieData.MovieName} style={{ textDecoration: 'none' }}> 
+                     <Button
                         onClick={()=>{
                         setUserWantedMovie(oneMovieData)}} variant="contained">Дэлгэрэнгүй</Button>
                     </Link>
