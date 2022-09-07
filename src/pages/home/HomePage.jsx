@@ -13,9 +13,9 @@ export const HomePage=()=>{
             <Box className="helloWorld" sx={{ height: 'auto' }} >
                 <Header/>
                 <ShowMoviesInSlide/>
-                <UserRegisteration/>
-                <Movies/>
-                <UserOrders/>
+                {/* <UserRegisteration/> */}
+                {/* <Movies/> */}
+                {/* <UserOrders/> */}
             </Box>
         </Container>
     )
