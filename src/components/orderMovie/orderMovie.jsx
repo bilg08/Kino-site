@@ -7,12 +7,16 @@ import { Link } from "react-router-dom";
 export const OrderMovie=()=>{
     const { takeUserInput, 
             takeOrder,
-            form,setUserWantedToOrder,
+            form,setUserWantedToOrder,canUserClickBtnForOrderChair,
             userWantedToOrder,userWantedToOrderChair, setUserWantedToOrderChair
            } = useContext(MovieOrderingContext)
     const { userWantedMovie } = useContext(MoviesContext);
     const userWantedMovieSeats = userWantedMovie.seat;
-    let [userChosenSeats, setUserChosenseats] = useState([])
+    const possibleSeatsAllNumber=userWantedMovie.possibleSeatsAllNumber
+    let [userChosenSeats, setUserChosenseats] = useState([]);
+    const [adultNum,setAdult]=useState(0);
+    const [kidsNum,setKids]=useState(0)
+
 
 
 
@@ -69,14 +73,29 @@ export const OrderMovie=()=>{
                     <button onClick={()=>setUserWantedToOrder(false)} className={css.exitFromForm}>X</button>
                 </div>
                 <div className={css.formMain}>
-                    <p>Таны боломжит захиалганы тоо:{userWantedMovie.possibleSeatsAllNumber}</p>
+                    <p>Таны боломжит захиалганы тоо:{possibleSeatsAllNumber}</p>
                  <div className={css.personQuantity}>
                     <p>Том Хүн</p>
-                    <input className={css.Adult} onChange={(e) => takeUserInput(e)} name="Adult" />
+                    <input className={css.Adult} value={adultNum} type='number' min="0" max={possibleSeatsAllNumber}  onChange={(e) => {
+                        takeUserInput(e);
+                        setAdult(e.target.value)
+                    }} name="Adult" />
                     <p>Хүүхэд</p>
-                    <input className={css.Kids} onChange={(e) => takeUserInput(e)} name="Kids" />
+                    <input className={css.Kids} value={kidsNum} type='number' min='0' max={possibleSeatsAllNumber}  onChange={(e) => {
+                        takeUserInput(e);
+                        setKids(e.target.value)
+                    }} name="Kids" />
                  </div>
-                 <button className={css.continueToOrderSeat} onClick={()=>setUserWantedToOrderChair(true)}>Үргэлжлүүлэх</button>
+                 <button disabled={canUserClickBtnForOrderChair} className={css.continueToOrderSeat} onClick={()=>{
+                    if((parseInt(form.Adult)+parseInt(form.Kids))>possibleSeatsAllNumber){
+                        alert('Та боломжит суудалаас их суудал сонгосон байна')
+                        console.log(possibleSeatsAllNumber,form.Adult+form.Kids)
+                    }else if( (parseInt(form.Adult)+parseInt(form.Kids))===0){
+                        alert('Тань суудлын тоо 0 байна')
+                    }else{
+                        setUserWantedToOrderChair(true)
+                    }
+                }}>Үргэлжлүүлэх</button>
                 </div>
            </div>
 

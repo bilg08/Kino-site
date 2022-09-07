@@ -9,6 +9,7 @@
     background: #121212;
     flex-direction: column;
     position: relative;
+    /* flex-wrap: wrap; */
 }
 .MoviesHeader{
     width: 90%;
@@ -24,7 +25,7 @@
    justify-content: space-around;
    /* position: relative; */
    position: absolute;
-   flex-wrap: wrap;
+   /* flex-wrap: wrap; */
 }  
  @media (min-width:1350px) {
     .Movies{
@@ -36,4 +37,15 @@
     
 }  
 
+@media (max-width:1030px) {
+    
+    .MoviesContainer{
+        max-width: 100%;
+        overflow: scroll;
+    }
+    
+}  
+
+
+ 
  

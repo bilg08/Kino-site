@@ -132,3 +132,6 @@
     color: white;
     border-radius: 10px;
 }
+.continueToOrderSeat:disabled{
+    opacity: 0.3;
+}
