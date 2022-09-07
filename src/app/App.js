@@ -3,7 +3,7 @@ import React from "react";
 import {Route,Routes}from 'react-router-dom';
 import { MovieDetail } from "../pages/MovieDetail/movieDetail"
 import { OrderMovie } from "../components/orderMovie/orderMovie";
-import { UserRegisteration } from "../pages/Login/userRegisteration";
+import { UserRegisteration } from "../components/Login/userRegisteration";
 import { HomePage } from "../pages/home/HomePage";
 function App() {
   return (

@@ -7,7 +7,7 @@ import { collection, getDocs } from "firebase/firestore";
 import { db } from "../../firebaseForThisApp/firebase";
 export const Header =()=>{
   const {isUserLogged,signOutFromWebSite,userUid}=useContext(WhetherUserLoggedOrNotContext);
-  const {setUserWantedtoSeeCart,setUserOrders}=useContext(MovieOrderingContext);
+  const {setUserWantedtoSeeCart,setUserOrders,userWantedToLogin,setUserWantedToLogin}=useContext(MovieOrderingContext);
     return(
         <header className={css.siteHeader}>
           <div className={css.siteHeaderMain}>
@@ -30,14 +30,10 @@ export const Header =()=>{
                       return prevVal=prevValACopy;
                     })
                   })
-
                  } catch (error) {
-                  
                  }
                 }} style={{display:isUserLogged===false?'none':'block'}}>Сагс</li>
-                <Link to='/login' style={{textDecoration:'none'}}>
-                <li style={{display:isUserLogged===false?'block':'none'}}>Нэвтрэх</li>
-                </Link>
+                <li onClick={()=>setUserWantedToLogin(true)} style={{display:isUserLogged===false?'block':'none'}}>Нэвтрэх</li>
                 <Link to='/'>
                 <li onClick={signOutFromWebSite} style={{display:isUserLogged===true?'block':'none'}}>Гарах</li>
                 </Link>
@@ -46,3 +42,5 @@ export const Header =()=>{
         </header>
     )
 }
+
+

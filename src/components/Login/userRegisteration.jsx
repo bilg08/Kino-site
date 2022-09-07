@@ -2,12 +2,13 @@ import React, { useContext, useState } from "react";
 import {RecaptchaVerifier,signInWithPhoneNumber}from "firebase/auth"
 import { auth } from "../../firebaseForThisApp/firebase";
 import css from "./userRegisteration.module.css"
-import { Link,useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { WhetherUserLoggedOrNotContext } from "../../contexts/whetherUserLoggedOrNot";
 import { setDocToFirebase } from "../../firebaseForThisApp/setDoc";
-import { Header } from "../../components/site-header/siteHeader";
+import { MovieOrderingContext } from "../../contexts/MovieOrderingContext";
 export const UserRegisteration=()=>{
-    const {setWhetherUserLoggedOrNot,setUserUid}=useContext(WhetherUserLoggedOrNotContext)
+    const {setWhetherUserLoggedOrNot,setUserUid}=useContext(WhetherUserLoggedOrNotContext);
+    const {setUserWantedToLogin,userWantedToLogin}=useContext(MovieOrderingContext)
     const countryCode="+976";
     const [phoneNumber,setPhoneNumber]=useState(countryCode);
     const [otp,setOTP]=useState();
@@ -47,15 +48,10 @@ export const UserRegisteration=()=>{
     }
 
     return(
-       
-       <>
-       <Header/>
-       <div style={{display:isOTPRight===true?'none':'flex'}}  className={css.UserRegisteration}>
+       <div style={{display:isOTPRight===true?'none':'flex',transform:userWantedToLogin===true?'translateY(0vh)':'translateY(-100vh)'}}  className={css.UserRegisteration}>
             <div className={css.loginHeader}>
               <p>Нэвтрэх</p>
-              <Link to="/" style={{textDecoration:'none'}}>
-                <button>x</button>
-              </Link>
+                <button onClickCapture={()=>setUserWantedToLogin(false)}>x</button>
             </div>
             <div style={{display:sendRequest===true?'none':'flex'}} className={css.loginWithPhoneNumber}>
                 <input value={phoneNumber} onChange={e=>setPhoneNumber(e.target.value)} placeholder="Утасны дугаараа оруулна уу"/>
@@ -67,6 +63,6 @@ export const UserRegisteration=()=>{
             </div>
             <div id="recaptchaContainer"></div>
         </div>
-       </>
+       
     )
 }
