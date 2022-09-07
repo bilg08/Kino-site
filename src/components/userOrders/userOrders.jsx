@@ -29,6 +29,7 @@ export const UserOrders = () => {
                              <button
                              className={css.deleteOrderBtn}
                              onClick={async()=>{
+                                 console.log('daragdlaa')
                               const orderData= getDocFromFirebase(`users/${userUid}/myOrders/${order.uid}`);
                               orderData.then(async(order)=>{
                               MoviesDatas.map(movieData=>{
@@ -38,6 +39,7 @@ export const UserOrders = () => {
                                        if(data.seat[sth].isOrdered===true&&data.seat[sth].isOrdering===true){
                                         data.seat[sth].isOrdered=false;
                                         data.seat[sth].isOrdering=false;
+
                                         data.possibleSeatsAllNumber=data.possibleSeatsAllNumber+1
                                         await setDocToFirebase(`movies/${data.MovieName}`,data);
                                         deleteOrder(order.uid)

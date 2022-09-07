@@ -3,7 +3,7 @@ import {signOut,onAuthStateChanged} from 'firebase/auth';
 import { auth } from "../firebaseForThisApp/firebase";
 export const WhetherUserLoggedOrNotContext=createContext();
 export const WhetherUserLoggedOrNotProvider=({children})=>{
-    let [isUserLogged,setWhetherUserLoggedOrNot]=useState(false)
+    let [isUserLogged,setWhetherUserLoggedOrNot]=useState(false);
     let [userUid,setUserUid]=useState('');
     onAuthStateChanged(auth,(user)=>{
         if(user){

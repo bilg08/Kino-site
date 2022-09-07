@@ -16,6 +16,7 @@ export const MovieOrderingContextProvider = ({ children }) => {
     let [userWantedToOrder, setUserWantedToOrder] = useState(false);
     let [userWantedToOrderChair, setUserWantedToOrderChair] = useState(false);
     let [userWantedtoSeeCart, setUserWantedtoSeeCart] = useState(false);
+    let [userWantedToLogin,setUserWantedToLogin]=useState(false)
     let [userOrders,setUserOrders]=useState([]);
     let userWantedMovieSeats = userWantedMovie.seat;
     let [canUserClickBtnForOrderChair,setCanUserClickBtnForOrderChair]=useState(true)
@@ -89,7 +90,7 @@ export const MovieOrderingContextProvider = ({ children }) => {
     },[form])
     return (
         <MovieOrderingContext.Provider value={
-            {canUserClickBtnForOrderChair,
+            {canUserClickBtnForOrderChair,userWantedToLogin,setUserWantedToLogin,
                 userWantedToOrder, setUserWantedToOrder, takeUserInput, setUserWantedtoSeeCart,deleteOrder,
                 form, takeOrder, userWantedToOrderChair, setUserWantedToOrderChair, userWantedtoSeeCart,setUserOrders,userOrders
             }

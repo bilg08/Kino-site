@@ -24,7 +24,7 @@ export const ShowMoviesInSlide = () => {
 
     });
   }
-  const prevImg = (e) => {
+  const prevImg = () => {
 
     setIndex(prevVal => {
       let prevValACopy = prevVal;
@@ -64,31 +64,30 @@ export const ShowMoviesInSlide = () => {
                   justifyContent: 'space-between', alignItems: 'center',
                   position: 'absolute',
                   background: `url(${movie.backgroundImage})`, width: 100 + '%', height: 100 + '%', backgroundRepeat: 'no-repeat'
-                  , backgroundPosition: 'center', backgroundSize: 'cover'
+                  ,backgroundPosition: 'center', backgroundSize: 'cover'
                 }}>
-              <p>Манай дэлгэцнээ</p>
-              <button className={css.prevBtn} onClick={(e) => prevImg(e)}><AiFillCaretLeft /></button>
-              <h1>{movie.MovieName}</h1>
-              <button className={css.nextBtn} onClick={(e) => nextImg(e)}><AiFillCaretRight /></button>
+              <button className={css.prevBtn} onClick={() => prevImg()}><AiFillCaretLeft /></button>
+              <div><h1>{movie.MovieName}</h1></div>
+              <button className={css.nextBtn} onClick={() => nextImg()}><AiFillCaretRight /></button>
             </div>
           )
         })}
-      </div>
-      <div className={css.upNextMoviesContainer}>
-
-        <h2>Дараа нь</h2>
-        <div className={css.upNextMovies}>
-        {upNextMovies.map((movie, index) =>{
-          return (
-            <div
-            className={css.upNextMovie} key={index}>
-                  <img src={movie.image}/>
-                  <h3>`{movie.MovieName}`</h3>
-            </div>
-          )
-        })}
-        </div>
       </div>
     </div>
   )
 }
+{/* <div className={css.upNextMoviesContainer}>
+
+  <h2>Дараа нь</h2>
+  <div className={css.upNextMovies}>
+  {upNextMovies.map((movie, index) =>{
+    return (
+      <div
+      className={css.upNextMovie} key={index}>
+            <img src={movie.image}/>
+            <h3>`{movie.MovieName}`</h3>
+      </div>
+    )
+  })}
+  </div>
+</div> */}

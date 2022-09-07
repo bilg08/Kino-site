@@ -1,51 +1,50 @@
 .Movies{
-    width: 90%;
-    height:80vh;
-    justify-content: space-around;
-    align-items: center;
-    gap:10px;
-    display: flex;
-    /* background: white; */
-    background: #121212;
-    flex-direction: column;
+    width: 100%;
+    height:60vh;
     position: relative;
-    /* flex-wrap: wrap; */
+    box-shadow: rgb(0 0 0 / 20%) 0px 2px 1px -1px, rgb(0 0 0 / 14%) 0px 1px 1px 0px, rgb(0 0 0 / 12%) 0px 1px 3px 0px;
 }
 .MoviesHeader{
-    width: 90%;
+    width: 100%;
+    height: 10%;
     color: #f5c518;
-    position: absolute;
-    top: 0;
-    left: 0;
+    text-align: left;
 }
 .MoviesContainer{
    width: 100%;
-   height: auto;
+   height: 80%;
    display: flex;
-   justify-content: space-around;
-   /* position: relative; */
-   position: absolute;
-   /* flex-wrap: wrap; */
+   margin: auto;
+   display: flex;
+   gap: 10px;
+   flex-wrap: wrap;
 }  
  @media (min-width:1350px) {
     .Movies{
         width: 1350px;
     }
     .MoviesContainer{
-        width: 1000px;
+        width: 90%;
     }
     
-}  
-
-@media (max-width:1030px) {
-    
+} 
+ @media (max-width:1030px) {
+    .Movies{
+        width: 100%;
+        height: auto;
+    }
     .MoviesContainer{
         max-width: 100%;
+        height: 100%;
         overflow: scroll;
+        flex-direction: column;
+        position: relative;
+        justify-content: center;
+        align-items: center;
     }
     
 }  
 
 
  
- 
+  
