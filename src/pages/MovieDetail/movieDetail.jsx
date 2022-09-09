@@ -6,45 +6,76 @@ import { Header } from "../../components/site-header/siteHeader";
 import { OrderMovie } from "../../components/orderMovie/orderMovie";
 import { Link } from "react-router-dom";
 import { WhetherUserLoggedOrNotContext } from "../../contexts/whetherUserLoggedOrNot";
+import { Grid } from "@mui/material";
 export const MovieDetail = (props) => {
-    
-    const {userWantedMovie} = useContext(MoviesContext);
-    const {setUserWantedToOrder} = useContext(MovieOrderingContext);
-    const {isUserLogged}=useContext(WhetherUserLoggedOrNotContext);
-    console.log(userWantedMovie)
-    return(
-        <div className={css.MovieDetailPage}>
-            <Header/>
-        <div className={css.MovieDetailPageMain}>
-           <div style={{background:`url(${userWantedMovie.backgroundImage})`,backgroundPosition: "center",
-                        backgroundSize: "contain",backgroundRepeat:"no-repeat",width:100+'%',height:100+"%"}}>
-                <div className={css.movieMoreAbout}>
-                    <div className={css.movieLogo}>
-                            <img alt="" src={userWantedMovie.MovieLogo}/>
-                    </div>
-                    <h1>{userWantedMovie.MovieName}</h1>
-                    <p className={css.genre}>{userWantedMovie.genre}</p>
-                    <p>{userWantedMovie.about}</p>
-                    
-                   <div>
-                     <button className={css.continue} onClick={()=>{
-                        if(isUserLogged===true){
-                            setUserWantedToOrder(true)
-                        }else{
-                            alert('Ta nevtreegui Baina')
-                        }
-                    }}>
-                    Захиалах
-                    </button>
-                    <Link to='/'>
-                    <button className={css.backToMovies}>Буцах</button>
-                    </Link>
-                   </div>
-                </div>
-            </div>
-        </div>
-        <OrderMovie/>
-    </div>
+  const { userWantedMovie } = useContext(MoviesContext);
+  const { setUserWantedToOrder } = useContext(MovieOrderingContext);
+  const { isUserLogged } = useContext(WhetherUserLoggedOrNotContext);
+  // const styles = {
+  //   movieDetailStyle: (theme) => ({
 
-    )
-}
+  //   }),
+  // };
+  return (
+    <>
+      <Header />
+      <Grid container
+        sx={{
+          background: `url(${userWantedMovie.backgroundImage})`,
+          backgroundPosition: "center",
+          backgroundSize: "contain",
+          backgroundRepeat: "no-repeat",
+          width: 100 + "%",
+          height: 100 + "vh",
+        }}
+          >
+            <Grid item>
+                  
+            </Grid>
+      </Grid>
+    </>
+    // <div className={css.MovieDetailPage}>
+    //   <Header />
+    //   <div className={css.MovieDetailPageMain}>
+    //     <div
+    //       style={{
+    // background: `url(${userWantedMovie.backgroundImage})`,
+    // backgroundPosition: "center",
+    // backgroundSize: "contain",
+    // backgroundRepeat: "no-repeat",
+    // width: 100 + "%",
+    // height: 100 + "%",
+    //       }}
+    //     >
+    //       <div className={css.movieMoreAbout}>
+    //         <div className={css.movieLogo}>
+    //           <img alt="" src={userWantedMovie.MovieLogo} />
+    //         </div>
+    //         <h1>{userWantedMovie.MovieName}</h1>
+    //         <p className={css.genre}>{userWantedMovie.genre}</p>
+    //         <p>{userWantedMovie.about}</p>
+
+    //         <div>
+    //           <button
+    //             className={css.continue}
+    //             onClick={() => {
+    //               if (isUserLogged === true) {
+    //                 setUserWantedToOrder(true);
+    //               } else {
+    //                 alert("Ta nevtreegui Baina");
+    //               }
+    //             }}
+    //           >
+    //             Захиалах
+    //           </button>
+    //           <Link to="/">
+    //             <button className={css.backToMovies}>Буцах</button>
+    //           </Link>
+    //         </div>
+    //       </div>
+    //     </div>
+    //   </div>
+    //   <OrderMovie />
+    // </div>
+  );
+};

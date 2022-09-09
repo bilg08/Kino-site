@@ -22,6 +22,9 @@ export const useGetDocsFromFireBase=(collectionName)=>{
         })
     } catch (error) {}
     }
+
+
+
     useEffect(()=>{
       getData();
     },[])

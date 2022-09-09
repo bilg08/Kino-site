@@ -5,17 +5,27 @@ import { MovieDetail } from "../pages/MovieDetail/movieDetail"
 import { OrderMovie } from "../components/orderMovie/orderMovie";
 import { UserRegisteration } from "../components/Login/userRegisteration";
 import { HomePage } from "../pages/home/HomePage";
+import { createTheme,ThemeProvider } from '@mui/material/styles';
+import { Box, Container } from "@mui/material";
+import { Header } from "../components/site-header/siteHeader";
+const themes = createTheme({
+  
+});
 function App() {
   return (
-    <div className={css.App}>
-      <Routes>
-        <Route path="/" element={<HomePage/>}/>
-        <Route path="/login" element={<UserRegisteration/>}/>
-        <Route path="/movies/:MovieName" element={<MovieDetail/>}/>
-        <Route path="/OrderMovie" element={<OrderMovie/>}/>
-      </Routes>
-    </div>
+    <ThemeProvider theme={themes}>
+      <Container maxWidth="xl">
+        <Box sx={{ height: "auto" }}>
+          {/* <Header /> */}
+          {/* { <HomePage />*} */}
+          
+        </Box>
+        <Routes>
+          <Route element={<HomePage />} path="/" />
+          <Route path="/movies/:MovieName" element={<MovieDetail/>} />
+        </Routes>
+      </Container>
+    </ThemeProvider>
   );
 }
-
 export default App;

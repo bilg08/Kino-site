@@ -98,6 +98,7 @@ export const MovieOrderingContextProvider = ({ children }) => {
         </MovieOrderingContext.Provider>
     )
 }
+export const useMovieOrderingContext=()=>useContext(MovieOrderingContext)
 
 
 
