@@ -18,14 +18,15 @@ export const OrderMovie=()=>{
 
     const checkSeat = (e) => {
         const seatId = parseInt(e.target.innerText);
-        const possibleSeatToOrder=parseInt(form.Adult)+parseInt(form.Kids)
+        const possibleSeatToOrder = parseInt(form.Adult) + parseInt(form.Kids)
+        console.log(possibleSeatToOrder)
         if(possibleSeatToOrder>userChosenSeats.length){
             if (userWantedMovieSeats[seatId].isOrdering === false) {
                 userWantedMovieSeats[seatId].isOrdering = true;
                 setUserChosenseats(prevVal => {
                     let prevValACopy = prevVal;
                     prevValACopy.push(seatId);
-                    console.log(prevValACopy)
+                    console.log(prevValACopy,userWantedMovieSeats[seatId].isOrdering)
                     e.target.style.background = "green"
                     return (
                         prevVal = prevValACopy
@@ -43,9 +44,8 @@ export const OrderMovie=()=>{
     
             })
             }
-        }
-
-            for(let i=0;i<userChosenSeats.length;i++){
+        } else {
+             for(let i=0;i<userChosenSeats.length;i++){
                 if(parseInt(userChosenSeats[i])===seatId){
                     userWantedMovieSeats[seatId].isOrdering=false;
                     setUserChosenseats((prevVal)=>{
@@ -58,6 +58,9 @@ export const OrderMovie=()=>{
                     })
                 }
             }
+        }
+
+           
         
     }
 

@@ -6,10 +6,12 @@ import siteLogo from "../../asset/logoSite.svg";
 import LogoutIcon from '@mui/icons-material/Logout';
 import { useMovieOrderingContext } from "../../contexts/MovieOrderingContext";
 import { useWhetherUserLoggedOrNotContext} from "../../contexts/whetherUserLoggedOrNot";
+import { collection, getDocs } from "firebase/firestore";
+import { db } from "../../firebaseForThisApp/firebase";
 export const Header = () => {
-    const {isUserLogged,signOutFromWebSite}=useWhetherUserLoggedOrNotContext();
+    const {isUserLogged,signOutFromWebSite,userUid}=useWhetherUserLoggedOrNotContext();
 
-    const {setUserWantedToLogin,setUserWantedtoSeeCart}=useMovieOrderingContext()
+    const {setUserWantedToLogin,setUserWantedtoSeeCart,setUserOrders}=useMovieOrderingContext()
     const StyledToolBar=styled(Toolbar)({
         display:"flex",
         justifyContent:"space-between",
@@ -55,7 +57,24 @@ export const Header = () => {
                             <SearchIcon/>
                             <InputBase placeholder="Кино хайх..."/>
                         </Search>
-                    <Icons onClick={()=>setUserWantedtoSeeCart(true)} sx={styles.ifUserLoggedItem}>
+                    <Icons onClick={async () => {
+                        console.log('hha')
+                        setUserWantedtoSeeCart(true);
+                         try {
+                  const orders= await getDocs(collection(db,`users/${userUid}/myOrders`));
+                  setUserOrders(prevVal=>prevVal=[])
+                  orders.forEach(order=>{
+                    setUserOrders(prevVal=>{
+                      let prevValACopy=prevVal;
+                      prevValACopy=[...prevValACopy,order.data()];
+                      return prevVal=prevValACopy;
+                    })
+                  })
+
+                 } catch (error) {
+
+                 }
+                    }} sx={styles.ifUserLoggedItem}>
                         <Badge badgeContent={4} color='primary'>
                         <ShoppingCartIcon/>
                         </Badge>
