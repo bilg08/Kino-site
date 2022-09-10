@@ -6,7 +6,7 @@ import { OrderMovie } from "../components/orderMovie/orderMovie";
 import { UserRegisteration } from "../components/Login/userRegisteration";
 import { HomePage } from "../pages/home/HomePage";
 import { createTheme,ThemeProvider } from '@mui/material/styles';
-import { Box, Container } from "@mui/material";
+import { Box, Container, Grid } from "@mui/material";
 import { Header } from "../components/site-header/siteHeader";
 const themes = createTheme({
   
@@ -14,17 +14,15 @@ const themes = createTheme({
 function App() {
   return (
     <ThemeProvider theme={themes}>
-      <Container maxWidth="xl">
-        <Box sx={{ height: "auto" }}>
-          {/* <Header /> */}
-          {/* { <HomePage />*} */}
-          
-        </Box>
-        <Routes>
+      <Grid container sx={{margin:'auto'}} lg={10} md={12} xs={12}>
+        {/* <Grid item lg={12} md={12} xs={12}> */}
+        {/* </Grid> */}
+      <Routes>
           <Route element={<HomePage />} path="/" />
           <Route path="/movies/:MovieName" element={<MovieDetail/>} />
         </Routes>
-      </Container>
+        
+      </Grid>
     </ThemeProvider>
   );
 }

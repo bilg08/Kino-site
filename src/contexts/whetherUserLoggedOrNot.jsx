@@ -1,4 +1,4 @@
-import React, { createContext, useState } from "react";
+import React, { createContext, useContext, useState } from "react";
 import {signOut,onAuthStateChanged} from 'firebase/auth';
 import { auth } from "../firebaseForThisApp/firebase";
 export const WhetherUserLoggedOrNotContext=createContext();
@@ -24,5 +24,5 @@ export const WhetherUserLoggedOrNotProvider=({children})=>{
            {children}
         </WhetherUserLoggedOrNotContext.Provider>
     )
-
 }
+export const useWhetherUserLoggedOrNotContext = () => useContext(WhetherUserLoggedOrNotContext)

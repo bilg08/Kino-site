@@ -5,8 +5,11 @@ import PersonIcon from '@mui/icons-material/Person';
 import siteLogo from "../../asset/logoSite.svg";
 import LogoutIcon from '@mui/icons-material/Logout';
 import { useMovieOrderingContext } from "../../contexts/MovieOrderingContext";
-export const Header=()=>{
-    const {setUserWantedToLogin}=useMovieOrderingContext()
+import { useWhetherUserLoggedOrNotContext} from "../../contexts/whetherUserLoggedOrNot";
+export const Header = () => {
+    const {isUserLogged,signOutFromWebSite}=useWhetherUserLoggedOrNotContext();
+
+    const {setUserWantedToLogin,setUserWantedtoSeeCart}=useMovieOrderingContext()
     const StyledToolBar=styled(Toolbar)({
         display:"flex",
         justifyContent:"space-between",
@@ -32,6 +35,14 @@ export const Header=()=>{
         gap:5+'%',
         width:'auto',
     }));
+    const styles = {
+        ifUserNotLoggedItems: (theme) => ({
+           display:isUserLogged===true?'none':'flex'
+        }),
+        ifUserLoggedItem: (theme) => ({
+           display:isUserLogged===true?'flex':'none'
+    }),
+    }
     return(
         <AppBar sx={{position:'relative',color:'white',}}>
             <StyledToolBar >
@@ -44,13 +55,13 @@ export const Header=()=>{
                             <SearchIcon/>
                             <InputBase placeholder="Кино хайх..."/>
                         </Search>
-                    <Icons sx={{display:'block'}}>
+                    <Icons onClick={()=>setUserWantedtoSeeCart(true)} sx={styles.ifUserLoggedItem}>
                         <Badge badgeContent={4} color='primary'>
                         <ShoppingCartIcon/>
                         </Badge>
                     </Icons>
-                    <Button variant="contained" onClick={()=>setUserWantedToLogin(true)}><PersonIcon/>Нэвтрэх</Button>
-                    <Button variant="contained"><LogoutIcon/>Гарах</Button>
+                    <Button sx={styles.ifUserNotLoggedItems} variant="contained" onClick={()=>setUserWantedToLogin(true)}><PersonIcon/>Нэвтрэх</Button>
+                    <Button onClick={()=>signOutFromWebSite()} sx={styles.ifUserLoggedItem} variant="contained"><LogoutIcon/>Гарах</Button>
               </StyledNavbarItems>
            </StyledToolBar>
         </AppBar>

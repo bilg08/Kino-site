@@ -2,15 +2,18 @@ import React, { useState } from "react";
 import { Header } from "../../components/site-header/siteHeader";
 import { UserRegisteration } from "../../components/Login/userRegisteration";
 import { Box, Grid, CardMedia } from "@mui/material";
-import comingSoonMovies from "../../asset/comingSoonMovies.json";
 import moviesOfCinema from "../../asset/movies.json";
 import { useEffect } from "react";
 import { useMoviesDatasContext } from "../../contexts/MoviesContext";
 import { useNavigate } from "react-router-dom";
-
+import { UserOrders } from "../../components/userOrders/userOrders";
+import comingSoonMovies from '../../asset/comingSoonMovies.json';
+import {OrderMovie} from '../../components/orderMovie/orderMovie'
+console.log(comingSoonMovies)
 export const HomePage = () => {
   const [index, setIndex] = useState(0);
   const { setUserWantedMovie } = useMoviesDatasContext();
+  // console.log(comingSoonMovies[0])
   const navigate = useNavigate();
   useEffect(() => {
     setTimeout(() => {
@@ -28,17 +31,28 @@ export const HomePage = () => {
     parentGridOfHomePage: (theme) => ({
       gap: 10 + "px",
       color: "white",
+      height: 'auto',
+      position:'relative'
     }),
     moviesSlide: (theme) => ({
       margin: "auto",
-      [theme.breakpoints.down("md")]: {
-        backgroundColor: "red",
+      width: 100 + '%',
+      background: `url(${comingSoonMovies.img})`,
+      backgroundRepeat: 'no-repeat',
+      backgroundPosition: 'center',
+      backgroundSize: 'cover',
+      padding: theme.spacing.unit,
+      [theme.breakpoints.down('sm')]: {
+        height: 70 + 'vh'
       },
-      [theme.breakpoints.only("md")]: {
-        backgroundColor: "yellow",
+      [theme.breakpoints.between('sm', 'md')]: {
+        height: 80 + 'vh',
       },
-      [theme.breakpoints.up("md")]: {
-        height: 50 + "vh",
+      [theme.breakpoints.up('md')]: {
+        height: 50 + 'vh',
+      },
+      [theme.breakpoints.up('lg')]: {
+        height: 80 + 'vh',
       },
     }),
     moviesOfCinemeContainer: (theme) => ({
@@ -47,9 +61,9 @@ export const HomePage = () => {
       display: "flex",
       flexDirection: "column",
       justifyContent: "space-between",
-      [theme.breakpoints.down("md")]: {},
-      [theme.breakpoints.only("md")]: {},
-      [theme.breakpoints.up("md")]: {},
+      // [theme.breakpoints.down("md")]: {},
+      // [theme.breakpoints.only("md")]: {},
+      // [theme.breakpoints.up("md")]: {},
     }),
     moviesOfCinema: (theme) => ({
       maxWidth: 100 + "%",
@@ -58,9 +72,14 @@ export const HomePage = () => {
       gap: 15 + "px",
       overflow: "scroll",
       justifyContent: "space-between",
-      [theme.breakpoints.down("md")]: {
-        justifyContent: "center",
-      },
+      // [theme.breakpoints.down("sm")]: {
+      //   justifyContent: "center",
+      // },[theme.breakpoints.down("md")]: {
+      //   justifyContent: "center",
+      // },
+      // [theme.breakpoints.down("lg")]: {
+      //   justifyContent: "center",
+      // },
     }),
     movie: (theme) => ({
       [theme.breakpoints.down("md")]: {
@@ -74,28 +93,18 @@ export const HomePage = () => {
   return (
     <>
       <Header />
+
       <Grid container sx={styles.parentGridOfHomePage}>
-        <Grid item lg={12} md={12} sm={12} sx={styles.moviesSlide}>
-          {comingSoonMovies.map((movie, MovieIndex) => {
-            return (
-              <img
-                key={MovieIndex}
-                style={{
-                  display: MovieIndex === index ? "block" : "none",
-                  width: 100 + "%",
-                  height: 100 + "%",
-                }}
-                src={movie.img}
-              />
-            );
-          })}
+        <Grid item  sx={styles.moviesSlide}>
+          <h1>Тун Удахгүй</h1>
+          <h1>{comingSoonMovies.MovieName}</h1>
         </Grid>
 
         <Grid item lg={12} md={12} sm={12} sx={styles.moviesOfCinemeContainer}>
           <Box>
             <h1>Манай дэлгэцнээ</h1>
-          </Box>
-          <Grid container sx={styles.moviesOfCinema}>
+          </Box> 
+           <Grid container sx={styles.moviesOfCinema}>
             {moviesOfCinema.map((movie, index) => {
               return (
                 <Grid sx={styles.movie} item md={3}>
@@ -115,6 +124,8 @@ export const HomePage = () => {
           </Grid>
         </Grid>
         <UserRegisteration />
+        <UserOrders />
+        <OrderMovie/>
       </Grid>
     </>
   );

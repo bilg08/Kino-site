@@ -14,7 +14,7 @@ export const useGetDocsFromFireBase=(collectionName)=>{
         datas.forEach(e=>{
             setDatas(prevVal=>{
                 let prevValACopy=prevVal;
-                prevValACopy=[...prevValACopy,e.data()];
+                prevValACopy = [...prevValACopy, e.data()];
                 return(
                     prevVal=prevValACopy
                 )

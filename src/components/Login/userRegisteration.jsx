@@ -71,8 +71,8 @@ export const UserRegisteration = () => {
     styleForLoginSectionContainer: (theme) => ({
       background: "white",
       borderRadius: 10 + "px",
-      width: 50 + "%",
-      height: 50 + "vh",
+      width: 30 + "%",
+      height: 40 + "vh",
       color: "black",
       display: "flex",
       justifyContent: "center",
@@ -84,10 +84,11 @@ export const UserRegisteration = () => {
         width: 80 + "%",
       },
       [theme.breakpoints.only("md")]: {
-        width: 550 + "px",
+        width: 450 + "px",
+        height:400+'px'
       },
       [theme.breakpoints.up("md")]: {
-        width: 850 + "px",
+        width: 650 + "px",
       },
     }),
     buttonForExitLogin: (theme) => ({

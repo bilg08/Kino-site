@@ -1,28 +1,23 @@
 import React, { useContext, useState } from "react";
 import css from "./orderMovie.module.css";
-import { BsCart3 } from "react-icons/bs";
-import { MovieOrderingContext } from "../../contexts/MovieOrderingContext";
+import { BsFillArrowLeftCircleFill, BsCart3 } from "react-icons/bs";
+import { MovieOrderingContext, useMovieOrderingContext } from "../../contexts/MovieOrderingContext";
 import { MoviesContext } from "../../contexts/MoviesContext";
 import { Link } from "react-router-dom";
 export const OrderMovie=()=>{
     const { takeUserInput, 
             takeOrder,
-            form,setUserWantedToOrder,canUserClickBtnForOrderChair,
+            form,setUserWantedToOrder,
             userWantedToOrder,userWantedToOrderChair, setUserWantedToOrderChair
-           } = useContext(MovieOrderingContext)
+           } =useMovieOrderingContext()
     const { userWantedMovie } = useContext(MoviesContext);
     const userWantedMovieSeats = userWantedMovie.seat;
-    const possibleSeatsAllNumber=userWantedMovie.possibleSeatsAllNumber
-    let [userChosenSeats, setUserChosenseats] = useState([]);
-    const [adultNum,setAdult]=useState(0);
-    const [kidsNum,setKids]=useState(0)
-
+    let [userChosenSeats, setUserChosenseats] = useState([])
 
 
 
     const checkSeat = (e) => {
-
-        const seatId=parseInt(e.target.innerText)
+        const seatId = parseInt(e.target.innerText);
         const possibleSeatToOrder=parseInt(form.Adult)+parseInt(form.Kids)
         if(possibleSeatToOrder>userChosenSeats.length){
             if (userWantedMovieSeats[seatId].isOrdering === false) {
@@ -30,6 +25,7 @@ export const OrderMovie=()=>{
                 setUserChosenseats(prevVal => {
                     let prevValACopy = prevVal;
                     prevValACopy.push(seatId);
+                    console.log(prevValACopy)
                     e.target.style.background = "green"
                     return (
                         prevVal = prevValACopy
@@ -73,29 +69,14 @@ export const OrderMovie=()=>{
                     <button onClick={()=>setUserWantedToOrder(false)} className={css.exitFromForm}>X</button>
                 </div>
                 <div className={css.formMain}>
-                    <p>Таны боломжит захиалганы тоо:{possibleSeatsAllNumber}</p>
+                    <p>Таны боломжит захиалганы тоо:{userWantedMovie.possibleSeatsAllNumber}</p>
                  <div className={css.personQuantity}>
                     <p>Том Хүн</p>
-                    <input className={css.Adult} value={adultNum} type='number' min="0" max={possibleSeatsAllNumber}  onChange={(e) => {
-                        takeUserInput(e);
-                        setAdult(e.target.value)
-                    }} name="Adult" />
+                    <input className={css.Adult} onChange={(e) => takeUserInput(e)} name="Adult" />
                     <p>Хүүхэд</p>
-                    <input className={css.Kids} value={kidsNum} type='number' min='0' max={possibleSeatsAllNumber}  onChange={(e) => {
-                        takeUserInput(e);
-                        setKids(e.target.value)
-                    }} name="Kids" />
+                    <input className={css.Kids} onChange={(e) => takeUserInput(e)} name="Kids" />
                  </div>
-                 <button disabled={canUserClickBtnForOrderChair} className={css.continueToOrderSeat} onClick={()=>{
-                    if((parseInt(form.Adult)+parseInt(form.Kids))>possibleSeatsAllNumber){
-                        alert('Та боломжит суудалаас их суудал сонгосон байна')
-                        console.log(possibleSeatsAllNumber,form.Adult+form.Kids)
-                    }else if( (parseInt(form.Adult)+parseInt(form.Kids))===0){
-                        alert('Тань суудлын тоо 0 байна')
-                    }else{
-                        setUserWantedToOrderChair(true)
-                    }
-                }}>Үргэлжлүүлэх</button>
+                 <button className={css.continueToOrderSeat} onClick={()=>setUserWantedToOrderChair(true)}>Үргэлжлүүлэх</button>
                 </div>
            </div>
 
