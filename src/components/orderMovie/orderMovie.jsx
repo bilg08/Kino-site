@@ -68,7 +68,15 @@ export const OrderMovie = () => {
             alignItems: 'center',
           flexDirection: 'column',
           gap: '5px',
-            position:'relative'
+          position: 'relative',
+          [theme.breakpoints.down("sm")]: {
+                   width:'400px',
+                height: "400px",
+              },
+              [theme.breakpoints.between("sm", "md")]: {
+                height: "400px"
+              },
+              
             // transform: userWantedToOrder === true ? "translateY(0vh)" : "translateY(-500vh)",
       }),
         moviesSeat: (theme) => ({
@@ -104,9 +112,13 @@ export const OrderMovie = () => {
         flexWrap: 'wrap',
         justifyContent: 'center',
         alignItems:'center',
-        gap:'10px'
+        gap: '10px',
+        // background:'green',
+       
         
-      })
+      }),
+      
+      
         
     };
 
@@ -159,23 +171,23 @@ export const OrderMovie = () => {
         <Button variant="contained" onClick={()=>setUserWantedToOrderChair(true)}>Үргэлжлүүлэх</Button>
       </Grid>
       <Grid item sx={styles.moviesSeat}>
-        <Box sx={styles.televison}></Box>
         <Grid item sx={styles.aboutSeat}>
           <Grid item md={3} sx={{width:'auto',height:'100%',background:'red'}}>Захиалгатай</Grid>
           <Grid item md={3} sx={{width:'auto',height:'100%',background:'green'}}>Таны сонгосон</Grid>
           <Grid item md={3} sx={{width:'auto',height:'100%',background:'blue'}}>Захиалгагүй</Grid>
         </Grid>
+            <Box sx={styles.televison}></Box>
         <Grid item sx={styles.seatContainer}>
              {userWantedMovieSeats === undefined ? "" : userWantedMovieSeats.map((seat, index) => {
                  return (
-                     <Button name="Seat" key={index} style={{
-                         background: seat.isOrdered === true ? "red" : "blue"
-                     }}
+                   <Button sx={styles.button} name="Seat"  style={{
+                      background: seat.isOrdered === true ? "red" : "blue",
+                     }} key={index} 
                          disabled={seat.isOrdered === true ? true : false}
                          onClick={(e) => {
                              checkSeat(e)
                              takeUserInput(e, seat, userWantedMovieSeats)
-                         }} className={css.seat}>
+                         }} >
                          {index}
                      </Button>
                  )

@@ -8,9 +8,10 @@ import { WhetherUserLoggedOrNotContext } from "./whetherUserLoggedOrNot";
 import { uuidv4 } from "@firebase/util";
 import { deleteDocOfFirebase } from "../firebaseForThisApp/deleteDoc";
 import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 export const MovieOrderingContext = createContext();
 export const MovieOrderingContextProvider = ({ children }) => {
-   let [getDatasOfMovies,setGetDatasOfMovies]=useState(false)
+    const navigate=useNavigate()
     let { userWantedMovie } = useContext(MoviesContext);
     let { userUid } = useContext(WhetherUserLoggedOrNotContext);
     let [userWantedToOrder, setUserWantedToOrder] = useState(false);
@@ -19,6 +20,7 @@ export const MovieOrderingContextProvider = ({ children }) => {
     let [userWantedToLogin,setUserWantedToLogin]=useState(false)
     let [userOrders,setUserOrders]=useState([]);
     let userWantedMovieSeats = userWantedMovie.seat;
+    let [userOrderedMovieSoReTakeData,setUserOrderedMovieSoReTakeData]=useState(0)
     let [canUserClickBtnForOrderChair,setCanUserClickBtnForOrderChair]=useState(true)
     let [form, setForm] = useState({
         Name: "",
@@ -65,14 +67,13 @@ export const MovieOrderingContextProvider = ({ children }) => {
             prevValACopy.userOrderedMovieImg = userWantedMovie.image;
             prevValACopy.uid=uuidForOrderDoc;
             userWantedMovie.possibleSeatsAllNumber= userWantedMovie.possibleSeatsAllNumber-userChosenSeats.length
-            console.log(userWantedMovie)
- 
             addDocToFirebase(`${userWantedMovie.MovieName}orders`, form);
             setDocToFirebase(`movies/${userWantedMovie.MovieName}`, userWantedMovie);
-            await setDocToFirebase(`users/${userUid}/myOrders/${uuidForOrderDoc}`,form);
+            await setDocToFirebase(`users/${userUid}/myOrders/${uuidForOrderDoc}`, form);
             return (
                 prevVal = prevValACopy
             )
+            
         })
 
         //zahialga hiigdsenii daraa omnoh zahialgatai zahialgiin huseltiig hoosolno
@@ -88,6 +89,9 @@ export const MovieOrderingContextProvider = ({ children }) => {
                 prevVal = prevValACopy
             )
         });
+        // await navigate('/');
+        // await window.location.reload()
+        
     }
     useEffect(() => {
         console.log(form)
@@ -99,7 +103,7 @@ export const MovieOrderingContextProvider = ({ children }) => {
     },[form])
     return (
         <MovieOrderingContext.Provider value={
-            {canUserClickBtnForOrderChair,userWantedToLogin,setUserWantedToLogin,setGetDatasOfMovies,getDatasOfMovies,
+            {canUserClickBtnForOrderChair,userWantedToLogin,setUserWantedToLogin,userOrderedMovieSoReTakeData,setUserOrderedMovieSoReTakeData,
                 userWantedToOrder, setUserWantedToOrder, takeUserInput, setUserWantedtoSeeCart,deleteOrder,
                 form, takeOrder, userWantedToOrderChair, setUserWantedToOrderChair, userWantedtoSeeCart,setUserOrders,userOrders
             }

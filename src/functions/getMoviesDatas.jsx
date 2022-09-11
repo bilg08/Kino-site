@@ -4,13 +4,13 @@ import { db } from "../firebaseForThisApp/firebase";
 import { useMovieOrderingContext } from "../contexts/MovieOrderingContext";
 export const useGetDocsFromFireBaseForMovieData=(collectionName)=>{
    const [colName]=useState(collectionName);
-    const { setGetDatasOfMovies,getDatasOfMovies } = useMovieOrderingContext()
-    console.log(getDatasOfMovies)
+    const { userOrderedMovieSoReTakeData, setUserOrderedMovieSoReTakeData } = useMovieOrderingContext()
+    console.log(userOrderedMovieSoReTakeData)
    let [data,setDatas]=useState([]);
     const getData=async()=>{
         setDatas(data=[])
     try {
-        const datas=await getDocs(collection(db,colName));
+        const datas=await getDocs(collection(db,'movies'));
         datas.forEach(e=>{
             setDatas(prevVal=>{
                 let prevValACopy=prevVal;
@@ -20,7 +20,6 @@ export const useGetDocsFromFireBaseForMovieData=(collectionName)=>{
                 )
             })
         })
-        setGetDatasOfMovies(false)
     } catch (error) {}
     }
 
@@ -28,6 +27,6 @@ export const useGetDocsFromFireBaseForMovieData=(collectionName)=>{
 
     useEffect(()=>{
       getData();
-    },[getDatasOfMovies])
+    },[userOrderedMovieSoReTakeData])
     return [data]
 }

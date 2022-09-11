@@ -54,15 +54,7 @@ export const UserOrders = () => {
       justifyContent: "center",
       gap: 15 + "px",
       overflow: "scroll",
-      justifyContent: "space-between",
-      // [theme.breakpoints.down("sm")]: {
-      //   justifyContent: "center",
-      // },[theme.breakpoints.down("md")]: {
-      //   justifyContent: "center",
-      // },
-      // [theme.breakpoints.down("lg")]: {
-      //   justifyContent: "center",
-      // },
+      justifyContent: "center",
     }),
     movie: (theme) => ({
       margin: "auto",
@@ -83,7 +75,7 @@ export const UserOrders = () => {
           </Button>
         </Box>
         <Grid container justifyContent="center" sx={styles.movies}>
-          {userOrders.map((order, i) => {
+          {userOrders.length===0?<h1>Таны сагс хоосон байна</h1>:userOrders.map((order, i) => {
             return (
               <Grid sx={styles.movie} item md={3}>
                 <CardMedia

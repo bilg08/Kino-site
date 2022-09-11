@@ -77,7 +77,7 @@ const navigate=useNavigate()
 
                             }
                     }} sx={styles.ifUserLoggedItem}>
-                        <Badge badgeContent={userOrders.length} color='primary'>
+                        <Badge color='primary'>
                         <ShoppingCartIcon/>
                         </Badge>
                     </Icons>
