@@ -5,7 +5,6 @@ import { useMovieOrderingContext } from "../contexts/MovieOrderingContext";
 export const useGetDocsFromFireBaseForMovieData=(collectionName)=>{
    const [colName]=useState(collectionName);
     const { userOrderedMovieSoReTakeData, setUserOrderedMovieSoReTakeData } = useMovieOrderingContext()
-    console.log(userOrderedMovieSoReTakeData)
    let [data,setDatas]=useState([]);
     const getData=async()=>{
         setDatas(data=[])

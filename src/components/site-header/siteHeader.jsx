@@ -59,7 +59,6 @@ const navigate=useNavigate()
                             <InputBase placeholder="Кино хайх..."/>
                         </Search>
                     <Icons onClick={async () => {
-                        console.log(userUid)
                         setUserWantedtoSeeCart(true);
                          try {
                             const orders= await getDocs(collection(db,`users/${userUid}/myOrders`));
@@ -68,7 +67,6 @@ const navigate=useNavigate()
                                 setUserOrders(prevVal=>{
                                 let prevValACopy=prevVal;
                                     prevValACopy = [...prevValACopy, order.data()];
-                                    console.log(prevValACopy)
                                 return prevVal=prevValACopy;
                                 })
                             })

@@ -133,7 +133,6 @@ export const OrderMovie = () => {
         setUserChosenseats((prevVal) => {
           let prevValACopy = prevVal;
           prevValACopy.push(seatId);
-          console.log(prevValACopy, userWantedMovieSeats[seatId].isOrdering);
           e.target.style.background = "green";
           return (prevVal = prevValACopy);
         });
@@ -178,13 +177,13 @@ export const OrderMovie = () => {
         </Grid>
             <Box sx={styles.televison}></Box>
         <Grid item sx={styles.seatContainer}>
-             {userWantedMovieSeats === undefined ? "" : userWantedMovieSeats.map((seat, index) => {
+          {userWantedMovieSeats === undefined ? "" : userWantedMovieSeats.map((seat, index) => {
                  return (
                    <Button sx={styles.button} name="Seat"  style={{
                       background: seat.isOrdered === true ? "red" : "blue",
                      }} key={index} 
                          disabled={seat.isOrdered === true ? true : false}
-                         onClick={(e) => {
+                     onClick={(e) => {
                              checkSeat(e)
                              takeUserInput(e, seat, userWantedMovieSeats)
                          }} >

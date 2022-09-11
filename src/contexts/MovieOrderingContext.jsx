@@ -33,7 +33,6 @@ export const MovieOrderingContextProvider = ({ children }) => {
         uid:""
     });
     const takeUserInput = async (e) => {
-        console.log(e.target)
         if (e.target.name === 'Name') {
             let targetValue = e.target.value;
             checkInputMongolianAlphabetOrNot(targetValue)
@@ -46,18 +45,13 @@ export const MovieOrderingContextProvider = ({ children }) => {
     }
 
     const deleteOrder = (DocUid) => {
-        console.log(DocUid,'kkkk')
       deleteDocOfFirebase(`users/${userUid}/myOrders/${DocUid}`).then(setUserWantedtoSeeCart(false));
     }
     const takeOrder = async (userChosenSeats) => {
         const uuidForOrderDoc = uuidv4()
-        console.log(userChosenSeats,userWantedMovie)
         for (let i = 0; i < userWantedMovieSeats.length; i++) {
             if (userWantedMovieSeats[i].isOrdering === true) {
-                console.log(userWantedMovieSeats[i].isOrdered)
                 userWantedMovieSeats[i].isOrdered = true;
-                console.log(userWantedMovieSeats[i].isOrdered)
-
             }
         }
         setForm(async (prevVal) => {
@@ -94,7 +88,6 @@ export const MovieOrderingContextProvider = ({ children }) => {
         
     }
     useEffect(() => {
-        console.log(form)
         if(parseInt(form.Adult)>20||parseInt(form.Kids)>20||(parseInt(form.Adult)+parseInt(form.Kids)>20)){
             setCanUserClickBtnForOrderChair(true)
         }else if(parseInt(form.Adult)<20||parseInt(form.Kids)<20||(parseInt(form.Adult)+parseInt(form.Kids)<20)||(parseInt(form.Adult)===0&&parseInt(form.Kids)===0)){

@@ -2,18 +2,15 @@ import React, { useState } from "react";
 import { Header } from "../../components/site-header/siteHeader";
 import { UserRegisteration } from "../../components/Login/userRegisteration";
 import { Box, Grid, CardMedia } from "@mui/material";
-import moviesOfCinema from "../../asset/movies.json";
 import { useEffect } from "react";
 import { useMoviesDatasContext } from "../../contexts/MoviesContext";
 import { useNavigate } from "react-router-dom";
 import { UserOrders } from "../../components/userOrders/userOrders";
 import comingSoonMovies from '../../asset/comingSoonMovies.json';
 import {OrderMovie} from '../../components/orderMovie/orderMovie'
-console.log(comingSoonMovies)
 export const HomePage = () => {
   const [index, setIndex] = useState(0);
-  const { setUserWantedMovie } = useMoviesDatasContext();
-  // console.log(comingSoonMovies[0])
+  const { setUserWantedMovie,MoviesDatas } = useMoviesDatasContext();
   const navigate = useNavigate();
   useEffect(() => {
     setTimeout(() => {
@@ -106,7 +103,7 @@ export const HomePage = () => {
             <h1>Манай дэлгэцнээ</h1>
           </Box> 
            <Grid container sx={styles.moviesOfCinema}>
-            {moviesOfCinema.map((movie, index) => {
+            {MoviesDatas.map((movie, index) => {
               return (
                 <Grid sx={styles.movie} item md={3}>
                   <CardMedia

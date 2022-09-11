@@ -6,7 +6,6 @@ export const MoviesContextProvider = ({children}) => {
     const [userWantedMovie,setUserWantedMovie]=useState("");
     const [MoviesDatas] = useGetDocsFromFireBase('movies'); 
     const [comingSoonMovies] = useGetDocsFromFireBase('comingSoonMovies');
-
     return(
         <MoviesContext.Provider value={{MoviesDatas,comingSoonMovies,userWantedMovie,setUserWantedMovie}}>
             {children}

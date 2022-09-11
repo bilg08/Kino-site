@@ -4,13 +4,11 @@ import { db } from "./firebase";
 
 
 export const useGetDocsFromFireBase=(collectionName)=>{
-   const [colName]=useState(collectionName);
-   
    let [data,setDatas]=useState([]);
     const getData=async()=>{
         setDatas(data=[])
     try {
-        const datas=await getDocs(collection(db,colName));
+        const datas=await getDocs(collection(db,collectionName));
         datas.forEach(e=>{
             setDatas(prevVal=>{
                 let prevValACopy=prevVal;

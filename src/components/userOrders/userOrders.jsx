@@ -92,12 +92,32 @@ export const UserOrders = () => {
                 </Box>
                 <Button
                   onClick={async () => {
-                    console.log("daragdlaa",order);
                     const orderData = getDocFromFirebase(
                       `users/${userUid}/myOrders/${order.uid}`
                     );
                     
                     orderData.then(async (order) => {
+                      try {
+                        const moviesDatas = getDocFromFirebase(`movies/${order.userOrderedMovie}`)
+                        moviesDatas.then(res => res.seat.map((seatFromFirebase, i1) => {
+                          order.Seat.map(async(seatFromOrder, i2) => {
+                            if (seatFromFirebase.id === seatFromOrder) {
+                              if (seatFromFirebase.isOrdered === true && seatFromFirebase.isOrdering === true) {
+                                moviesDatas.then(res => res.possibleSeatsAllNumber = res.possibleSeatsAllNumber + 1) 
+                                seatFromFirebase.isOrdered = false;
+                                seatFromFirebase.isOrdering = false;
+                                await setDocToFirebase(
+                                `movies/${order.userOrderedMovie}`,
+                                 res
+                                );
+                                deleteOrder(order.uid);
+                              }
+                             }
+                          })
+                        }))
+                      } catch {
+                        
+                      }
                       MoviesDatas.map((movieData) => {
 
                         if (movieData.MovieName === order.userOrderedMovie) {
