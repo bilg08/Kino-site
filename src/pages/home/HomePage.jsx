@@ -82,6 +82,7 @@ export const HomePage = () => {
       // },
     }),
     movie: (theme) => ({
+      margin:'auto',
       [theme.breakpoints.down("md")]: {
         maxWidth: 260 + "px",
       },
@@ -100,7 +101,7 @@ export const HomePage = () => {
           <h1>{comingSoonMovies.MovieName}</h1>
         </Grid>
 
-        <Grid item lg={12} md={12} sm={12} sx={styles.moviesOfCinemeContainer}>
+        <Grid item lg={12} md={12} sm={12}  sx={styles.moviesOfCinemeContainer}>
           <Box>
             <h1>Манай дэлгэцнээ</h1>
           </Box> 
@@ -125,7 +126,7 @@ export const HomePage = () => {
         </Grid>
         <UserRegisteration />
         <UserOrders />
-        <OrderMovie/>
+        {/* <OrderMovie/> */}
       </Grid>
     </>
   );

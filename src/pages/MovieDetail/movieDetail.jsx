@@ -43,6 +43,9 @@ export const MovieDetail = () => {
       flexDirection: "column",
       justifyContent: "center",
       alignItems: "center",
+      [theme.breakpoints.down("md")]: {
+      fontSize:'15px'
+      },
     }),
     movieLogo: (theme) => ({
       backgroundPosition: "center",
@@ -51,11 +54,18 @@ export const MovieDetail = () => {
       backgroundRepeat: "no-repeat",
       width: 100 + "%",
       height: 30 + "%",
+       
     }),
     aboutMovie: (theme) => ({
       width: 100 + "%",
       height: 50 + "%",
       color: "silver",
+    }),
+    buttonsStyle: (theme) => ({
+      [theme.breakpoints.down("md")]: {
+        width: '80px',
+        fontSize:'10px'
+      },
     }),
   };
   return (
@@ -71,6 +81,7 @@ export const MovieDetail = () => {
             </p>
             <p>{userWantedMovie.about}</p>
             <Button
+              sx={styles.buttonsStyle}
               variant="outlined"
               onClick={() => {
                 if (isUserLogged === true) {
@@ -81,7 +92,7 @@ export const MovieDetail = () => {
               }}>
               Захиалах
             </Button>
-            <Button onClick={() => navigate("/")}>Буцах</Button>
+            <Button sx={styles.buttonsStyle} onClick={() => navigate("/")}>Буцах</Button>
           </Grid>
         </Grid>
       </Grid>

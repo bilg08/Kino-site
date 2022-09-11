@@ -38,15 +38,14 @@ export const UserRegisteration = () => {
     );
   };
     const requestOtpMessage = () => {
-      console.log(phoneNumber)
         if (phoneNumber.length >= 12) {
-        console.log('zob')
       const appVerifier = window.recaptchaVerifier;
-      generateRecaptcha();
+          generateRecaptcha();
+          
       signInWithPhoneNumber(auth, phoneNumber, appVerifier)
         .then((confirmationResult) => {
-          alert("messeage ilgeelee");
-          setSentRequest((sendRequest = true));
+          // alert("messeage ilgeelee");
+          setSentRequest(sendRequest=true);
           window.confirmationResult = confirmationResult;
         })
         .catch((error) => {});
@@ -102,11 +101,7 @@ export const UserRegisteration = () => {
       },
     }),
   };
-  const InputForLogin = styled(Box)(({ theme }) => ({
-    border: "1px solid silver",
-    padding: "10px",
-    borderRadius: "10px",
-  }));
+  
 
   return (
     <Backdrop
@@ -123,7 +118,9 @@ export const UserRegisteration = () => {
         >
           <CloseIcon />
         </Button>
-        <InputForLogin>
+      <Box sx={{border: "1px solid silver",
+    padding: "10px",
+    borderRadius: "10px",}}>
           <input
             style={{ border: "none", outline: "none" }}
             value={phoneNumber}
@@ -134,10 +131,13 @@ export const UserRegisteration = () => {
           <Button onClick={() => requestOtpMessage()}>
             <SendIcon />
           </Button>
-        </InputForLogin>
+        </Box>
 
-        <InputForLogin
-        //   sx={{ display: setIsOTPRight === true ? "block" : "none" }}
+        <Box sx={{
+          display:sendRequest===true?'block':'none',
+          border: "1px solid silver",
+    padding: "10px",
+    borderRadius: "10px",}}
         >
           <input
             style={{ border: "none", outline: "none" }}
@@ -148,7 +148,7 @@ export const UserRegisteration = () => {
           <Button onClick={checkThenCreateNewUser}>
             <SendIcon />
           </Button>
-        </InputForLogin>
+        </Box>
         <div id="recaptchaContainer"></div>
       </Box>
     </Backdrop>
