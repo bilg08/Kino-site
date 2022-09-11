@@ -10,7 +10,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import { Box } from "@mui/system";
 import { BsBoxArrowInUp } from "react-icons/bs";
 export const UserOrders = () => {
-  const arr=[1,2,3,4,5,6,7,8,9,10]
+  const arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
   const { userUid } = useContext(WhetherUserLoggedOrNotContext);
   const { MoviesDatas } = useContext(MoviesContext);
   const {
@@ -24,20 +24,20 @@ export const UserOrders = () => {
       width: 100 + "%",
       height: "100%",
       background: "black",
-      position: 'absolute',
+      position: "absolute",
       top: 0,
       left: 0,
-      display:userWantedtoSeeCart===true?'block':'none'
+      display: userWantedtoSeeCart === true ? "block" : "none",
     },
-//     userOrders: {
-//    height:'auto'
-//  },
-//     userOrder: {
-//       // width: 300 + "px",
-//       // height: '400px',
-//       background:'red'
-//     },
-      orderMoviesContainer: (theme) => ({
+    //     userOrders: {
+    //    height:'auto'
+    //  },
+    //     userOrder: {
+    //       // width: 300 + "px",
+    //       // height: '400px',
+    //       background:'red'
+    //     },
+    orderMoviesContainer: (theme) => ({
       maxWidth: 100 + "%",
       height: "auto",
       display: "flex",
@@ -50,7 +50,7 @@ export const UserOrders = () => {
     movies: (theme) => ({
       maxWidth: 100 + "%",
       display: "flex",
-      height:'auto',
+      height: "auto",
       justifyContent: "center",
       gap: 15 + "px",
       overflow: "scroll",
@@ -65,60 +65,56 @@ export const UserOrders = () => {
       // },
     }),
     movie: (theme) => ({
-      margin:'auto',
+      margin: "auto",
       [theme.breakpoints.down("md")]: {
         maxWidth: 260 + "px",
       },
-
     }),
-
   };
   return (
     <Box sx={styles.userOrdersContainer}>
-      <Grid item lg={12} md={12} sm={12}  sx={styles.orderMoviesContainer}>
-          <Box sx={{display:'flex',justifyContent:'space-around'}}>
+      <Grid item lg={12} md={12} sm={12} sx={styles.orderMoviesContainer}>
+        <Box sx={{ display: "flex", justifyContent: "space-around" }}>
           <h1>Таны Захиалга</h1>
           <Button
-           sx={{ color: "white" }}
-           onClick={() => setUserWantedtoSeeCart(false)}>
-           <CloseIcon />
-         </Button>
-          </Box> 
-           <Grid container  justifyContent='center' sx={styles.movies}>
-            {userOrders.map((order,i) => {
-              return (
-                <Grid sx={styles.movie} item md={3}>
-                  <CardMedia
-                    onClick={async () => {
-                    }}
-                    component="img"
-                    height={{ width: 100 + "%", height: 50 + "%" }}
-                    image={order.userOrderedMovieImg}
-                  />
-                  <h4>{order.userOrderedMovie}</h4>
-                  <Box sx={{ display: "flex", gap: "10px" }}>
-                   {order.Seat.map((el) => (
-                     <p>{el}</p>
-                   ))}
-                 </Box>
-                  <Button
+            sx={{ color: "white" }}
+            onClick={() => setUserWantedtoSeeCart(false)}>
+            <CloseIcon />
+          </Button>
+        </Box>
+        <Grid container justifyContent="center" sx={styles.movies}>
+          {userOrders.map((order, i) => {
+            return (
+              <Grid sx={styles.movie} item md={3}>
+                <CardMedia
+                  onClick={async () => {}}
+                  component="img"
+                  height={{ width: 100 + "%", height: 50 + "%" }}
+                  image={order.userOrderedMovieImg}
+                />
+                <h4>{order.userOrderedMovie}</h4>
+                <Box sx={{ display: "flex", gap: "10px" }}>
+                  {order.Seat.map((el) => (
+                    <p>{el}</p>
+                  ))}
+                </Box>
+                <Button
                   onClick={async () => {
+                    console.log("daragdlaa",order);
                     const orderData = getDocFromFirebase(
                       `users/${userUid}/myOrders/${order.uid}`
                     );
+                    
                     orderData.then(async (order) => {
                       MoviesDatas.map((movieData) => {
+
                         if (movieData.MovieName === order.userOrderedMovie) {
-                          console.log('hahah')
                           order.Seat.map(async (sth) => {
                             let data = movieData;
-                            console.log(data[sth].isOrdered,data[sth].isOrdering,'upper')
                             if (
                               data.seat[sth].isOrdered === true &&
                               data.seat[sth].isOrdering === true
                             ) {
-                              await console.log('monbain')
-                              await console.log(data,'is')
                               data.seat[sth].isOrdered = false;
                               data.seat[sth].isOrdering = false;
 
@@ -128,7 +124,7 @@ export const UserOrders = () => {
                                 `movies/${data.MovieName}`,
                                 data
                               );
-                              await deleteOrder(order.uid);
+                              deleteOrder(order.uid);
                             }
                           });
                         }
@@ -137,12 +133,12 @@ export const UserOrders = () => {
                   }}>
                   Захиалга Устгах
                 </Button>
-                </Grid>
-              );
-            })}
-          </Grid>
+              </Grid>
+            );
+          })}
         </Grid>
-       {/* <Box sx={{ display: "flex", justifyContent: "space-around" }}>
+      </Grid>
+      {/* <Box sx={{ display: "flex", justifyContent: "space-around" }}>
          <h2>Таны Захиалга</h2>
          <Button
            sx={{ color: "white" }}
@@ -267,7 +263,7 @@ export const UserOrders = () => {
     //         );
     //       })
     //     )}
-       
+
     //   </Grid>
     // </Box>
   );

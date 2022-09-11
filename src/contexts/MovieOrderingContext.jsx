@@ -10,7 +10,7 @@ import { deleteDocOfFirebase } from "../firebaseForThisApp/deleteDoc";
 import { useEffect } from "react";
 export const MovieOrderingContext = createContext();
 export const MovieOrderingContextProvider = ({ children }) => {
-
+   let [getDatasOfMovies,setGetDatasOfMovies]=useState(false)
     let { userWantedMovie } = useContext(MoviesContext);
     let { userUid } = useContext(WhetherUserLoggedOrNotContext);
     let [userWantedToOrder, setUserWantedToOrder] = useState(false);
@@ -48,10 +48,14 @@ export const MovieOrderingContextProvider = ({ children }) => {
       deleteDocOfFirebase(`users/${userUid}/myOrders/${DocUid}`).then(setUserWantedtoSeeCart(false));
     }
     const takeOrder = async (userChosenSeats) => {
-        const uuidForOrderDoc=uuidv4()
+        const uuidForOrderDoc = uuidv4()
+        console.log(userChosenSeats,userWantedMovie)
         for (let i = 0; i < userWantedMovieSeats.length; i++) {
             if (userWantedMovieSeats[i].isOrdering === true) {
+                console.log(userWantedMovieSeats[i].isOrdered)
                 userWantedMovieSeats[i].isOrdered = true;
+                console.log(userWantedMovieSeats[i].isOrdered)
+
             }
         }
         setForm(async (prevVal) => {
@@ -95,7 +99,7 @@ export const MovieOrderingContextProvider = ({ children }) => {
     },[form])
     return (
         <MovieOrderingContext.Provider value={
-            {canUserClickBtnForOrderChair,userWantedToLogin,setUserWantedToLogin,
+            {canUserClickBtnForOrderChair,userWantedToLogin,setUserWantedToLogin,setGetDatasOfMovies,getDatasOfMovies,
                 userWantedToOrder, setUserWantedToOrder, takeUserInput, setUserWantedtoSeeCart,deleteOrder,
                 form, takeOrder, userWantedToOrderChair, setUserWantedToOrderChair, userWantedtoSeeCart,setUserOrders,userOrders
             }

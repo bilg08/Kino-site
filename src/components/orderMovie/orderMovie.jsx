@@ -81,7 +81,7 @@ export const OrderMovie = () => {
             alignItems: 'center',
             flexDirection: 'column',
             gap: '10px',
-            display:userWantedToOrder===true?"flex":"none",
+            display:userWantedToOrderChair===true?"flex":"none",
             // transform: userWantedToOrder === true ? "translateY(0vh)" : "translateY(-500vh)",
       }),
       televison: (theme) => ({
@@ -113,7 +113,6 @@ export const OrderMovie = () => {
  
 
   const checkSeat = (e) => {
-    console.log(userWantedMovie)
     const seatId = parseInt(e.target.innerText);
     const possibleSeatToOrder = parseInt(form.Adult) + parseInt(form.Kids);
     if (possibleSeatToOrder > userChosenSeats.length) {
@@ -155,8 +154,8 @@ export const OrderMovie = () => {
       <Grid item  sx={styles.moviesForm}>
         <h2>Захиалга</h2>
        <Button sx={{position:'absolute',top:0,right:0}} onClick={()=>setUserWantedToOrder(false)} >X</Button>
-        <TextField variant="outlined" name="Adult" onChange={(e) => takeUserInput(e)} label='Том хүн' />
-        <TextField variant="outlined" name="Kids" onChange={(e) => takeUserInput(e)} label='Хүүхэд' />
+        <TextField type='number' variant="outlined" name="Adult" onChange={(e) => takeUserInput(e)} label='Том хүн' />
+        <TextField type='number' variant="outlined" name="Kids" onChange={(e) => takeUserInput(e)} label='Хүүхэд' />
         <Button variant="contained" onClick={()=>setUserWantedToOrderChair(true)}>Үргэлжлүүлэх</Button>
       </Grid>
       <Grid item sx={styles.moviesSeat}>
