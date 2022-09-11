@@ -8,6 +8,7 @@ import { HomePage } from "../pages/home/HomePage";
 import { createTheme,ThemeProvider } from '@mui/material/styles';
 import { Box, Container, Grid } from "@mui/material";
 import { Header } from "../components/site-header/siteHeader";
+import { UserOrders } from "../components/userOrders/userOrders";
 const themes = createTheme({
   
 });
@@ -19,7 +20,7 @@ function App() {
         {/* </Grid> */}
       <Routes>
           <Route element={<HomePage />} path="/" />
-          <Route path="/movies/:MovieName" element={<MovieDetail/>} />
+          <Route path="/movies/:MovieName" element={<MovieDetail />} />
         </Routes>
         
       </Grid>

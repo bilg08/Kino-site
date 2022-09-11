@@ -8,10 +8,11 @@ import { useMovieOrderingContext } from "../../contexts/MovieOrderingContext";
 import { useWhetherUserLoggedOrNotContext} from "../../contexts/whetherUserLoggedOrNot";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "../../firebaseForThisApp/firebase";
+import {useNavigate} from "react-router-dom"
 export const Header = () => {
     const {isUserLogged,signOutFromWebSite,userUid}=useWhetherUserLoggedOrNotContext();
-
-    const {setUserWantedToLogin,setUserWantedtoSeeCart,setUserOrders}=useMovieOrderingContext()
+const navigate=useNavigate()
+    const {setUserWantedToLogin,setUserWantedtoSeeCart,userOrders,setUserOrders}=useMovieOrderingContext()
     const StyledToolBar=styled(Toolbar)({
         display:"flex",
         justifyContent:"space-between",
@@ -58,24 +59,23 @@ export const Header = () => {
                             <InputBase placeholder="Кино хайх..."/>
                         </Search>
                     <Icons onClick={async () => {
-                        console.log('hha')
                         setUserWantedtoSeeCart(true);
                          try {
-                  const orders= await getDocs(collection(db,`users/${userUid}/myOrders`));
-                  setUserOrders(prevVal=>prevVal=[])
-                  orders.forEach(order=>{
-                    setUserOrders(prevVal=>{
-                      let prevValACopy=prevVal;
-                      prevValACopy=[...prevValACopy,order.data()];
-                      return prevVal=prevValACopy;
-                    })
-                  })
+                            const orders= await getDocs(collection(db,`users/${userUid}/myOrders`));
+                            setUserOrders(prevVal=>prevVal=[])
+                            orders.forEach(order=>{
+                                setUserOrders(prevVal=>{
+                                let prevValACopy=prevVal;
+                                prevValACopy=[...prevValACopy,order.data()];
+                                return prevVal=prevValACopy;
+                                })
+                            })
 
-                 } catch (error) {
+                            } catch (error) {
 
-                 }
+                            }
                     }} sx={styles.ifUserLoggedItem}>
-                        <Badge badgeContent={4} color='primary'>
+                        <Badge badgeContent={userOrders.length} color='primary'>
                         <ShoppingCartIcon/>
                         </Badge>
                     </Icons>

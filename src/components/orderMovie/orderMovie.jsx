@@ -65,7 +65,7 @@ export const OrderMovie=()=>{
     }
 
     return (
-        <div className={css.OrderMovie} style={{transform:userWantedToOrder===true?"translateY(0vh)":"translateY(-100vh)",}}>
+        <div className={css.OrderMovie} style={{transform:userWantedToOrder===true?"translateY(0vh)":"translateY(-500vh)",}}>
             <div style={{display:userWantedToOrderChair===true?"none":'flex'}} className={css.form}>
                 <div className={css.formHeader}>
                     <h2>Захиалга</h2>
