@@ -30,7 +30,8 @@ export const MovieOrderingContextProvider = ({ children }) => {
         userOrderedMovieImg: "",
         uid:""
     });
-    const takeUserInput = async(e) => {
+    const takeUserInput = async (e) => {
+        console.log(e.target)
         if (e.target.name === 'Name') {
             let targetValue = e.target.value;
             checkInputMongolianAlphabetOrNot(targetValue)
@@ -42,7 +43,8 @@ export const MovieOrderingContextProvider = ({ children }) => {
         setForm({ ...form, [e.target.name]: e.target.value });
     }
 
-    const deleteOrder=(DocUid)=>{
+    const deleteOrder = (DocUid) => {
+        console.log(DocUid,'kkkk')
       deleteDocOfFirebase(`users/${userUid}/myOrders/${DocUid}`).then(setUserWantedtoSeeCart(false));
     }
     const takeOrder = async (userChosenSeats) => {
@@ -59,7 +61,9 @@ export const MovieOrderingContextProvider = ({ children }) => {
             prevValACopy.userOrderedMovieImg = userWantedMovie.image;
             prevValACopy.uid=uuidForOrderDoc;
             userWantedMovie.possibleSeatsAllNumber= userWantedMovie.possibleSeatsAllNumber-userChosenSeats.length
-            addDocToFirebase(`${userWantedMovie.MovieName}orders`, form)
+            console.log(userWantedMovie)
+ 
+            addDocToFirebase(`${userWantedMovie.MovieName}orders`, form);
             setDocToFirebase(`movies/${userWantedMovie.MovieName}`, userWantedMovie);
             await setDocToFirebase(`users/${userUid}/myOrders/${uuidForOrderDoc}`,form);
             return (
@@ -81,7 +85,8 @@ export const MovieOrderingContextProvider = ({ children }) => {
             )
         });
     }
-    useEffect(()=>{
+    useEffect(() => {
+        console.log(form)
         if(parseInt(form.Adult)>20||parseInt(form.Kids)>20||(parseInt(form.Adult)+parseInt(form.Kids)>20)){
             setCanUserClickBtnForOrderChair(true)
         }else if(parseInt(form.Adult)<20||parseInt(form.Kids)<20||(parseInt(form.Adult)+parseInt(form.Kids)<20)||(parseInt(form.Adult)===0&&parseInt(form.Kids)===0)){

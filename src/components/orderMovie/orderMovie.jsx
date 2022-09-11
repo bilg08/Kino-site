@@ -5,11 +5,24 @@ import {
   MovieOrderingContext,
   useMovieOrderingContext,
 } from "../../contexts/MovieOrderingContext";
-import { MoviesContext } from "../../contexts/MoviesContext";
-import { Link } from "react-router-dom";
-import { Backdrop, Button, Grid } from "@mui/material";
+import { MoviesContext, useMoviesDatasContext } from "../../contexts/MoviesContext";
+import { Link, useNavigate } from "react-router-dom";
+import { Backdrop, Button, Grid, TextField } from "@mui/material";
 import { Box } from "@mui/system";
 export const OrderMovie = () => {
+  const navigate=useNavigate()
+   const {
+    takeUserInput,
+    takeOrder,
+    form,
+    setUserWantedToOrder,
+    userWantedToOrder,
+    userWantedToOrderChair,
+    setUserWantedToOrderChair,
+  } = useMovieOrderingContext();
+  const { userWantedMovie } = useMoviesDatasContext();
+  const userWantedMovieSeats = userWantedMovie.seat;
+  let [userChosenSeats, setUserChosenseats] = useState([]);
     const styles = {
         moviesOrderingContainer: (theme) => ({
             width: '100%',
@@ -19,7 +32,6 @@ export const OrderMovie = () => {
             left: 0,
             margin: 'auto',
             bottom: 300,
-            background: 'red',
             transform: userWantedToOrder === true ? "translateY(0vh)" : "translateY(-500vh)",
             //   margin: "auto",
             //   width: 100 + "%",
@@ -42,40 +54,68 @@ export const OrderMovie = () => {
             //   },
         }),
         moviesForm: (theme) => ({
-            width: '80%',
-            height: '80%',
+            width: '50%',
+            height: '50%',
             margin:'auto',
             // top: 0,
             // left: 0,
             // margin: 'auto',
             // bottom: 300,
-            background: 'yellow',
+          background: 'white',
+            borderRadius:'10px',
             display: 'flex',
             justifyContent: 'center',
             alignItems: 'center',
-            flexDirection:'column'
+          flexDirection: 'column',
+          gap: '5px',
+            position:'relative'
             // transform: userWantedToOrder === true ? "translateY(0vh)" : "translateY(-500vh)",
-        }),
+      }),
+        moviesSeat: (theme) => ({
+            width: '90%',
+            height: '50%',
+            margin:'auto',
+            // background: 'green',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            flexDirection: 'column',
+            gap: '10px',
+            display:userWantedToOrder===true?"flex":"none",
+            // transform: userWantedToOrder === true ? "translateY(0vh)" : "translateY(-500vh)",
+      }),
+      televison: (theme) => ({
+        width: '20%',
+        height: '2px',
+        background:'white'
+      }),
+      aboutSeat: (theme) => ({
+        width: '50%',
+        height: '80px',
+        display: 'flex',
+        justifyContent:'space-between'
+         
+      }),
+      seatContainer: (theme) => ({
+        width: '80%',
+        height: '50%',
+        border: '1px solid black',
+        display: 'flex',
+        flexWrap: 'wrap',
+        justifyContent: 'center',
+        alignItems:'center',
+        gap:'10px'
+        
+      })
         
     };
 
-  const {
-    takeUserInput,
-    takeOrder,
-    form,
-    setUserWantedToOrder,
-    userWantedToOrder,
-    userWantedToOrderChair,
-    setUserWantedToOrderChair,
-  } = useMovieOrderingContext();
-  const { userWantedMovie } = useContext(MoviesContext);
-  const userWantedMovieSeats = userWantedMovie.seat;
-  let [userChosenSeats, setUserChosenseats] = useState([]);
+ 
 
   const checkSeat = (e) => {
+    console.log(userWantedMovie)
     const seatId = parseInt(e.target.innerText);
     const possibleSeatToOrder = parseInt(form.Adult) + parseInt(form.Kids);
-    console.log(possibleSeatToOrder);
     if (possibleSeatToOrder > userChosenSeats.length) {
       if (userWantedMovieSeats[seatId].isOrdering === false) {
         userWantedMovieSeats[seatId].isOrdering = true;
@@ -110,85 +150,47 @@ export const OrderMovie = () => {
     }
   };
 
-    return (
-      <div className={css.OrderMovie} style={{transform:userWantedToOrder===true?"translateY(0vh)":"translateY(-500vh)",}}>
-    <div style={{display:userWantedToOrderChair===true?"none":'flex'}} className={css.form}>
-        <div className={css.formHeader}>
-            <h2>Захиалга</h2>
-            <button onClick={()=>setUserWantedToOrder(false)} className={css.exitFromForm}>X</button>
-        </div>
-        <div className={css.formMain}>
-            <p>Таны боломжит захиалганы тоо:{userWantedMovie.possibleSeatsAllNumber}</p>
-         <div className={css.personQuantity}>
-            <p>Том Хүн</p>
-            <input className={css.Adult} onChange={(e) => takeUserInput(e)} name="Adult" />
-            <p>Хүүхэд</p>
-            <input className={css.Kids} onChange={(e) => takeUserInput(e)} name="Kids" />
-         </div>
-         <button className={css.continueToOrderSeat} onClick={()=>setUserWantedToOrderChair(true)}>Үргэлжлүүлэх</button>
-        </div>
-   </div>
-
-    <div className={css.seatsSection} style={{display:userWantedToOrderChair===true?"flex":'none'}}>
-        <div className={css.aboutSeats}>
-            <div className={css.aboutRedSeat}>Захиалгатай</div>
-            <div className={css.aboutBlueSeat}>Захиалгагүй</div>
-            <div className={css.aboutGreenSeat}>Таны сонгосон</div>
-        </div>
-        <div className={css.theaterTelevision}></div>
-        <div className={css.seats} >
-            {userWantedMovieSeats === undefined ? "" : userWantedMovieSeats.map((seat, index) => {
-                return (
-                    <button name="Seat" key={index} style={{
-                        background: seat.isOrdered === true ? "red" : "blue"
-                    }}
-                        disabled={seat.isOrdered === true ? true : false}
-                        onClick={(e) => {
-                            checkSeat(e)
-                            takeUserInput(e, seat, userWantedMovieSeats)
-                        }} className={css.seat}>
-                        {index}
-                    </button>
-                )
-            })}
-        </div>
-        <Link to="/">
-            <button
-                className={css.orderMovieBtn}
-                onClick={()=>{
-                takeOrder(userChosenSeats)
-                setUserWantedToOrderChair(false);
-                setUserWantedToOrder(false)
-            }}><BsCart3 /></button>
-        </Link>
-
-    </div>
-</div>
-
-    //   <Backdrop
-    //   sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 ,position:"absolute",top:0,left:0,width:'100%',height:'100%'}}
-    //   //   open={userWantedToLogin}
-    //   >
-//     <Grid container sx={styles.moviesOrderingContainer}>
-//           <Grid item sx={styles.moviesForm}>
-//               <h2>Захиалга</h2>
-//               <Grid item sx={{border: "1px solid silver",
-//             padding: "10px",
-//                   borderRadius: "10px"
-//               }}>
-//                    <p>Том Хүн</p>
-//                    <input onChange={(e) => takeUserInput(e)} name="Adult" />
-//               </Grid>
-//               <Grid>
-//                    <p>Хүүхэд</p>
-//                    <input onChange={(e) => takeUserInput(e)} name="Adult" />
-//               </Grid>
-//           </Grid>
-
-//         <Grid item>
-            
-//         </Grid>
-//     </Grid>
-//     // </Backdrop>
+  return (
+    <Grid container sx={styles.moviesOrderingContainer}>
+      <Grid item  sx={styles.moviesForm}>
+        <h2>Захиалга</h2>
+       <Button sx={{position:'absolute',top:0,right:0}} onClick={()=>setUserWantedToOrder(false)} >X</Button>
+        <TextField variant="outlined" name="Adult" onChange={(e) => takeUserInput(e)} label='Том хүн' />
+        <TextField variant="outlined" name="Kids" onChange={(e) => takeUserInput(e)} label='Хүүхэд' />
+        <Button variant="contained" onClick={()=>setUserWantedToOrderChair(true)}>Үргэлжлүүлэх</Button>
+      </Grid>
+      <Grid item sx={styles.moviesSeat}>
+        <Box sx={styles.televison}></Box>
+        <Grid item sx={styles.aboutSeat}>
+          <Grid item md={3} sx={{width:'auto',height:'100%',background:'red'}}>Захиалгатай</Grid>
+          <Grid item md={3} sx={{width:'auto',height:'100%',background:'green'}}>Таны сонгосон</Grid>
+          <Grid item md={3} sx={{width:'auto',height:'100%',background:'blue'}}>Захиалгагүй</Grid>
+        </Grid>
+        <Grid item sx={styles.seatContainer}>
+             {userWantedMovieSeats === undefined ? "" : userWantedMovieSeats.map((seat, index) => {
+                 return (
+                     <Button name="Seat" key={index} style={{
+                         background: seat.isOrdered === true ? "red" : "blue"
+                     }}
+                         disabled={seat.isOrdered === true ? true : false}
+                         onClick={(e) => {
+                             checkSeat(e)
+                             takeUserInput(e, seat, userWantedMovieSeats)
+                         }} className={css.seat}>
+                         {index}
+                     </Button>
+                 )
+             })}
+          <Button
+            onClick={() => {
+              takeOrder(userChosenSeats)
+              setUserWantedToOrderChair(false);
+              setUserWantedToOrder(false);
+              navigate('/')
+            }}
+            > Захиалах</Button>
+        </Grid>
+      </Grid>
+    </Grid>
   );
 };

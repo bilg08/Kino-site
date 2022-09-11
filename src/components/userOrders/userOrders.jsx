@@ -96,6 +96,11 @@ export const UserOrders = () => {
                     image={order.userOrderedMovieImg}
                   />
                   <h4>{order.userOrderedMovie}</h4>
+                  <Box sx={{ display: "flex", gap: "10px" }}>
+                   {order.Seat.map((el) => (
+                     <p>{el}</p>
+                   ))}
+                 </Box>
                   <Button
                   onClick={async () => {
                     const orderData = getDocFromFirebase(
@@ -104,12 +109,16 @@ export const UserOrders = () => {
                     orderData.then(async (order) => {
                       MoviesDatas.map((movieData) => {
                         if (movieData.MovieName === order.userOrderedMovie) {
+                          console.log('hahah')
                           order.Seat.map(async (sth) => {
                             let data = movieData;
+                            console.log(data[sth].isOrdered,data[sth].isOrdering,'upper')
                             if (
                               data.seat[sth].isOrdered === true &&
                               data.seat[sth].isOrdering === true
                             ) {
+                              await console.log('monbain')
+                              await console.log(data,'is')
                               data.seat[sth].isOrdered = false;
                               data.seat[sth].isOrdering = false;
 
@@ -119,7 +128,7 @@ export const UserOrders = () => {
                                 `movies/${data.MovieName}`,
                                 data
                               );
-                              deleteOrder(order.uid);
+                              await deleteOrder(order.uid);
                             }
                           });
                         }
