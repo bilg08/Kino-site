@@ -10,7 +10,8 @@ import comingSoonMovies from '../../asset/comingSoonMovies.json';
 import {OrderMovie} from '../../components/orderMovie/orderMovie'
 export const HomePage = () => {
   const [index, setIndex] = useState(0);
-  const { setUserWantedMovie,MoviesDatas } = useMoviesDatasContext();
+  const { setUserWantedMovie, MoviesDatas } = useMoviesDatasContext();
+  console.log(MoviesDatas)
   const navigate = useNavigate();
   useEffect(() => {
     setTimeout(() => {
@@ -104,6 +105,7 @@ export const HomePage = () => {
           </Box> 
            <Grid container sx={styles.moviesOfCinema}>
             {MoviesDatas.map((movie, index) => {
+              console.log(MoviesDatas)
               return (
                 <Grid sx={styles.movie} item md={3}>
                   <CardMedia
